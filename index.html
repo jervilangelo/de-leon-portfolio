@@ -162,6 +162,32 @@ nav a:hover::after,nav a:focus-visible::after{transform:scaleX(1)}
   .ch,.route li b,.route li span,.js .reveal{opacity:1!important;transform:none!important}
   .route::before{clip-path:none}.route li::before{transform:none}
 }
+
+/* ===== projects: clickable cards with a service flow ===== */
+.grid{grid-template-columns:repeat(2,1fr)}
+.project{padding:1.75rem 1.75rem 1.5rem 2.25rem;overflow:hidden;gap:1.1rem}
+.project::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--teal);transition:width .3s,background .3s}
+.project:hover::before{width:9px;background:var(--amber)}
+.project.feature{grid-column:1/-1}
+.project .top{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem}
+.project h3{font-size:1.4rem;line-height:1.2}
+.project h3 a{color:inherit;text-decoration:none}
+.project h3 a::after{content:"";position:absolute;inset:0;z-index:2}
+.project:has(a:focus-visible){outline:3px solid var(--amber);outline-offset:3px}
+.project h3 a:focus-visible{outline:none}
+.go{flex:none;width:2.5rem;height:2.5rem;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;color:var(--teal);transition:transform .35s cubic-bezier(.3,1.4,.5,1),background .25s,border-color .25s,color .25s}
+.project:hover .go{transform:rotate(-45deg);background:var(--amber);border-color:var(--amber);color:#13242e}
+.project .more{margin-top:auto;font-weight:600;color:var(--teal)}
+.built{font-size:.85rem;color:var(--muted);margin:0 0 -.5rem}
+
+/* how the ticket API fits together, drawn with the same dotted route as the hero */
+.flow{list-style:none;margin:.25rem 0 0;padding:1rem 1.1rem;display:grid;gap:.8rem;background:var(--bg);border-radius:8px}
+.flow li{display:flex;align-items:center;flex-wrap:wrap;gap:.6rem}
+.flow .lbl{width:7rem;font-size:.85rem;color:var(--muted)}
+.flow .node{font:600 .9rem var(--head);padding:.3rem .8rem;border-radius:6px;background:var(--surface);border:1px solid var(--line)}
+.flow .node.alert{border-color:var(--amber)}
+.flow .join{width:1.6rem;border-top:3px dotted var(--teal)}
+@media (max-width:48rem){.grid{grid-template-columns:1fr}.flow .lbl{width:100%}}
 </style>
 <script>document.documentElement.classList.add("js")</script>
 </head>
@@ -200,18 +226,42 @@ nav a:hover::after,nav a:focus-visible::after{transform:scaleX(1)}
   <section id="projects">
     <h2>Projects</h2>
     <div class="grid">
+
+      <article class="project feature">
+        <div class="top">
+          <h3><a href="https://github.com/jervilangelo/aws-serverless-ticketing-api" target="_blank" rel="noopener" aria-label="AWS Serverless Ticketing API, view on GitHub (opens in a new tab)">AWS Serverless Ticketing API (Lambda, DynamoDB, CloudWatch, API Gateway, SNS)</a></h3>
+          <span class="go" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8h12M9 3l5 5-5 5"/></svg></span>
+        </div>
+        <p>A small serverless API on AWS for logging and tracking HRIS support tickets. API Gateway takes the requests, a Lambda function handles them, and DynamoDB stores the tickets. A second Lambda sends me an email whenever a Critical ticket is created.</p>
+        <ol class="flow" aria-label="How the API works">
+          <li><span class="lbl">Every request</span><span class="node">API Gateway</span><i class="join"></i><span class="node">Lambda</span><i class="join"></i><span class="node">DynamoDB</span></li>
+          <li><span class="lbl">Critical ticket</span><span class="node">Lambda</span><i class="join"></i><span class="node">SNS</span><i class="join"></i><span class="node alert">Email to me</span></li>
+        </ol>
+        <p class="built">Services used</p>
+        <ul class="stack"><li>Lambda</li><li>DynamoDB</li><li>CloudWatch</li><li>API Gateway</li><li>SNS</li></ul>
+        <span class="more">View on GitHub</span>
+      </article>
+
       <article class="project">
-        <h3>HRIS Template Completion Tracker</h3>
+        <div class="top">
+          <h3><a href="https://github.com/jervilangelo/hris-template-tracker-automation-" target="_blank" rel="noopener">HRIS Template Completion Tracker</a></h3>
+          <span class="go" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8h12M9 3l5 5-5 5"/></svg></span>
+        </div>
         <p>A daily Power Automate flow scans a SharePoint library and flags files that have not been updated in 7 days. It keeps one row per file in an Excel Online table, and a Power BI dashboard shows completion across about 29 templates and 9 business units.</p>
         <ul class="stack"><li>Power Automate</li><li>SharePoint</li><li>Excel Online</li><li>Power BI</li></ul>
-        <a class="more" href="https://github.com/jervilangelo/hris-template-tracker-automation-">Read the write-up on GitHub</a>
+        <span class="more">Read the write-up on GitHub</span>
       </article>
+
       <article class="project">
-        <h3>Secure EC2 Web Server</h3>
+        <div class="top">
+          <h3><a href="https://github.com/jervilangelo/secure-ec2-web-server" target="_blank" rel="noopener">Secure EC2 Web Server</a></h3>
+          <span class="go" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8h12M9 3l5 5-5 5"/></svg></span>
+        </div>
         <p>This portfolio, hosted on Nginx on an Amazon EC2 instance inside a custom VPC (10.0.0.0/16) in Singapore. HTTP is open to everyone, SSH is limited to my IP, and Session Manager access comes from an IAM role. An EBS snapshot serves as the backup, and there is no NAT gateway, to keep costs down.</p>
         <ul class="stack"><li>EC2</li><li>VPC</li><li>Security Groups</li><li>IAM</li><li>EBS</li><li>Nginx</li></ul>
-        <a class="more" href="https://github.com/jervilangelo/secure-ec2-web-server">Read the full write-up on GitHub</a>
+        <span class="more">Read the full write-up on GitHub</span>
       </article>
+
     </div>
   </section>
 
