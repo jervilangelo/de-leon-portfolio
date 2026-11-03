@@ -528,3 +528,62 @@
   .ctp-portrait { grid-column: 1 / -1; max-width: 360px; }
 }
 @media (max-width: 480px) { .ctp-methods li { grid-template-columns: 1fr; gap: 2px; } }
+
+
+/* ================= PROJECTS: ticketing API detail ================= */
+.tk-detail { margin-top: 64px; display: grid; gap: 64px; }
+.tk-arch { margin: 0; display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 3fr); gap: 24px 32px; align-items: start; }
+.tk-arch-zoom { padding: 0; border: 0; background: #ffffff; cursor: zoom-in; display: block; overflow: hidden; }
+.tk-arch-zoom img { width: 100%; height: auto; transition: transform 500ms var(--ease-soft); }
+@media (hover: hover) and (pointer: fine) { .tk-arch-zoom:hover img { transform: scale(1.02); } }
+.tk-arch figcaption { display: grid; gap: 14px; }
+.tk-arch figcaption b, .tk-detail .points b, .tk-note b { font-weight: 500; }
+.tk-block { display: grid; gap: 18px; }
+.tk-table td { vertical-align: top; }
+.tk-table td:first-child { font-weight: 500; white-space: nowrap; }
+.tk-table th.r, .tk-table td.r { text-align: right; font-variant-numeric: tabular-nums; }
+.tk-note { max-width: 78ch; }
+.tk-cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px 32px; }
+.tk-cols--two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.tk-col { display: grid; gap: 18px; align-content: start; }
+.tk-links { display: flex; flex-wrap: wrap; gap: 14px 32px; }
+@media (max-width: 1100px) { .tk-cols { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 900px) {
+  .tk-arch, .tk-cols, .tk-cols--two { grid-template-columns: 1fr; }
+  .tk-detail { gap: 48px; margin-top: 48px; }
+}
+@media (max-width: 640px) {
+  .tk-table { font-size: var(--step-small); }
+  .tk-table td, .tk-table th { padding: 10px 8px; }
+  .tk-table td:first-child { white-space: normal; }
+}
+.tk-detail code { white-space: nowrap; }
+
+
+/* ================= PROJECTS: EC2 detail ================= */
+.ec2-diagram { margin: 0; display: grid; gap: 14px; }
+.ec2-svg-wrap { background: #222221; padding: clamp(16px, 2.5vw, 32px); }
+.ec2-svg-wrap svg { width: 100%; height: auto; display: block; }
+.ec2-phases { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; counter-reset: phase; }
+.ec2-phases li { background: var(--surface); padding: 20px; display: grid; gap: 8px; align-content: start; counter-increment: phase; }
+.ec2-phases b { font-weight: 500; font-size: var(--step-body); }
+.ec2-phases b::before { content: "Phase " counter(phase) ": "; color: var(--accent-strong); }
+.ec2-phases span { color: var(--muted); line-height: 1.45; }
+.ec2-next { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 32px; }
+@media (max-width: 1100px) { .ec2-phases { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 700px) {
+  .ec2-svg-wrap { overflow-x: auto; margin-inline: calc(-1 * var(--margin)); }
+  .ec2-svg-wrap svg { min-width: 680px; }
+  .ec2-phases, .ec2-next { grid-template-columns: 1fr; }
+}
+
+/* ================= ABOUT: highlights ================= */
+.about-portrait { display: grid; gap: 12px; }
+.about-highlights { list-style: none; display: grid; gap: 4px; }
+.about-highlights li { display: flex; align-items: center; gap: 16px; padding: 14px 16px; background: var(--surface); transition: background-color var(--t-hover) ease; }
+@media (hover: hover) and (pointer: fine) { .about-highlights li:hover { background: var(--surface-2); } }
+.about-highlights b { display: block; font-weight: 500; font-size: var(--step-lead); letter-spacing: -0.015em; line-height: 1.1; }
+.about-highlights small { display: block; margin-top: 4px; font-size: var(--step-small); color: var(--muted); }
+.hl-badges { display: flex; flex: none; width: 88px; }
+.hl-badges img { width: 44px; height: 44px; object-fit: contain; }
+.hl-num { flex: none; width: 88px; font-size: var(--step-head); font-weight: 500; line-height: 1; letter-spacing: -0.03em; color: var(--accent-strong); text-align: center; }

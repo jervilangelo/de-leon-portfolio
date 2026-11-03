@@ -15,7 +15,7 @@
 <meta property="og:description" content="AWS projects by Jervil Angelo De Leon: Teolohiya.site on Amplify Gen 2, a serverless ticketing API with Lambda, DynamoDB and SNS, a secure EC2 web server in a custom VPC, plus HRIS automation and a church website.">
 <meta property="og:image" content="https://jervilangelo.github.io/de-leon-portfolio/img/og-cover.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%238fa68e'/%3E%3Ctext x='16' y='23' font-family='Arial' font-size='19' font-weight='700' text-anchor='middle' fill='%231c1c1c'%3EJ%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://api.fontshare.com">
 <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
 <link href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500&display=swap" rel="stylesheet">
@@ -131,12 +131,12 @@
     <div class="strips">
       <article class="strip" id="p-ticketing" data-reveal>
         <div class="strip-frames">
-          <button class="zoom" type="button" data-full="img/work/tk-arch-l.webp" aria-label="Enlarge: Architecture: client, API Gateway, Lambda, DynamoDB, stream to alert Lambda and SNS email" style="--r:2.09"><img src="img/work/tk-arch-s.webp" width="640" height="306" alt="Architecture: client, API Gateway, Lambda, DynamoDB, stream to alert Lambda and SNS email" loading="lazy"></button>
+          <button class="zoom" type="button" data-full="img/work/tk-table-l.webp" aria-label="Enlarge: HrisTickets items in DynamoDB" style="--r:2.09"><img src="img/work/tk-table-s.webp" width="640" height="306" alt="HrisTickets items in DynamoDB" loading="lazy"></button>
           <button class="zoom" type="button" data-full="img/work/tk-routes-l.webp" aria-label="Enlarge: HTTP API routes in API Gateway" style="--r:1.98"><img src="img/work/tk-routes-s.webp" width="640" height="324" alt="HTTP API routes in API Gateway" loading="lazy"></button>
           <button class="zoom" type="button" data-full="img/work/tk-alarm-l.webp" aria-label="Enlarge: CloudWatch alarm on Lambda errors" style="--r:1.98"><img src="img/work/tk-alarm-s.webp" width="640" height="324" alt="CloudWatch alarm on Lambda errors" loading="lazy"></button>
           <button class="zoom" type="button" data-full="img/work/tk-email-l.webp" aria-label="Enlarge: Critical ticket alert email delivered by SNS" style="--r:1.98"><img src="img/work/tk-email-s.webp" width="640" height="324" alt="Critical ticket alert email delivered by SNS" loading="lazy"></button>
         </div>
-        <p class="strip-cap"><span><b>AWS Serverless Ticketing API</b></span><span class="muted">Event-driven HRIS tickets</span><span class="muted">2026</span></p>
+        <p class="strip-cap"><span><b>AWS Serverless Ticketing API</b></span><span class="muted">Event-driven HRIS tickets</span><span class="muted">Oct 2026</span></p>
         <div class="strip-body">
           <p>A serverless API for logging and tracking HRIS support tickets, modelled on the requests I handle at work, with made-up data. API Gateway takes the request, a Lambda function handles it and DynamoDB stores it. A DynamoDB stream feeds a second Lambda that emails me through SNS whenever a Critical ticket is created.</p>
           <ul class="points">
@@ -149,6 +149,116 @@
             <ul class="tags" aria-label="Services"><li>API Gateway</li><li>Lambda</li><li>DynamoDB</li><li>DynamoDB Streams</li><li>SNS</li><li>CloudWatch</li><li>IAM</li><li>Python 3.12</li></ul>
             <a class="link ext" href="https://github.com/jervilangelo/aws-serverless-ticketing-api" target="_blank" rel="noopener">Code and write-up on GitHub</a>
           </div>
+        </div>
+
+        <div class="tk-detail">
+          <figure class="tk-arch">
+            <button class="zoom tk-arch-zoom" type="button" data-full="img/work/tk-arch-l.webp" aria-label="Enlarge: Ticketing API architecture diagram"><img src="img/work/tk-arch-l.webp" width="1400" height="669" alt="Architecture: a client calls API Gateway, which invokes the hris-ticket-handler Lambda reading and writing the HrisTickets DynamoDB table. The table's stream triggers the hris-critical-alert Lambda, which publishes to an SNS topic that emails critical tickets. CloudWatch keeps the handler's logs and alarms on errors through a second SNS topic." loading="lazy"></button>
+            <figcaption>
+              <p>A request goes through API Gateway to the <b>hris-ticket-handler</b> function, which reads or writes the <b>HrisTickets</b> table. Every new or changed item also lands on the table's DynamoDB stream; <b>hris-critical-alert</b> reads it, ignores everything except new Critical tickets, and publishes those to SNS, which emails me. CloudWatch keeps the handler's logs and alarms on its errors through a second SNS topic.</p>
+              <p class="small muted">Built October 2026 in ap-southeast-1 (Singapore). All ticket data is made up.</p>
+            </figcaption>
+          </figure>
+
+          <div class="tk-block">
+            <h3 class="h3">API endpoints</h3>
+            <div class="table-scroll">
+              <table class="table tk-table">
+                <caption class="sr-only">Ticketing API routes</caption>
+                <thead><tr><th scope="col">Method</th><th scope="col">Route</th><th scope="col">Purpose</th><th scope="col" class="r">Success</th></tr></thead>
+                <tbody>
+                  <tr><td>POST</td><td><code>/tickets</code></td><td>Create a ticket</td><td class="r">201</td></tr>
+                  <tr><td>GET</td><td><code>/tickets</code></td><td>List tickets, with optional <code>?status=</code> and <code>?module=</code> filters</td><td class="r">200</td></tr>
+                  <tr><td>GET</td><td><code>/tickets/{id}</code></td><td>Get one ticket</td><td class="r">200</td></tr>
+                  <tr><td>PUT</td><td><code>/tickets/{id}</code></td><td>Update status, assignee, priority or resolution notes</td><td class="r">200</td></tr>
+                  <tr><td>DELETE</td><td><code>/tickets/{id}</code></td><td>Delete a ticket</td><td class="r">200</td></tr>
+                  <tr><td>GET</td><td><code>/summary</code></td><td>Ticket counts by status and by module</td><td class="r">200</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="tk-note">Bad input returns <b>400</b> with a list of what is wrong, an unknown ticket returns <b>404</b>, and anything unexpected returns a generic <b>500</b> while the details go to the logs. Updates and deletes use a condition check, so changing a ticket that does not exist returns 404 instead of quietly creating it.</p>
+          </div>
+
+          <div class="tk-cols">
+            <div class="tk-col">
+              <h3 class="h3">Data model</h3>
+              <ul class="points">
+                <li>One on-demand table, <code>HrisTickets</code>, keyed on <code>ticketId</code> (for example <code>HRIS-70B503C7</code>).</li>
+                <li>Fields for module, request type, priority, status, assignee and notes, with UTC timestamps; <code>resolvedAt</code> is set only on resolution.</li>
+                <li>A <code>status-index</code> GSI (status, then createdAt) makes status filters a query that returns the newest first, instead of a full scan.</li>
+                <li>SLA due dates by priority: Critical 4 hours, High 8, Medium 24, Low 72.</li>
+              </ul>
+            </div>
+            <div class="tk-col">
+              <h3 class="h3">Security and permissions</h3>
+              <ul class="points">
+                <li><b>hris-ticket-handler</b> may only Put, Get, Update, Delete and Scan items on the table, and Query its index.</li>
+                <li><b>hris-critical-alert</b> may only read the table's stream and publish to the <code>hris-critical-alerts</code> topic.</li>
+                <li>Neither policy uses a wildcard on its main resource.</li>
+                <li>The stage is throttled to 5 requests a second (burst 10) so a runaway script cannot run up a bill.</li>
+                <li>No authentication, acceptable for a short-lived test with fake data; a Cognito JWT authorizer would come first in a real deployment.</li>
+              </ul>
+            </div>
+            <div class="tk-col">
+              <h3 class="h3">Monitoring and alerts</h3>
+              <ul class="points">
+                <li>One JSON log line per request with the route and Lambda request ID; error details logged on failure.</li>
+                <li>One-week log retention on both functions.</li>
+                <li>A CloudWatch alarm on the handler's Errors metric emails me through SNS on one or more errors in five minutes; missing data counts as healthy.</li>
+                <li>The stream trigger uses batch size 10 from the latest record, so existing tickets never cause alerts.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tk-block">
+            <h3 class="h3">Testing</h3>
+            <p class="tk-note">Every route tested from PowerShell with <code>Invoke-RestMethod</code>.</p>
+            <div class="table-scroll">
+              <table class="table tk-table">
+                <caption class="sr-only">Test results</caption>
+                <thead><tr><th scope="col">Test</th><th scope="col">What I did</th><th scope="col">Result</th></tr></thead>
+                <tbody>
+                  <tr><td>Create</td><td>POST a valid ticket</td><td>201, ticket returned with an ID and a due date</td></tr>
+                  <tr><td>Read</td><td>List all tickets; get one by ID</td><td>Stored tickets returned</td></tr>
+                  <tr><td>Filter</td><td><code>?status=Open</code> and <code>?status=Resolved</code></td><td>Correct tickets returned through the index</td></tr>
+                  <tr><td>Update</td><td>PUT status Resolved with notes</td><td>Status changed, <code>resolvedAt</code> added</td></tr>
+                  <tr><td>Summary</td><td>GET <code>/summary</code></td><td>Counts by status and by module</td></tr>
+                  <tr><td>Validation</td><td>POST with missing fields and a bad module</td><td>400 with a list of problems</td></tr>
+                  <tr><td>Not found</td><td>GET an ID that does not exist</td><td>404</td></tr>
+                  <tr><td>Delete</td><td>DELETE a ticket, then GET it</td><td>Deleted, then 404</td></tr>
+                  <tr><td>Critical alert</td><td>Create a Critical ticket</td><td>Email received in about a minute</td></tr>
+                  <tr><td>Non-critical</td><td>Create a Low ticket</td><td>No email, as intended</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="tk-cols tk-cols--two">
+            <div class="tk-col">
+              <h3 class="h3">What went wrong</h3>
+              <ul class="points">
+                <li><b>Wrong region.</b> I started building in the wrong region and had to remove everything and begin again in Singapore. Almost everything in AWS is regional, so I now check the region selector before every step.</li>
+                <li><b>Empty ticket ID.</b> Two commands pasted onto one line left the ticket ID variable empty, so GET and PUT returned a plain 500: DynamoDB rejects an empty key, and the response did not say so. The structured logs showed the cause.</li>
+              </ul>
+            </div>
+            <div class="tk-col">
+              <h3 class="h3">Limitations and next steps</h3>
+              <ul class="points">
+                <li>Add authentication, with a Cognito JWT authorizer or API keys.</li>
+                <li>Paginate listing; without a status filter it is a Scan capped at 50 items.</li>
+                <li>Handle MODIFY stream events, so raising a ticket to Critical also alerts.</li>
+                <li>Convert timestamps from UTC to local time in the emails.</li>
+                <li>Rebuild it as an AWS SAM template so it deploys with one command.</li>
+                <li>Add a small frontend for demos.</li>
+              </ul>
+              <p class="tk-note muted">Cost: Lambda, API Gateway and DynamoDB on pay-per-use pricing with tiny test traffic, so the cost was negligible.</p>
+            </div>
+          </div>
+
+          <p class="tk-links">
+            <a class="link ext" href="https://github.com/jervilangelo/aws-serverless-ticketing-api/blob/main/docs/HRIS-Ticket-Tracker-Documentation.pdf" target="_blank" rel="noopener">Read the full documentation (PDF)</a>
+            <a class="link ext" href="https://github.com/jervilangelo/aws-serverless-ticketing-api" target="_blank" rel="noopener">Code, IAM policies and screenshots on GitHub</a>
+          </p>
         </div>
       </article>
 
@@ -171,6 +281,139 @@
             <ul class="tags" aria-label="Services"><li>EC2</li><li>VPC</li><li>Security groups</li><li>IAM</li><li>Session Manager</li><li>EBS</li><li>Nginx</li></ul>
             <a class="link ext" href="https://github.com/jervilangelo/secure-ec2-web-server" target="_blank" rel="noopener">Write-up on GitHub</a>
           </div>
+        </div>
+
+        <div class="tk-detail">
+          <figure class="ec2-diagram">
+            <div class="ec2-svg-wrap">
+              <svg viewBox="0 0 1000 390" role="img" aria-labelledby="ec2-dg-title ec2-dg-desc">
+                <title id="ec2-dg-title">Secure EC2 Web Server architecture</title>
+                <desc id="ec2-dg-desc">A visitor's browser reaches the internet gateway, and the public route table sends traffic to a public subnet in a custom VPC. There, an EC2 instance running Nginx sits behind a security group that allows HTTP from anywhere and SSH only from my IP. I reach the instance over SSH from my IP or through Session Manager using the instance's IAM role. An EBS snapshot backs up its volume.</desc>
+                <defs><marker id="ec2-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#8fa68e"/></marker></defs>
+                <rect x="395" y="20" width="585" height="355" fill="#232322"/>
+                <image href="img/aws/AmazonVirtualPrivateCloud.svg" x="410" y="34" width="26" height="26"/>
+                <text x="446" y="53" font-size="15" font-weight="500" fill="#f1f1ef">VPC 10.0.0.0/16 · ap-southeast-1</text>
+                <rect x="655" y="74" width="305" height="285" fill="#2c2c2a"/>
+                <text x="672" y="344" font-size="13" fill="#a3a49f">Public subnet, auto-assign public IPv4</text>
+                <g fill="none" stroke="#8fa68e" stroke-width="2" marker-end="url(#ec2-ar)">
+                  <path d="M170 150 H 206"/>
+                  <path d="M360 150 H 426"/>
+                  <path d="M620 150 H 676"/>
+                  <path d="M170 312 H 630 V 175 H 676"/>
+                  <path d="M800 190 V 236"/>
+                </g>
+                <rect x="672" y="98" width="256" height="104" fill="none" stroke="#8fa68e" stroke-width="2"/>
+                <text x="680" y="92" font-size="12" fill="#a9bfa8">Security group</text>
+                <g font-family="Clash Grotesk, Segoe UI, sans-serif">
+                  <rect x="20" y="110" width="150" height="80" fill="#c8c5ba"/>
+                  <text x="36" y="144" font-size="16" font-weight="500" fill="#1c1c1c">Visitor</text>
+                  <text x="36" y="166" font-size="13" fill="#4a4943">Browser, HTTP 80</text>
+                  <rect x="210" y="110" width="150" height="80" fill="#262626"/>
+                  <text x="226" y="144" font-size="16" font-weight="500" fill="#f1f1ef">Internet</text>
+                  <text x="226" y="166" font-size="16" font-weight="500" fill="#f1f1ef">gateway</text>
+                  <rect x="430" y="110" width="190" height="80" fill="#262626"/>
+                  <text x="446" y="144" font-size="16" font-weight="500" fill="#f1f1ef">Public route table</text>
+                  <text x="446" y="166" font-size="13" fill="#a3a49f">0.0.0.0/0 to the gateway</text>
+                  <rect x="680" y="110" width="240" height="80" fill="#262626"/>
+                  <image href="img/aws/AmazonEC2.svg" x="694" y="130" width="40" height="40"/>
+                  <text x="746" y="144" font-size="16" font-weight="500" fill="#f1f1ef">EC2 · Nginx</text>
+                  <text x="746" y="166" font-size="13" fill="#a3a49f">Amazon Linux 2023</text>
+                  <rect x="680" y="240" width="240" height="72" fill="#8fa68e"/>
+                  <image href="img/aws/AmazonElasticBlockStore.svg" x="694" y="256" width="40" height="40"/>
+                  <text x="746" y="272" font-size="16" font-weight="500" fill="#1c1c1c">EBS volume</text>
+                  <text x="746" y="293" font-size="13" fill="#1c1c1c">Snapshot as backup</text>
+                  <rect x="20" y="272" width="150" height="80" fill="#c8c5ba"/>
+                  <text x="36" y="306" font-size="16" font-weight="500" fill="#1c1c1c">Me, admin</text>
+                  <text x="36" y="328" font-size="13" fill="#4a4943">IAM user with MFA</text>
+                  <text x="190" y="300" font-size="13" fill="#a3a49f">SSH 22 from my IP, or Session Manager (IAM role)</text>
+                </g>
+              </svg>
+            </div>
+            <figcaption class="small muted">How traffic reaches the server. No NAT gateway and no VPC endpoints, to avoid extra cost.</figcaption>
+          </figure>
+
+          <div class="tk-cols tk-cols--two">
+            <div class="tk-col">
+              <h3 class="h3">Why I built it</h3>
+              <p>While studying for the AWS Certified Cloud Practitioner (CLF-C02) exam, I wanted to practise the services I was reading about instead of only memorising them, so I built a small but secure web server in a network I designed myself.</p>
+              <ul class="points">
+                <li>Apply EC2, VPC, security groups, IAM and EBS in one working project.</li>
+                <li>Follow security basics: no daily work as root, restricted access and cost controls.</li>
+                <li>Document the work so others can follow it.</li>
+              </ul>
+            </div>
+            <div class="tk-col">
+              <h3 class="h3">Configuration</h3>
+              <table class="table tk-table">
+                <caption class="sr-only">Architecture configuration</caption>
+                <tbody>
+                  <tr><td>Region</td><td>Asia Pacific (Singapore), ap-southeast-1</td></tr>
+                  <tr><td>VPC</td><td>Custom VPC, <code>10.0.0.0/16</code>, one Availability Zone</td></tr>
+                  <tr><td>Subnet</td><td>One public subnet with auto-assign public IPv4</td></tr>
+                  <tr><td>Routing</td><td>Internet gateway attached; route table sends <code>0.0.0.0/0</code> to it</td></tr>
+                  <tr><td>Compute</td><td>EC2 on Amazon Linux 2023, Nginx installed by a user data script</td></tr>
+                  <tr><td>Storage</td><td>EBS volume with a snapshot as a backup</td></tr>
+                  <tr><td>Access</td><td>Security group, plus an IAM role for Session Manager</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="tk-block">
+            <h3 class="h3">How I built it</h3>
+            <ol class="ec2-phases">
+              <li><b>Account setup</b><span>Picked one region, enabled MFA on the root account, set a monthly budget with an 80% email alert, turned on Free Tier alerts, and created an IAM user with MFA in an admin group for daily work.</span></li>
+              <li><b>Network</b><span>Created the VPC with one public subnet and no NAT gateway or VPC endpoints. Verified the internet gateway, created a public route table with a default route to it, and associated it with the subnet.</span></li>
+              <li><b>Server</b><span>Launched the instance, confirmed its status checks, and checked Nginx in the browser. Connected over SSH with a key pair, uploaded the site with <code>scp</code>, moved it into the Nginx web folder, and set file permissions to 644.</span></li>
+              <li><b>Backup</b><span>Created an EBS snapshot of the instance volume and confirmed it reached the Completed state.</span></li>
+            </ol>
+          </div>
+
+          <div class="tk-cols">
+            <div class="tk-col">
+              <h3 class="h3">Security measures</h3>
+              <ul class="points">
+                <li>Root account protected with MFA and not used for daily work.</li>
+                <li>Security group allows HTTP (80) from anywhere and SSH (22) only from my IP address.</li>
+                <li>An IAM role on the instance lets Session Manager act as a keyless backup way in.</li>
+                <li>No NAT gateway and a $5 budget alert as cost guardrails.</li>
+                <li>The private key stays off GitHub and is never shared.</li>
+              </ul>
+            </div>
+            <div class="tk-col">
+              <h3 class="h3">Problems I solved</h3>
+              <ul class="points">
+                <li><b>SSH "Permission denied (publickey)".</b> The key file was not found because I ran the command from the wrong folder. The full path to the key, quoted because of spaces in the folder name, fixed it.</li>
+                <li><b>Key file permissions on Windows.</b> The private key must be readable only by my user, so I removed inherited permissions and granted my account read access with <code>icacls</code>.</li>
+                <li><b><code>sudo</code> error in PowerShell.</b> I had run server commands on my own PC. Commands like <code>sudo mv</code> run on the server; <code>scp</code> runs on my computer.</li>
+              </ul>
+            </div>
+            <div class="tk-col">
+              <h3 class="h3">Concepts it reinforced</h3>
+              <ul class="points">
+                <li><b>Shared responsibility.</b> AWS secures the infrastructure; I manage the OS, patches and security group rules.</li>
+                <li><b>Least privilege.</b> Open only the ports and permissions that are needed.</li>
+                <li><b>Regions and AZs.</b> Resources belong to a region, so staying in one avoids confusion.</li>
+                <li><b>Cost awareness.</b> Public IPv4 addresses, NAT gateways and snapshots can all create charges.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tk-block">
+            <h3 class="h3">Next steps</h3>
+            <ul class="points ec2-next">
+              <li>Add HTTPS with a domain name and certificate.</li>
+              <li>Automate the deployment with a script or infrastructure as code.</li>
+              <li>Add monitoring with CloudWatch.</li>
+              <li>Rebuild the setup with CloudFormation or Terraform.</li>
+              <li>Clean up: stop the instance when not in use, and delete the instance, snapshot and VPC when finished.</li>
+            </ul>
+          </div>
+
+          <p class="tk-links">
+            <a class="link ext" href="https://github.com/jervilangelo/secure-ec2-web-server/blob/main/Secure-EC2-Web-Server-Case-Study.pdf" target="_blank" rel="noopener">Read the full case study (PDF)</a>
+            <a class="link ext" href="https://github.com/jervilangelo/secure-ec2-web-server" target="_blank" rel="noopener">Screenshots and write-up on GitHub</a>
+          </p>
         </div>
       </article>
 
