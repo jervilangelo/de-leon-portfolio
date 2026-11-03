@@ -59,6 +59,9 @@
 .orb img { width: 64px; height: 64px; border-radius: 12px; box-shadow: 0 18px 32px -10px rgba(0, 0, 0, 0.6); /* taste-skill-ignore: floating objects carry depth */ }
 .orb span { font-size: var(--step-small); font-weight: 500; white-space: nowrap; color: var(--ink); }
 .cloud-stage.is-live .orb { left: 50%; top: 47%; will-change: transform, opacity; }
+.cloud-stage.is-live { cursor: grab; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+.cloud-stage.is-dragging { cursor: grabbing; }
+.cloud-stage img { -webkit-user-drag: none; }
 .cloud-stage.is-live .orb span { transition: none; }
 
 /* entrance (motion allowed only) */

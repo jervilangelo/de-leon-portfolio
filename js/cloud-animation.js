@@ -64,6 +64,36 @@
   function ease(x) { return 1 - Math.pow(1 - x, 3); }
 
   var rot = 0.35;                         // shared rotation; icons are spaced evenly over however many are shown
+
+  // click (or touch) and drag to spin the ring; it keeps some momentum, then settles back to the slow orbit
+  var dragging = false, lastX = 0, lastY = 0, lastMove = 0, vel = 0, tilt = 0;
+  var MAX_VEL = 7, MAX_TILT = 0.16;
+  stage.addEventListener("pointerdown", function (e) {
+    if (e.button !== undefined && e.button !== 0) return;
+    dragging = true; vel = 0;
+    lastX = e.clientX; lastY = e.clientY; lastMove = performance.now();
+    stage.setPointerCapture(e.pointerId);
+    stage.classList.add("is-dragging");
+  });
+  stage.addEventListener("pointermove", function (e) {
+    if (!dragging) return;
+    var now = performance.now(), dt = Math.max(1, now - lastMove) / 1000;
+    var dRot = -(e.clientX - lastX) / Math.max(120, W * 0.42);   // drag right, the front of the ring follows right
+    rot = (rot + dRot + TAU) % TAU;
+    vel = Math.max(-MAX_VEL, Math.min(MAX_VEL, vel * 0.3 + (dRot / dt) * 0.7));
+    tilt = Math.max(-MAX_TILT, Math.min(MAX_TILT, tilt + (e.clientY - lastY) / Math.max(200, H) * 0.6));
+    lastX = e.clientX; lastY = e.clientY; lastMove = now;
+  });
+  function release(e) {
+    if (!dragging) return;
+    dragging = false;
+    if (performance.now() - lastMove > 90) vel = 0;              // held still before letting go: no fling
+    if (stage.hasPointerCapture && stage.hasPointerCapture(e.pointerId)) stage.releasePointerCapture(e.pointerId);
+    stage.classList.remove("is-dragging");
+  }
+  stage.addEventListener("pointerup", release);
+  stage.addEventListener("pointercancel", release);
+  stage.addEventListener("lostpointercapture", release);
   var start = 0, last = 0, running = false, raf = 0;
   function frame(t) {
     if (!start) { start = t; last = t; }
@@ -71,8 +101,13 @@
     last = t;
     mx += (tx - mx) * 0.05; my += (ty - my) * 0.05;
 
-    var rx = W * 0.42, ry = H * 0.27, cy = H * 0.02;
-    rot = (rot + SPEED * dt) % TAU;
+    if (!dragging) {
+      rot = (rot + (SPEED + vel) * dt + TAU) % TAU;
+      vel *= Math.exp(-dt * 1.8);                     // momentum fades back into the normal orbit
+      if (Math.abs(vel) < 0.002) vel = 0;
+      tilt += (0 - tilt) * Math.min(1, dt * 1.5);     // ring eases back to its resting angle
+    }
+    var rx = W * 0.42, ry = H * (0.27 + tilt), cy = H * 0.02;
     for (var i = 0; i < visibleCount; i++) {
       var s = state[i];
       s.a = (rot + (s.slot / visibleCount) * TAU) % TAU;
