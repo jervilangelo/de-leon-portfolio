@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Projects | AWS Serverless, EC2 and Automation Builds by Jervil Angelo De Leon</title>
+<meta name="description" content="AWS projects by Jervil Angelo De Leon: Teolohiya.site on Amplify Gen 2, a serverless ticketing API with Lambda, DynamoDB and SNS, a secure EC2 web server in a custom VPC, plus HRIS automation and a church website.">
+<meta name="author" content="Jervil Angelo De Leon">
+<meta name="theme-color" content="#1c1c1c">
+<link rel="canonical" href="https://jervilangelo.github.io/de-leon-portfolio/projects.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://jervilangelo.github.io/de-leon-portfolio/projects.html">
+<meta property="og:site_name" content="Jervil Angelo De Leon">
+<meta property="og:title" content="Projects | AWS Serverless, EC2 and Automation Builds by Jervil Angelo De Leon">
+<meta property="og:description" content="AWS projects by Jervil Angelo De Leon: Teolohiya.site on Amplify Gen 2, a serverless ticketing API with Lambda, DynamoDB and SNS, a secure EC2 web server in a custom VPC, plus HRIS automation and a church website.">
+<meta property="og:image" content="https://jervilangelo.github.io/de-leon-portfolio/img/og-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%238fa68e'/%3E%3Ctext x='16' y='23' font-family='Arial' font-size='19' font-weight='700' text-anchor='middle' fill='%231c1c1c'%3EJ%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/pages.css">
+<script>document.documentElement.classList.add("js")</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Jervil Angelo De Leon",
+  "url": "https://jervilangelo.github.io/de-leon-portfolio/",
+  "jobTitle": "HRIS Technical Support",
+  "address": {"@type": "PostalAddress", "addressLocality": "Makati", "addressCountry": "PH"},
+  "alumniOf": "FEU Institute of Technology",
+  "knowsAbout": ["Amazon Web Services", "Serverless architecture", "Cloud infrastructure", "Networking", "Automation", "Technical support"],
+  "sameAs": ["https://www.linkedin.com/in/jervilangelo/", "https://github.com/jervilangelo"]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<header class="nav" id="nav">
+  <a class="wordmark" href="index.html">Jervil Angelo De Leon</a>
+  <div class="nav-right">
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="projects.html" aria-current="page">Projects</a></li>
+      <li><a href="certifications.html">Certifications</a></li>
+      <li><a href="journey.html">Journey</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a class="btn" href="resume.html">Resume</a>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="frame page-head" aria-labelledby="page-title">
+  <div class="grid">
+    <div class="page-head-text">
+      <h1 id="page-title">Projects</h1>
+      <p class="lead">Five things I have built and shipped: three on AWS, one automation for my HRIS work, and one website for a church in Manila.</p>
+    </div>
+  </div>
+</section>
+<!-- ============ FLAGSHIP: Teolohiya.site ============ -->
+<section class="section frame flagship" id="teolohiya" aria-labelledby="teo-title">
+  <div class="grid">
+    <div class="flag-rail" data-reveal>
+      <h2 class="h2" id="teo-title">Teolohiya.site</h2>
+      <p class="flag-line">My flagship build, live on AWS: a moderated listing board where readers across the Philippines find Christian theological books, and members list the copies they want to pass on.</p>
+      <div class="flag-actions">
+        <a class="btn" href="teolohiya-case-study.html">Read the case study <span class="arrow" aria-hidden="true">→</span></a>
+        <a class="link ext" href="https://teolohiya.site" target="_blank" rel="noopener">Visit the live site</a>
+        <a class="link ext" href="https://github.com/jervilangelo/teolohiya-repo" target="_blank" rel="noopener">GitHub case study</a>
+      </div>
+    </div>
+
+    <div class="flag-run">
+      <div class="run" tabindex="0" role="region" aria-label="Teolohiya.site screens, scrolls sideways">
+        <figure class="lifted shutter-wrap">
+          <div class="shutter" data-shutter><video class="autoplay" muted loop playsinline preload="metadata" poster="img/work/teo-demo-poster.webp" width="920" height="520" aria-label="Walkthrough of the live Teolohiya.site homepage and recent listings"><source src="img/work/teo-demo.mp4" type="video/mp4"></video></div>
+          <figcaption><span>Live walkthrough</span><span>teolohiya.site</span></figcaption>
+        </figure>
+        <figure><img src="img/work/teo-listings-l.webp" width="1346" height="633" alt="Book categories and recently listed books" loading="lazy"><figcaption><span>Recent listings</span><span>Approved books only</span></figcaption></figure>
+        <figure><img src="img/work/teo-book-l.webp" width="1344" height="624" alt="Book detail page with photos, price, condition and seller contact" loading="lazy"><figcaption><span>Book page</span><span>Seller contacted directly</span></figcaption></figure>
+        <figure><img src="img/work/teo-list-l.webp" width="1348" height="625" alt="Create a listing form" loading="lazy"><figcaption><span>List a book</span><span>Up to five photos</span></figcaption></figure>
+        <figure><img src="img/work/teo-admin-l.webp" width="1347" height="625" alt="Admin team and role management page" loading="lazy"><figcaption><span>Admin</span><span>Roles and audit log</span></figcaption></figure>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid flag-detail" data-reveal>
+    <div class="flag-col">
+      <h3 class="h3">What it does</h3>
+      <p>Visitors browse, search and report approved listings. Members sign in with Cognito, list books with up to five photos and track review status. Moderators approve or reject with reasons; admins manage roles and read the audit log. Payment and delivery happen outside the site, by design.</p>
+    </div>
+    <div class="flag-col">
+      <h3 class="h3">How it is built</h3>
+      <ol class="path" aria-label="Request path">
+        <li><span>Next.js App Router</span><span class="muted">Amplify Hosting, CloudFront, ACM</span></li>
+        <li><span>Sign-in and roles</span><span class="muted">Amazon Cognito groups</span></li>
+        <li><span>GraphQL API</span><span class="muted">AWS AppSync</span></li>
+        <li><span>Private and public data</span><span class="muted">Two DynamoDB models</span></li>
+        <li><span>Moderation actions</span><span class="muted">AWS Lambda</span></li>
+        <li><span>Book photos</span><span class="muted">Amazon S3, pending and approved paths</span></li>
+      </ol>
+    </div>
+    <div class="flag-col">
+      <h3 class="h3">Decisions that matter</h3>
+      <ul class="points">
+        <li>Listings stay private until approved; only sanitised copies reach the public table.</li>
+        <li>The browser can never approve: Lambda owns every moderation and role change, and writes an audit entry.</li>
+        <li>Optimistic locking stops a moderator approving a stale revision.</li>
+        <li>No always-on compute and no NAT gateway, with AWS Budgets alerts on the account.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OTHER PROJECTS: one strip per project ============ -->
+<section class="section frame work" id="projects" aria-labelledby="work-title">
+  <div class="work-grid">
+    <div class="work-rail">
+      <h2 class="h3" id="work-title">More builds</h2>
+      <p class="small muted">Four builds, newest first</p>
+    </div>
+
+    <div class="strips">
+      <article class="strip" id="p-ticketing" data-reveal>
+        <div class="strip-frames">
+          <button class="zoom" type="button" data-full="img/work/tk-arch-l.webp" aria-label="Enlarge: Architecture: client, API Gateway, Lambda, DynamoDB, stream to alert Lambda and SNS email" style="--r:2.09"><img src="img/work/tk-arch-s.webp" width="640" height="306" alt="Architecture: client, API Gateway, Lambda, DynamoDB, stream to alert Lambda and SNS email" loading="lazy"></button>
+          <button class="zoom" type="button" data-full="img/work/tk-routes-l.webp" aria-label="Enlarge: HTTP API routes in API Gateway" style="--r:1.98"><img src="img/work/tk-routes-s.webp" width="640" height="324" alt="HTTP API routes in API Gateway" loading="lazy"></button>
+          <button class="zoom" type="button" data-full="img/work/tk-alarm-l.webp" aria-label="Enlarge: CloudWatch alarm on Lambda errors" style="--r:1.98"><img src="img/work/tk-alarm-s.webp" width="640" height="324" alt="CloudWatch alarm on Lambda errors" loading="lazy"></button>
+          <button class="zoom" type="button" data-full="img/work/tk-email-l.webp" aria-label="Enlarge: Critical ticket alert email delivered by SNS" style="--r:1.98"><img src="img/work/tk-email-s.webp" width="640" height="324" alt="Critical ticket alert email delivered by SNS" loading="lazy"></button>
+        </div>
+        <p class="strip-cap"><span><b>AWS Serverless Ticketing API</b></span><span class="muted">Event-driven HRIS tickets</span><span class="muted">2026</span></p>
+        <div class="strip-body">
+          <p>A serverless API for logging and tracking HRIS support tickets, modelled on the requests I handle at work, with made-up data. API Gateway takes the request, a Lambda function handles it and DynamoDB stores it. A DynamoDB stream feeds a second Lambda that emails me through SNS whenever a Critical ticket is created.</p>
+          <ul class="points">
+            <li>Six routes: CRUD, status and module filters, and a summary by status and module.</li>
+            <li>A <code>status-index</code> GSI turns status filters into queries instead of scans; SLA due dates are set by priority.</li>
+            <li>One narrow IAM role per function, no resource wildcards; API throttled to 5 requests a second.</li>
+            <li>JSON logs, one-week retention and a CloudWatch error alarm that emails through SNS.</li>
+          </ul>
+          <div class="strip-meta">
+            <ul class="tags" aria-label="Services"><li>API Gateway</li><li>Lambda</li><li>DynamoDB</li><li>DynamoDB Streams</li><li>SNS</li><li>CloudWatch</li><li>IAM</li><li>Python 3.12</li></ul>
+            <a class="link ext" href="https://github.com/jervilangelo/aws-serverless-ticketing-api" target="_blank" rel="noopener">Code and write-up on GitHub</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="strip" id="p-ec2" data-reveal>
+        <div class="strip-frames">
+          <button class="zoom" type="button" data-full="img/work/ec2-vpc-l.webp" aria-label="Enlarge: Custom VPC resource map with a public subnet and route table" style="--r:2.29"><img src="img/work/ec2-vpc-s.webp" width="640" height="279" alt="Custom VPC resource map with a public subnet and route table" loading="lazy"></button>
+          <button class="zoom" type="button" data-full="img/work/ec2-sg-l.webp" aria-label="Enlarge: Security group allowing HTTP from anywhere and SSH from one IP" style="--r:2.31"><img src="img/work/ec2-sg-s.webp" width="640" height="277" alt="Security group allowing HTTP from anywhere and SSH from one IP" loading="lazy"></button>
+          <button class="zoom" type="button" data-full="img/work/ec2-instance-l.webp" aria-label="Enlarge: Running EC2 instance in ap-southeast-1" style="--r:2.15"><img src="img/work/ec2-instance-s.webp" width="640" height="297" alt="Running EC2 instance in ap-southeast-1" loading="lazy"></button>
+          <button class="zoom" type="button" data-full="img/work/ec2-ebs-l.webp" aria-label="Enlarge: Completed EBS snapshot used as a backup" style="--r:2.31"><img src="img/work/ec2-ebs-s.webp" width="640" height="277" alt="Completed EBS snapshot used as a backup" loading="lazy"></button>
+        </div>
+        <p class="strip-cap"><span><b>Secure EC2 Web Server</b></span><span class="muted">Nginx in a custom VPC</span><span class="muted">2026</span></p>
+        <div class="strip-body">
+          <p>A hands-on practice build for AWS networking and security: a static page served by Nginx on Amazon Linux 2023 inside a custom VPC (<code>10.0.0.0/16</code>) in Singapore. HTTP is open, SSH is limited to my IP, and Session Manager access comes from an IAM role on the instance. An EBS snapshot is the backup.</p>
+          <ul class="points">
+            <li>Root account behind MFA; daily work done as an IAM user.</li>
+            <li>No NAT gateway and a budget alert, to keep the bill predictable.</li>
+            <li>Solved: SSH "Permission denied" from a wrong key path, and Linux commands run in the wrong shell.</li>
+          </ul>
+          <div class="strip-meta">
+            <ul class="tags" aria-label="Services"><li>EC2</li><li>VPC</li><li>Security groups</li><li>IAM</li><li>Session Manager</li><li>EBS</li><li>Nginx</li></ul>
+            <a class="link ext" href="https://github.com/jervilangelo/secure-ec2-web-server" target="_blank" rel="noopener">Write-up on GitHub</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="strip" id="p-hris" data-reveal>
+        <div class="strip-frames">
+          <button class="zoom" type="button" data-full="img/work/hris-flow-l.webp" aria-label="Enlarge: Scheduled Power Automate flow" style="--r:2"><img src="img/work/hris-flow-s.webp" width="640" height="320" alt="Scheduled Power Automate flow" loading="lazy"></button>
+          <button class="zoom" type="button" data-full="img/work/hris-tracker-l.webp" aria-label="Enlarge: Tracker table with active and stale counts per business unit" style="--r:2.14"><img src="img/work/hris-tracker-s.webp" width="640" height="299" alt="Tracker table with active and stale counts per business unit" loading="lazy"></button>
+          <button class="zoom" type="button" data-full="img/work/hris-dash-l.webp" aria-label="Enlarge: Template tracker dashboard" style="--r:1.8"><img src="img/work/hris-dash-s.webp" width="640" height="356" alt="Template tracker dashboard" loading="lazy"></button>
+          <button class="zoom" type="button" data-full="img/work/hris-matrix-l.webp" aria-label="Enlarge: Completion matrix by business unit" style="--r:2.9"><img src="img/work/hris-matrix-s.webp" width="640" height="221" alt="Completion matrix by business unit" loading="lazy"></button>
+        </div>
+        <p class="strip-cap"><span><b>HRIS Template Completion Tracker</b></span><span class="muted">Built for my HRIS rollout</span><span class="muted">2026</span></p>
+        <div class="strip-body">
+          <p>About 29 HR templates across 9 business units were being checked by hand. A daily Power Automate flow now scans the SharePoint library, flags files untouched for 7 days as stale, and upserts one row per file into an Excel Online table that feeds a Power BI completion dashboard.</p>
+          <ul class="points">
+            <li>Upsert keyed on each file's full path, so re-runs update rows instead of duplicating them.</li>
+            <li>Fixed a silent-skip bug by running the next step after the lookup succeeds or fails.</li>
+            <li>Completion is measured against the templates each unit actually uses; source files are only ever read.</li>
+          </ul>
+          <div class="strip-meta">
+            <ul class="tags" aria-label="Tools"><li>Power Automate</li><li>SharePoint</li><li>Excel Online</li><li>Power BI</li></ul>
+            <a class="link ext" href="https://github.com/jervilangelo/hris-template-tracker-automation-" target="_blank" rel="noopener">Case study on GitHub</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="strip" id="p-eccm" data-reveal>
+        <div class="strip-frames">
+          <button class="zoom" type="button" data-full="img/work/eccm-home-l.webp" aria-label="Enlarge: ECCM website homepage" style="--r:1.95"><img src="img/work/eccm-home-s.webp" width="640" height="328" alt="ECCM website homepage" loading="lazy"></button>
+          <button class="zoom" type="button" data-full="img/work/eccm-ministries-l.webp" aria-label="Enlarge: ECCM ministries page" style="--r:1.95"><img src="img/work/eccm-ministries-s.webp" width="640" height="328" alt="ECCM ministries page" loading="lazy"></button>
+          <button class="zoom" type="button" data-full="img/work/eccm-mobile-l.webp" aria-label="Enlarge: ECCM homepage on a phone" style="--r:0.51"><img src="img/work/eccm-mobile-s.webp" width="390" height="760" alt="ECCM homepage on a phone" loading="lazy"></button>
+          <button class="zoom" type="button" data-full="img/work/eccm-expect-l.webp" aria-label="Enlarge: ECCM What to Expect page" style="--r:1.95"><img src="img/work/eccm-expect-s.webp" width="640" height="328" alt="ECCM What to Expect page" loading="lazy"></button>
+        </div>
+        <p class="strip-cap"><span><b>ECCM Website</b></span><span class="muted">Church site, custom domain</span><span class="muted">2026</span></p>
+        <div class="strip-body">
+          <p>A multi-page website for Evangelical Covenant Church Manila, a nonprofit church: ministries, background, a guide for first-time visitors, giving and contact details. I built and deployed it, configured the custom domain, and added the SEO essentials.</p>
+          <ul class="points">
+            <li>Six pages: Home, About, What to Expect, Ministries, Giving and Contact.</li>
+            <li>Responsive layout for phones and desktops.</li>
+            <li><code>sitemap.xml</code> and <code>robots.txt</code> for search engines, plus favicons and a web manifest.</li>
+          </ul>
+          <div class="strip-meta">
+            <ul class="tags" aria-label="Tools"><li>HTML</li><li>CSS</li><li>Custom domain</li><li>SEO</li></ul>
+            <span class="strip-links">
+              <a class="link ext" href="https://ecc-manila.org/" target="_blank" rel="noopener">ecc-manila.org</a>
+              <a class="link ext" href="https://github.com/jervilangelo/eccm-web" target="_blank" rel="noopener">GitHub</a>
+            </span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AWS SERVICES: two-ended rows, filterable by project ============ -->
+<section class="section frame services" id="services" aria-labelledby="svc-title">
+  <div class="grid">
+    <div class="svc-intro">
+      <h2 class="h2" id="svc-title">AWS services across these builds</h2>
+      <p class="svc-line">Twenty services across three AWS builds, each tied to what it did there. Pick a project to see its stack.</p>
+      <div class="svc-filter" role="group" aria-label="Show services used by">
+        <button type="button" aria-pressed="true" data-project="all">All projects</button>
+        <button type="button" aria-pressed="false" data-project="teo">Teolohiya.site</button>
+        <button type="button" aria-pressed="false" data-project="tk">Ticketing API</button>
+        <button type="button" aria-pressed="false" data-project="ec2">Secure EC2</button>
+      </div>
+      <p class="svc-count small" aria-live="polite"><span id="svc-count">20</span> of 20 services</p>
+      <p class="small muted svc-note">"Via Amplify" marks services that Amplify Gen 2 provisions and manages for Teolohiya.site, rather than ones I configured on their own.</p>
+    </div>
+
+    <div class="svc-list">
+      <div class="svc-group">
+        <h3>Compute</h3>
+        <ul>
+          <li data-p="ec2"><img src="img/aws/AmazonEC2.svg" alt="" width="28" height="28"><div><b>Amazon EC2</b><span>Amazon Linux 2023 instance running Nginx</span></div><em>Secure EC2</em></li>
+          <li data-p="tk teo"><img src="img/aws/AWSLambda.svg" alt="" width="28" height="28"><div><b>AWS Lambda</b><span>Ticket handler and alert functions; moderation and admin actions</span></div><em>Ticketing API, Teolohiya</em></li>
+        </ul>
+      </div>
+      <div class="svc-group">
+        <h3>Networking and delivery</h3>
+        <ul>
+          <li data-p="ec2"><img src="img/aws/AmazonVirtualPrivateCloud.svg" alt="" width="28" height="28"><div><b>Amazon VPC</b><span>Custom 10.0.0.0/16, public subnet, internet gateway, security groups</span></div><em>Secure EC2</em></li>
+          <li data-p="tk"><img src="img/aws/AmazonAPIGateway.svg" alt="" width="28" height="28"><div><b>Amazon API Gateway</b><span>HTTP API with six routes and a 5 req/s throttle</span></div><em>Ticketing API</em></li>
+          <li data-p="teo"><img src="img/aws/AmazonCloudFront.svg" alt="" width="28" height="28"><div><b>Amazon CloudFront</b><span>Content delivery for the hosted Next.js site, via Amplify</span></div><em>Teolohiya</em></li>
+        </ul>
+      </div>
+      <div class="svc-group">
+        <h3>Storage and databases</h3>
+        <ul>
+          <li data-p="tk teo"><img src="img/aws/AmazonDynamoDB.svg" alt="" width="28" height="28"><div><b>Amazon DynamoDB</b><span>On-demand table with a GSI and Streams; private and public listing models</span></div><em>Ticketing API, Teolohiya</em></li>
+          <li data-p="teo"><img src="img/aws/AmazonSimpleStorageService.svg" alt="" width="28" height="28"><div><b>Amazon S3</b><span>Book photos split into private pending and public approved paths</span></div><em>Teolohiya</em></li>
+          <li data-p="ec2"><img src="img/aws/AmazonElasticBlockStore.svg" alt="" width="28" height="28"><div><b>Amazon EBS</b><span>Snapshot of the web server volume as a backup</span></div><em>Secure EC2</em></li>
+        </ul>
+      </div>
+      <div class="svc-group">
+        <h3>Security and identity</h3>
+        <ul>
+          <li data-p="tk ec2 teo"><img src="img/aws/AWSIdentityandAccessManagement.svg" alt="" width="28" height="28"><div><b>AWS IAM</b><span>One least-privilege role per function; instance role; scoped app roles</span></div><em>All three</em></li>
+          <li data-p="teo"><img src="img/aws/AmazonCognito.svg" alt="" width="28" height="28"><div><b>Amazon Cognito</b><span>Sign-up, email sign-in, moderator and admin groups</span></div><em>Teolohiya</em></li>
+          <li data-p="teo"><img src="img/aws/AWSCertificateManager.svg" alt="" width="28" height="28"><div><b>AWS Certificate Manager</b><span>TLS certificate for HTTPS on the custom domain, via Amplify</span></div><em>Teolohiya</em></li>
+          <li data-p="teo"><img src="img/aws/AWSIAMIdentityCenter.svg" alt="" width="28" height="28"><div><b>AWS IAM Identity Center</b><span>SSO access to AWS without long-lived access keys</span></div><em>Teolohiya</em></li>
+          <li data-p="ec2"><img src="img/aws/AWSSystemsManager.svg" alt="" width="28" height="28"><div><b>AWS Systems Manager</b><span>Session Manager access to the instance through its IAM role</span></div><em>Secure EC2</em></li>
+        </ul>
+      </div>
+      <div class="svc-group">
+        <h3>Application integration</h3>
+        <ul>
+          <li data-p="teo"><img src="img/aws/AWSAppSync.svg" alt="" width="28" height="28"><div><b>AWS AppSync</b><span>GraphQL API for listings and related operations</span></div><em>Teolohiya</em></li>
+          <li data-p="tk"><img src="img/aws/AmazonSimpleNotificationService.svg" alt="" width="28" height="28"><div><b>Amazon SNS</b><span>Critical-ticket emails and alarm notifications</span></div><em>Ticketing API</em></li>
+        </ul>
+      </div>
+      <div class="svc-group">
+        <h3>Monitoring and cost</h3>
+        <ul>
+          <li data-p="tk"><img src="img/aws/AmazonCloudWatch.svg" alt="" width="28" height="28"><div><b>Amazon CloudWatch</b><span>Structured logs, one-week retention and an error alarm</span></div><em>Ticketing API</em></li>
+          <li data-p="teo ec2"><img src="img/aws/AWSBudgets.svg" alt="" width="28" height="28"><div><b>AWS Budgets</b><span>Spending alerts on the account</span></div><em>Teolohiya, Secure EC2</em></li>
+        </ul>
+      </div>
+      <div class="svc-group">
+        <h3>Deployment and infrastructure as code</h3>
+        <ul>
+          <li data-p="teo"><img src="img/aws/AWSAmplify.svg" alt="" width="28" height="28"><div><b>AWS Amplify Gen 2</b><span>Hosting, GitHub-connected deploys and the backend definition</span></div><em>Teolohiya</em></li>
+          <li data-p="teo"><img src="img/aws/AWSCloudFormation.svg" alt="" width="28" height="28"><div><b>AWS CloudFormation</b><span>Deploys the Amplify backend resources, via Amplify</span></div><em>Teolohiya</em></li>
+          <li data-p="teo"><img src="img/aws/AWSCloudDevelopmentKit.svg" alt="" width="28" height="28"><div><b>AWS CDK</b><span>Defines the backend as infrastructure as code, via Amplify</span></div><em>Teolohiya</em></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<dialog class="lightbox" id="lightbox" aria-label="Screenshot">
+  <figure><img alt=""><figcaption class="small"></figcaption></figure>
+  <button class="lb-close btn btn--quiet" type="button">Close</button>
+</dialog>
+
+</main>
+
+<footer class="foot">
+  <span class="muted">Jervil Angelo De Leon, cloud and infrastructure portfolio</span>
+  <ul class="foot-links">
+    <li><a class="link" href="projects.html">Projects</a></li>
+    <li><a class="link" href="certifications.html">Certifications</a></li>
+    <li><a class="link" href="resume.html">Resume</a></li>
+    <li><a class="link" href="https://github.com/jervilangelo" target="_blank" rel="noopener">GitHub</a></li>
+    <li><a class="link" href="https://www.linkedin.com/in/jervilangelo/" target="_blank" rel="noopener">LinkedIn</a></li>
+  </ul>
+  <span class="muted">© <span data-year>2026</span></span>
+</footer>
+
+<script src="js/main.js" defer></script>
+</body>
+</html>

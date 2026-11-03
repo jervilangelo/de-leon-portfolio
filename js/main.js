@@ -52,33 +52,7 @@
     Object.keys(map).forEach(function (id) { spy.observe(document.getElementById(id)); });
   }
 
-  /* ---- hero sheet: frames that fall outside the clipped hero are not rendered ---- */
-  var hero = document.querySelector(".hero");
-  if (hero) {
-    var fitSheet = function () {
-      var bottom = hero.getBoundingClientRect().bottom;
-      hero.querySelectorAll(".fr").forEach(function (fr) {
-        fr.style.display = "";
-        var cap = fr.querySelector("figcaption");
-        if (cap) cap.style.visibility = "";
-      });
-      hero.querySelectorAll(".fr").forEach(function (fr) {
-        var r = fr.getBoundingClientRect();
-        if (r.height === 0) return;
-        if (r.top - 20 >= bottom) { fr.style.display = "none"; return; }
-        var cap = fr.querySelector("figcaption");
-        if (cap && cap.getBoundingClientRect().top - 20 >= bottom) cap.style.visibility = "hidden";
-      });
-    };
-    var fitTimer;
-    fitSheet();
-    window.addEventListener("load", fitSheet);
-    window.addEventListener("resize", function () { clearTimeout(fitTimer); fitTimer = setTimeout(fitSheet, 150); });
-  }
-
   /* ---- staggered entrances ---- */
-  document.querySelectorAll(".hero .fr").forEach(function (el, i) { el.style.setProperty("--d", i % 12); });
-  document.querySelectorAll(".panel > *").forEach(function (el, i) { el.style.setProperty("--i", i + 2); });
 
   var targets = document.querySelectorAll("[data-reveal], [data-shutter]");
   if (reduce || !("IntersectionObserver" in window)) {
@@ -116,6 +90,24 @@
       });
     }, { threshold: 0.2 });
     vids.forEach(function (v) { vio.observe(v); });
+  }
+
+  /* ---- lightbox for project screenshots ---- */
+  var box = document.getElementById("lightbox");
+  if (box && typeof box.showModal === "function") {
+    var bImg = box.querySelector("img"), bCap = box.querySelector("figcaption");
+    document.querySelectorAll("[data-full]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var img = btn.querySelector("img");
+        bImg.src = btn.getAttribute("data-full");
+        bImg.alt = img ? img.alt : "";
+        bCap.textContent = img ? img.alt : "";
+        box.showModal();
+      });
+    });
+    box.querySelector(".lb-close").addEventListener("click", function () { box.close(); });
+    box.addEventListener("click", function (e) { if (e.target === box) box.close(); });
+    box.addEventListener("close", function () { bImg.removeAttribute("src"); });
   }
 
   /* ---- AWS services: filter by project ---- */

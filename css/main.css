@@ -152,7 +152,8 @@ code { font-family: inherit; font-size: inherit; font-weight: 500; background: v
   background: var(--accent); transform: scaleX(0); transform-origin: left;
   transition: transform var(--t-ui) var(--ease-out);
 }
-.nav-links a[aria-current="true"]::after { transform: scaleX(1); }
+.nav-links a[aria-current]::after { transform: scaleX(1); }
+.nav .btn[aria-current] { background: var(--ink); color: var(--bg); }
 @media (hover: hover) and (pointer: fine) { .nav-links a:hover::after { transform: scaleX(1); } }
 .nav .btn { min-height: 40px; padding: 0 16px; font-size: var(--step-small); }
 .nav-right { display: flex; align-items: center; gap: 28px; }

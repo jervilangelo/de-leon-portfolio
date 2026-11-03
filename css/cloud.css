@@ -1,0 +1,103 @@
+/* Homepage hero: introduction and the animated cloud. */
+
+.hero {
+  min-height: calc(100svh - var(--nav-h));
+  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gap);
+  align-items: center;
+  padding: clamp(24px, 4vh, 56px) var(--margin) clamp(40px, 6vh, 80px);
+  overflow: clip;
+}
+
+/* ---- introduction ---- */
+.hero-copy { grid-column: 1 / 7; position: relative; z-index: 5; }
+.hero-copy h1 { font-size: clamp(3rem, 0.9rem + 5.2vw, 6.5rem); line-height: 0.92; letter-spacing: -0.04em; max-width: 10ch; }
+.hero-intro { margin-top: 32px; font-size: var(--step-lead); line-height: 1.32; letter-spacing: -0.01em; max-width: 30ch; }
+.hero-intro b { font-weight: 500; }
+.hero-cta { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 12px; }
+.btn--quiet { background: var(--surface-2); color: var(--ink); }
+@media (hover: hover) and (pointer: fine) { .btn--quiet:hover { background: #3c3c3a; } }
+.hero-facts { margin: 56px 0 0; display: flex; flex-wrap: wrap; gap: 20px 44px; }
+.hero-facts div { display: grid; gap: 2px; }
+.hero-facts dt { font-size: var(--step-lead); font-weight: 500; font-variant-numeric: tabular-nums; order: 0; }
+.hero-facts dd { margin: 0; font-size: var(--step-small); color: var(--muted); }
+
+/* ---- the cloud ---- */
+.cloud-stage {
+  grid-column: 7 / 13; justify-self: center;
+  position: relative; width: 100%; max-width: 760px; aspect-ratio: 1 / 0.9;
+  perspective: 1000px;
+}
+.cloud-glow {
+  position: absolute; inset: 6% 2% 10%; pointer-events: none;
+  background: radial-gradient(closest-side, rgba(143, 166, 142, 0.26), rgba(143, 166, 142, 0.09) 55%, rgba(143, 166, 142, 0) 100%); /* taste-skill-ignore: the brief asks for a soft glow */
+}
+.cloud-glow::after {
+  content: ""; position: absolute; inset: 22% 26% 30%;
+  background: radial-gradient(closest-side, rgba(241, 241, 239, 0.12), rgba(241, 241, 239, 0)); /* taste-skill-ignore: the brief asks for a soft glow */
+}
+.cloud-body { position: absolute; left: 50%; top: 47%; width: 70%; transform: translate(-50%, -50%); z-index: 2; pointer-events: none; }
+.cloud-float { animation: cloudFloat 9s ease-in-out infinite alternate; }
+.cloud-tilt { transform-style: preserve-3d; will-change: transform; }
+.cloud-svg { width: 100%; height: auto; overflow: visible; }
+.cloud-svg { animation: lobeBreathe 7s ease-in-out infinite alternate; transform-origin: 50% 70%; }
+.cloud-shadow {
+  position: absolute; left: 50%; top: 79%; width: 46%; height: 8%; z-index: 0; pointer-events: none;
+  transform: translateX(-50%);
+  background: radial-gradient(closest-side, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0)); /* taste-skill-ignore: the brief asks for a soft glow */
+  animation: cloudShadow 9s ease-in-out infinite alternate;
+}
+@keyframes cloudFloat { from { transform: translateY(-1.6%); } to { transform: translateY(1.6%); } }
+@keyframes cloudShadow { from { transform: translateX(-50%) scale(0.9); opacity: 0.7; } to { transform: translateX(-50%) scale(1.04); opacity: 1; } }
+@keyframes lobeBreathe { from { transform: scale(1); } to { transform: scale(1.018, 1.026); } }
+
+/* ---- the service icons ---- */
+.orb {
+  position: absolute; z-index: 3; width: 64px; margin: -32px 0 0 -32px;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  pointer-events: none;
+}
+.orb img { width: 64px; height: 64px; border-radius: 12px; box-shadow: 0 18px 32px -10px rgba(0, 0, 0, 0.6); /* taste-skill-ignore: floating objects carry depth */ }
+.orb span { font-size: var(--step-small); font-weight: 500; white-space: nowrap; color: var(--ink); }
+.cloud-stage.is-live .orb { left: 50%; top: 47%; will-change: transform, opacity; }
+.cloud-stage.is-live .orb span { transition: none; }
+
+/* entrance (motion allowed only) */
+@media (prefers-reduced-motion: no-preference) {
+  .js .cloud-body { animation: cloudIn 1400ms var(--ease-expo) both; }
+  .js .cloud-glow { animation: glowIn 1800ms ease-out both; }
+  .js .cloud-stage:not(.is-live) .orb { opacity: 0; }
+  .js .hero-copy > * { opacity: 0; transform: translateY(20px); animation: copyIn 900ms var(--ease-expo) forwards; }
+  .js .hero-copy > :nth-child(2) { animation-delay: 90ms; }
+  .js .hero-copy > :nth-child(3) { animation-delay: 180ms; }
+  .js .hero-copy > :nth-child(4) { animation-delay: 270ms; }
+}
+@keyframes cloudIn { from { opacity: 0; transform: translate(-50%, -42%) scale(0.94); } to { opacity: 1; transform: translate(-50%, -50%); } }
+@keyframes glowIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes copyIn { to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .cloud-float, .cloud-shadow, .cloud-svg { animation: none; }
+}
+
+/* ---- tablet and phone: stacked ---- */
+@media (max-width: 1000px) {
+  .hero { min-height: 0; row-gap: 24px; padding-top: 48px; }
+  .hero-copy, .cloud-stage { grid-column: 1 / -1; }
+  .hero-copy h1 { max-width: 12ch; }
+  .cloud-stage { max-width: 620px; aspect-ratio: 1 / 0.78; }
+}
+@media (max-width: 640px) {
+  .hero { padding-top: 32px; row-gap: 0; }
+  .hero-copy { display: contents; }
+  .hero-copy > *, .cloud-stage { grid-column: 1 / -1; }
+  .cloud-stage { order: 1; margin-top: 8px; }
+  .hero-facts { order: 2; margin-top: 8px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+  .hero-intro { font-size: 1.1875rem; }
+  .hero-cta .btn { flex: 1 1 100%; }
+  .hero-facts { margin-top: 40px; gap: 16px 28px; }
+  .cloud-stage { aspect-ratio: 1 / 0.86; }
+  .cloud-body { width: 76%; }
+  .orb { width: 46px; margin: -23px 0 0 -23px; gap: 6px; }
+  .orb img { width: 46px; height: 46px; border-radius: 9px; }
+  .orbit .orb:nth-child(n + 7) { display: none; }
+}
