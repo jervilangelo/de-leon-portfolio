@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Teolohiya.site Case Study | Serverless AWS Amplify Gen 2 Build by Jervil Angelo De Leon</title>
+<meta name="description" content="How Teolohiya.site was built: a live, moderated book-listing platform on Next.js and AWS Amplify Gen 2 with Cognito, AppSync, DynamoDB, S3 and Lambda, server-side moderation, audit logs and optimistic locking.">
+<meta name="author" content="Jervil Angelo De Leon">
+<meta name="theme-color" content="#1c1c1c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Teolohiya.site: a moderated serverless book platform on AWS">
+<meta property="og:description" content="Architecture, moderation workflow, security controls and engineering decisions behind a live AWS Amplify Gen 2 application.">
+<meta property="og:image" content="https://raw.githubusercontent.com/jervilangelo/de-leon-portfolio/main/img/og-teolohiya.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="556">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%238fa68e'/%3E%3Ctext x='16' y='23' font-family='Arial' font-size='19' font-weight='700' text-anchor='middle' fill='%231c1c1c'%3EJ%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+<link rel="stylesheet" href="css/case.css">
+<script>document.documentElement.classList.add("js")</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": "Teolohiya.site",
+  "url": "https://teolohiya.site",
+  "description": "A live, moderated listing platform for Christian theological books in the Philippines, built with Next.js, TypeScript and AWS Amplify Gen 2.",
+  "creator": {"@type": "Person", "name": "Jervil Angelo De Leon", "sameAs": ["https://www.linkedin.com/in/jervilangelo/", "https://github.com/jervilangelo"]},
+  "keywords": "AWS Amplify Gen 2, Amazon Cognito, AWS AppSync, Amazon DynamoDB, Amazon S3, AWS Lambda, Next.js, serverless"
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<header class="nav" id="nav">
+  <a class="wordmark" href="index.html">Jervil Angelo De Leon</a>
+  <div class="nav-right">
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html#teolohiya">All projects</a></li>
+      <li><a href="#architecture">Architecture</a></li>
+      <li><a href="#moderation">Moderation</a></li>
+      <li><a href="#decisions">Decisions</a></li>
+      <li><a href="#lessons">Lessons</a></li>
+    </ul>
+    <a class="btn" href="https://teolohiya.site" target="_blank" rel="noopener">Live site <span aria-hidden="true">↗</span></a>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============ HERO ============ -->
+<section class="frame cs-hero" aria-labelledby="cs-title">
+  <div class="grid">
+    <div class="cs-intro">
+      <h1 id="cs-title">Teolohiya.site</h1>
+      <p class="lead">A live, moderated book-listing platform where readers across the Philippines discover Christian theological books and contact sellers directly.</p>
+      <div class="cs-actions">
+        <a class="btn" href="https://teolohiya.site" target="_blank" rel="noopener">Visit the live site <span class="arrow" aria-hidden="true">↗</span></a>
+        <a class="link ext" href="https://github.com/jervilangelo/teolohiya-repo" target="_blank" rel="noopener">View the GitHub case study</a>
+      </div>
+      <dl class="cs-facts">
+        <div><dt>Status</dt><dd>Live at teolohiya.site</dd></div>
+        <div><dt>Region</dt><dd>AWS Singapore, ap-southeast-1</dd></div>
+        <div><dt>Frontend</dt><dd>Next.js App Router, TypeScript, Tailwind CSS</dd></div>
+        <div><dt>Backend</dt><dd>AWS Amplify Gen 2, serverless</dd></div>
+      </dl>
+      <p class="small muted cs-note">The public repository documents the product, architecture and engineering decisions. The production source code is kept in a private repository.</p>
+    </div>
+    <figure class="cs-video">
+      <div class="shutter" data-shutter><video class="autoplay" muted loop playsinline preload="metadata" poster="img/work/teo-demo-poster.webp" width="920" height="520" aria-label="Walkthrough of the live Teolohiya.site homepage and recently listed books"><source src="img/work/teo-demo.mp4" type="video/mp4"></video></div>
+      <figcaption class="small"><span>The live homepage and recent listings</span><span class="muted">teolohiya.site</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ WHY ============ -->
+<section class="section frame" id="overview" aria-labelledby="why-title">
+  <div class="grid cs-why" data-reveal>
+    <h2 class="h2" id="why-title">Why it exists</h2>
+    <div class="cs-why-text">
+      <p class="lead">Christian books in the Philippines are scattered across marketplaces, social groups and individual sellers. Teolohiya.site brings the listings into one searchable place.</p>
+      <p>It began as hands-on practice while I studied for cloud certifications and grew into a deployed, production-oriented AWS application. It is a discovery platform, not a checkout service: payment, delivery and seller arrangements happen outside the site.</p>
+      <p class="cs-flow"><span>A member lists a book</span><span>staff review it</span><span>approved books become public</span><span>readers contact the seller</span></p>
+    </div>
+  </div>
+
+  <div class="cs-roles" data-reveal>
+    <h3 class="h3">Who can do what</h3>
+    <table class="table">
+      <caption class="sr-only">Capabilities by role</caption>
+      <thead><tr><th scope="col">Role</th><th scope="col">Capabilities</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Visitors</th><td>Browse approved books, search and filter listings, view photos and seller details, and report listings.</td></tr>
+        <tr><th scope="row">Members</th><td>Sign up with Cognito, create and manage listings, upload up to five photos, track review status and resubmit rejected listings.</td></tr>
+        <tr><th scope="row">Moderators</th><td>Review pending listings and photos, approve or reject with reasons, handle reports and remove listings.</td></tr>
+        <tr><th scope="row">Admins</th><td>Find registered users, manage moderator permissions, review reports, inspect audit logs and perform logged administrative reviews.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ SCREENS ============ -->
+<section class="section frame" id="screens" aria-labelledby="scr-title">
+  <h2 class="h3 cs-screens-title" id="scr-title">The application</h2>
+  <div class="cs-screens" data-reveal>
+    <figure><img src="img/work/teo-home-l.webp" width="1350" height="626" alt="Homepage with search and listing actions" loading="lazy"><figcaption><span>Homepage and search</span></figcaption></figure>
+    <figure><img src="img/work/teo-listings-l.webp" width="1346" height="633" alt="Book categories and recently listed book cards" loading="lazy"><figcaption><span>Categories and recent listings</span></figcaption></figure>
+    <figure><img src="img/work/teo-book-l.webp" width="1344" height="624" alt="Book detail page with photos, price, condition and seller contact" loading="lazy"><figcaption><span>Book details and direct seller contact</span></figcaption></figure>
+    <figure><img src="img/work/teo-list-l.webp" width="1348" height="625" alt="Create a listing form with category, condition, location and contact fields" loading="lazy"><figcaption><span>Create a listing</span></figcaption></figure>
+    <figure><img src="img/work/teo-admin-l.webp" width="1347" height="625" alt="Admin team management page with account search and role overview" loading="lazy"><figcaption><span>Admin team and roles, account email redacted</span></figcaption></figure>
+    <figure><img src="img/work/teo-guidelines-l.webp" width="1346" height="628" alt="Community guidelines covering transactions, safety, copyright and theological standards" loading="lazy"><figcaption><span>Community guidelines and safety</span></figcaption></figure>
+  </div>
+</section>
+
+<!-- ============ ARCHITECTURE ============ -->
+<section class="section frame" id="architecture" aria-labelledby="arch-title">
+  <div class="grid cs-arch-head" data-reveal>
+    <h2 class="h2" id="arch-title">Architecture</h2>
+    <p class="cs-arch-line">Serverless and usage-priced end to end: no always-on compute and no NAT gateway, deployed from GitHub through Amplify to ap-southeast-1.</p>
+  </div>
+
+  <figure class="cs-diagram" data-reveal>
+    <svg viewBox="0 0 1160 600" role="img" aria-labelledby="dg-title dg-desc">
+      <title id="dg-title">Teolohiya.site architecture</title>
+      <desc id="dg-desc">Users reach Amplify Hosting with CloudFront for the Next.js app, Amazon Cognito for sign-in, AWS AppSync for the GraphQL API and Amazon S3 for photo uploads. AppSync reads and writes a private DynamoDB model and a public DynamoDB model, and invokes AWS Lambda. Lambda handles moderation and admin actions against both DynamoDB models, Cognito and S3.</desc>
+      <defs>
+        <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#8fa68e"/></marker>
+      </defs>
+      <g class="dg-lines" fill="none" stroke="#8fa68e" stroke-width="2" marker-end="url(#ar)">
+        <path d="M200 300 C 250 300, 250 70, 296 70"/>
+        <path d="M200 300 C 250 300, 250 210, 296 210"/>
+        <path d="M200 300 C 250 300, 250 350, 296 350"/>
+        <path d="M200 300 C 250 300, 250 530, 296 530"/>
+        <path d="M534 340 C 700 340, 760 270, 906 270"/>
+        <path d="M534 360 C 700 360, 760 440, 906 440"/>
+        <path d="M534 372 C 580 372, 580 510, 616 510"/>
+        <path d="M854 500 C 880 500, 880 300, 906 290"/>
+        <path d="M854 515 C 880 515, 880 460, 906 455"/>
+        <path d="M640 472 C 640 400, 600 210, 538 210"/>
+        <path d="M616 530 L 538 530"/>
+      </g>
+      <g class="dg-nodes" font-family="Clash Grotesk, Segoe UI, sans-serif">
+        <g><rect x="20" y="262" width="180" height="76" fill="#c8c5ba"/><text x="38" y="294" font-size="17" font-weight="500" fill="#1c1c1c">Readers, sellers</text><text x="38" y="318" font-size="14" fill="#4a4943">and staff, in the browser</text></g>
+        <g><rect x="300" y="32" width="234" height="76" fill="#262626"/><image href="img/aws/AWSAmplify.svg" x="314" y="50" width="40" height="40"/><text x="366" y="64" font-size="17" font-weight="500" fill="#f1f1ef">Amplify Hosting</text><text x="366" y="88" font-size="13" fill="#a3a49f">Next.js · CloudFront · ACM</text></g>
+        <g><rect x="300" y="172" width="234" height="76" fill="#262626"/><image href="img/aws/AmazonCognito.svg" x="314" y="190" width="40" height="40"/><text x="366" y="204" font-size="17" font-weight="500" fill="#f1f1ef">Amazon Cognito</text><text x="366" y="228" font-size="13" fill="#a3a49f">Sign-in, groups, roles</text></g>
+        <g><rect x="300" y="312" width="234" height="76" fill="#262626"/><image href="img/aws/AWSAppSync.svg" x="314" y="330" width="40" height="40"/><text x="366" y="344" font-size="17" font-weight="500" fill="#f1f1ef">AWS AppSync</text><text x="366" y="368" font-size="13" fill="#a3a49f">GraphQL API</text></g>
+        <g><rect x="300" y="492" width="234" height="76" fill="#262626"/><image href="img/aws/AmazonSimpleStorageService.svg" x="314" y="510" width="40" height="40"/><text x="366" y="524" font-size="17" font-weight="500" fill="#f1f1ef">Amazon S3</text><text x="366" y="548" font-size="13" fill="#a3a49f">pending/ and approved/ photos</text></g>
+        <g><rect x="620" y="472" width="234" height="76" fill="#262626"/><image href="img/aws/AWSLambda.svg" x="634" y="490" width="40" height="40"/><text x="686" y="504" font-size="17" font-weight="500" fill="#f1f1ef">AWS Lambda</text><text x="686" y="528" font-size="13" fill="#a3a49f">Moderation, admin actions</text></g>
+        <g><rect x="910" y="232" width="234" height="76" fill="#262626"/><image href="img/aws/AmazonDynamoDB.svg" x="924" y="250" width="40" height="40"/><text x="976" y="264" font-size="17" font-weight="500" fill="#f1f1ef">DynamoDB, private</text><text x="976" y="288" font-size="13" fill="#a3a49f">Listings, reports, audit</text></g>
+        <g><rect x="910" y="402" width="234" height="76" fill="#8fa68e"/><image href="img/aws/AmazonDynamoDB.svg" x="924" y="420" width="40" height="40"/><text x="976" y="434" font-size="17" font-weight="500" fill="#1c1c1c">DynamoDB, public</text><text x="976" y="458" font-size="13" fill="#1c1c1c">Approved listings only</text></g>
+      </g>
+    </svg>
+    <figcaption class="small muted">Request paths between services. The public table, in sage, only ever receives sanitised copies written by Lambda.</figcaption>
+  </figure>
+
+  <div class="grid cs-together" data-reveal>
+    <h3 class="h3">How the services work together</h3>
+    <ol class="cs-steps">
+      <li><b>Amplify Hosting and CloudFront</b> serve the Next.js site over HTTPS with an ACM certificate on the custom domain.</li>
+      <li><b>Cognito</b> authenticates users and sets permissions through groups and IAM roles.</li>
+      <li>The frontend reads and writes listing data through <b>AppSync</b>, backed by <b>DynamoDB</b>.</li>
+      <li>Sellers upload photos to <b>S3</b> under restricted paths; <b>Lambda</b> handles approval and publishing.</li>
+      <li><b>CDK and CloudFormation</b> manage infrastructure changes; <b>IAM Identity Center</b> and <b>AWS Budgets</b> cover secure access and cost.</li>
+    </ol>
+  </div>
+
+  <div class="cs-services" data-reveal>
+    <h3 class="h3">AWS services and how each got there</h3>
+    <p class="cs-services-line">Amplify Gen 2 provisions and manages several of these. They are listed separately to show their roles, not to suggest each was configured from scratch.</p>
+    <div class="table-scroll">
+      <table class="table svc-table">
+        <caption class="sr-only">AWS services used by Teolohiya.site, their role, and how they are provisioned</caption>
+        <thead><tr><th scope="col">Service</th><th scope="col">Role in Teolohiya.site</th><th scope="col">Provisioned through</th></tr></thead>
+        <tbody>
+          <tr><th scope="row"><span class="svc-name"><img src="img/aws/AWSAmplify.svg" alt="" width="24" height="24">AWS Amplify Hosting (Gen 2)</span></th><td>Hosts the Next.js app, connects GitHub deployments, manages the backend infrastructure.</td><td>Amplify</td></tr>
+          <tr><th scope="row"><span class="svc-name"><img src="img/aws/AmazonCloudFront.svg" alt="" width="24" height="24">Amazon CloudFront</span></th><td>Delivers the hosted site through a CDN.</td><td>Managed by Amplify</td></tr>
+          <tr><th scope="row"><span class="svc-name"><img src="img/aws/AWSCertificateManager.svg" alt="" width="24" height="24">AWS Certificate Manager</span></th><td>TLS certificate for HTTPS on the custom domain.</td><td>Managed HTTPS via Amplify</td></tr>
+          <tr><th scope="row"><span class="svc-name"><img src="img/aws/AmazonCognito.svg" alt="" width="24" height="24">Amazon Cognito</span></th><td>Registration, email sign-in, identities, moderator and admin groups, role-based access.</td><td>Amplify Gen 2 backend</td></tr>
+          <tr><th scope="row"><span class="svc-name"><img src="img/aws/AWSAppSync.svg" alt="" width="24" height="24">AWS AppSync</span></th><td>GraphQL API the frontend uses for listings and related operations.</td><td>Amplify Gen 2 backend</td></tr>
+          <tr><th scope="row"><span class="svc-name"><img src="img/aws/AmazonDynamoDB.svg" alt="" width="24" height="24">Amazon DynamoDB</span></th><td>Private listings, approved public listings, reports and moderation audit records.</td><td>Amplify Gen 2 backend</td></tr>
+          <tr><th scope="row"><span class="svc-name"><img src="img/aws/AmazonSimpleStorageService.svg" alt="" width="24" height="24">Amazon S3</span></th><td>Uploaded book photos, pending images kept apart from approved ones with scoped access.</td><td>Amplify Gen 2 backend</td></tr>
+          <tr><th scope="row"><span class="svc-name"><img src="img/aws/AWSLambda.svg" alt="" width="24" height="24">AWS Lambda</span></th><td>Trusted moderation and admin actions: approval, rejection, removal, role management.</td><td>Amplify Gen 2 backend</td></tr>
+          <tr><th scope="row"><span class="svc-name"><img src="img/aws/AWSCloudFormation.svg" alt="" width="24" height="24">CloudFormation and CDK</span></th><td>Define and deploy the backend resources as infrastructure as code.</td><td>Used by Amplify</td></tr>
+          <tr><th scope="row"><span class="svc-name"><img src="img/aws/AWSIdentityandAccessManagement.svg" alt="" width="24" height="24">AWS IAM</span></th><td>Least-privilege permissions for application roles and deployment access.</td><td>Amplify and account</td></tr>
+          <tr><th scope="row"><span class="svc-name"><img src="img/aws/AWSIAMIdentityCenter.svg" alt="" width="24" height="24">AWS IAM Identity Center</span></th><td>SSO access to AWS without long-lived user access keys.</td><td>AWS account</td></tr>
+          <tr><th scope="row"><span class="svc-name"><img src="img/aws/AWSBudgets.svg" alt="" width="24" height="24">AWS Budgets</span></th><td>Cost alerts and spending visibility for the account.</td><td>AWS account</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MODERATION ============ -->
+<section class="section frame" id="moderation" aria-labelledby="mod-title">
+  <div class="grid cs-mod" data-reveal>
+    <div class="cs-mod-intro">
+      <h2 class="h2" id="mod-title">Moderation and security</h2>
+      <p class="lead">Listings are private until approved. The browser cannot approve a listing or write protected moderation fields.</p>
+    </div>
+    <div class="cs-states">
+      <h3 class="h3">Listing lifecycle</h3>
+      <table class="table">
+        <caption class="sr-only">Listing state transitions</caption>
+        <thead><tr><th scope="col">From</th><th scope="col">To</th><th scope="col">When</th></tr></thead>
+        <tbody>
+          <tr><td>New</td><td><b>Pending</b></td><td>Member submits a listing</td></tr>
+          <tr><td>Pending</td><td><b>Approved</b></td><td>Staff approves</td></tr>
+          <tr><td>Pending</td><td><b>Rejected</b></td><td>Staff rejects with a reason</td></tr>
+          <tr><td>Rejected</td><td><b>Pending</b></td><td>Seller edits and resubmits</td></tr>
+          <tr><td>Approved</td><td><b>Pending</b></td><td>Seller makes a significant edit</td></tr>
+          <tr><td>Approved</td><td><b>Removed</b></td><td>Staff removes it</td></tr>
+          <tr><td>Approved</td><td><b>Sold</b></td><td>Seller marks it sold</td></tr>
+          <tr><td>Pending</td><td><b>Withdrawn</b></td><td>Seller withdraws it</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <ul class="cs-controls" data-reveal aria-label="Security controls">
+    <li><b>Separate private and public data</b><span>Only sanitised, approved listings are copied into the guest-readable table.</span></li>
+    <li><b>Server-controlled moderation</b><span>Lambda handles approval, rejection, removal, role changes and audit entries.</span></li>
+    <li><b>Role enforcement</b><span>Cognito groups, IAM roles and live authorisation checks protect admin actions.</span></li>
+    <li><b>No moderator self-approval</b><span>Admin exceptions are explicitly logged.</span></li>
+    <li><b>Concurrency protection</b><span>Optimistic locking prevents approving a stale listing revision.</span></li>
+    <li><b>Photo isolation</b><span>Private <code>pending/{identity}/*</code> uploads, public <code>approved/*</code> images, scoped permissions and server-side path checks.</span></li>
+    <li><b>Abuse controls</b><span>Image type and size checks, submission limits, and reporting that staff can act on.</span></li>
+  </ul>
+</section>
+
+<!-- ============ DECISIONS ============ -->
+<section class="section frame" id="decisions" aria-labelledby="dec-title">
+  <div class="grid cs-dec" data-reveal>
+    <h2 class="h2" id="dec-title">Engineering decisions</h2>
+    <p class="cs-dec-line"><b>Release discipline:</b> strict TypeScript, ESLint, production builds, sandbox testing, explicit deployment confirmation, and rollback plans that account for database schema changes.</p>
+  </div>
+  <div class="table-scroll" data-reveal>
+    <table class="table dec-table">
+      <caption class="sr-only">Challenges and the approach taken</caption>
+      <thead><tr><th scope="col">Challenge</th><th scope="col">Approach</th></tr></thead>
+      <tbody>
+        <tr><td>Keep unreviewed listings out of public view</td><td>Separate <code>Listing</code> and <code>PublicListing</code> models, with Lambda-controlled publication</td></tr>
+        <tr><td>Stop client-side approval or role escalation</td><td>Protected fields, server-side group checks and scoped IAM permissions</td></tr>
+        <tr><td>Avoid approving outdated content</td><td>Version-aware moderation using optimistic locking</td></tr>
+        <tr><td>Ship changes without losing production data</td><td>Amplify sandbox testing, guarded releases and staged schema migrations</td></tr>
+        <tr><td>Keep running costs proportional to usage</td><td>Serverless, usage-based services; no always-on compute or NAT gateway</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ LESSONS ============ -->
+<section class="section frame" id="lessons" aria-labelledby="les-title">
+  <div class="grid cs-lessons">
+    <div class="cs-lessons-main" data-reveal>
+      <h2 class="h2" id="les-title">Lessons learned</h2>
+      <ul class="cs-lesson-list">
+        <li><b>Authorisation spans services.</b> Cognito group membership alone is not enough; IAM and S3 permissions have to match each role.</li>
+        <li><b>Moderation is a backend concern.</b> Protected state changes belong on the server, not in requests the browser controls.</li>
+        <li><b>Schema changes need deliberate rollouts.</b> Reverting to an older backend build can be unsafe once newer data models exist.</li>
+        <li><b>Small production safeguards matter.</b> Audit logs, version checks, scoped uploads and release gates make a real difference.</li>
+      </ul>
+    </div>
+    <div class="cs-next" data-reveal>
+      <h3 class="h3">Next steps</h3>
+      <ul>
+        <li>Listing view and contact-click metrics</li>
+        <li>Branded verification emails with Amazon SES</li>
+        <li>Better indexing and server-rendered book pages</li>
+        <li>Optional image screening to assist, not replace, manual review</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLOSE ============ -->
+<section class="section frame cs-close" aria-labelledby="close-title">
+  <div class="cs-close-band" data-reveal>
+    <h2 class="h2" id="close-title">See it running</h2>
+    <div class="cs-close-links">
+      <a class="btn btn--dark" href="https://teolohiya.site" target="_blank" rel="noopener">Visit teolohiya.site <span class="arrow" aria-hidden="true">↗</span></a>
+      <a class="link ext" href="https://github.com/jervilangelo/teolohiya-repo" target="_blank" rel="noopener">GitHub case study</a>
+      <a class="link" href="index.html#projects">More projects</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <span class="muted">Jervil Angelo De Leon, cloud and infrastructure portfolio</span>
+  <ul class="foot-links">
+    <li><a class="link" href="index.html">Portfolio</a></li>
+    <li><a class="link" href="mailto:deleonangelojervil@gmail.com">Email</a></li>
+    <li><a class="link" href="https://github.com/jervilangelo" target="_blank" rel="noopener">GitHub</a></li>
+    <li><a class="link" href="https://www.linkedin.com/in/jervilangelo/" target="_blank" rel="noopener">LinkedIn</a></li>
+  </ul>
+  <span class="muted">© <span data-year>2026</span></span>
+</footer>
+
+<script src="js/site.js" defer></script>
+</body>
+</html>

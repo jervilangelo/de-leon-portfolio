@@ -3,414 +3,474 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Jervil Angelo D. De Leon | Portfolio</title>
-<meta name="description" content="HRIS support, cloud and automation projects, and certifications of Jervil Angelo De Leon.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-:root{
-  --bg:#eef2f4; --surface:#ffffff; --ink:#13242e; --muted:#51656f;
-  --teal:#0f4c5c; --amber:#d98e04; --line:#cfd9de;
-  --head:"Familjen Grotesk",system-ui,sans-serif;
-  --body:"Instrument Sans",system-ui,sans-serif;
-}
-@media (prefers-color-scheme:dark){
-  :root{--bg:#0e1a21; --surface:#15262f; --ink:#e8eff2; --muted:#9db0b9; --teal:#6cc1d4; --amber:#f0b429; --line:#26404c}
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font:400 1.05rem/1.65 var(--body)}
-a{color:var(--teal)}
-a:focus-visible,button:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
-.wrap{max-width:62rem;margin:0 auto;padding:0 1.5rem}
-nav{display:flex;gap:1.5rem;justify-content:flex-end;padding:1.25rem 0;font-weight:500}
-nav a{color:var(--muted);text-decoration:none}
-nav a:hover{color:var(--ink)}
-h1,h2,h3{font-family:var(--head);line-height:1.1;margin:0}
-h1{font-size:clamp(2.8rem,8vw,5.5rem);letter-spacing:-.02em;font-weight:700}
-h2{font-size:1.9rem;margin-bottom:1.5rem}
-h3{font-size:1.25rem}
-section{padding:3.5rem 0;border-top:1px solid var(--line)}
-.hero{padding:3rem 0 4rem}
-.lead{max-width:38rem;color:var(--muted);font-size:1.2rem;margin:1.25rem 0 2rem}
-.btns{display:flex;flex-wrap:wrap;gap:.75rem}
-.btn{display:inline-block;padding:.8rem 1.4rem;border-radius:6px;font-weight:600;text-decoration:none;border:2px solid var(--teal)}
-.btn.primary{background:var(--teal);color:var(--bg)}
-.btn.ghost{color:var(--teal)}
-.btn:hover{border-color:var(--amber)}
-
-/* the one memorable element: a route from today to the goal */
-.route{list-style:none;margin:3.5rem 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:0;position:relative}
-.route::before{content:"";position:absolute;left:0;right:0;top:.55rem;height:3px;background:repeating-linear-gradient(90deg,var(--teal) 0 14px,transparent 14px 22px)}
-.route li{position:relative;padding-top:2rem;padding-right:1rem}
-.route li::before{content:"";position:absolute;top:0;left:0;width:1.1rem;height:1.1rem;border-radius:50%;background:var(--bg);border:3px solid var(--teal)}
-.route li:last-child::before{background:var(--amber);border-color:var(--amber)}
-.route b{display:block;font-family:var(--head);font-size:1.15rem}
-.route span{color:var(--muted);font-size:.95rem}
-
-.grid{display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fit,minmax(18rem,1fr))}
-.project{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:1.5rem;display:flex;flex-direction:column;gap:.9rem}
-.project p{margin:0;color:var(--muted)}
-.stack{display:flex;flex-wrap:wrap;gap:.4rem;padding:0;margin:0;list-style:none}
-.stack li{font-size:.85rem;padding:.15rem .6rem;border:1px solid var(--line);border-radius:99px}
-.project a.more{margin-top:auto;font-weight:600}
-
-.group{font-size:1.05rem;color:var(--muted);margin:0 0 1rem}
-.certs + .group{margin-top:2.5rem}
-.certs{display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fill,minmax(11rem,1fr))}
-.cert{text-align:center;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:1.25rem 1rem}
-.cert:hover{border-color:var(--amber)}
-.cert img{width:120px;height:120px;object-fit:contain;display:block;margin:0 auto .75rem}
-.cert .ph{width:120px;height:120px;margin:0 auto .75rem;border-radius:50%;border:3px dashed var(--line);display:grid;place-items:center;color:var(--muted);font-family:var(--head);font-weight:700;font-size:1.1rem}
-.cert strong{display:block;font-size:.95rem;line-height:1.3}
-.cert small{display:block;color:var(--muted)}
-.cert .verify{color:var(--teal);font-weight:600;margin-top:.25rem}
-
-.contact ul{list-style:none;padding:0;margin:0;display:grid;gap:.5rem}
-footer{padding:2rem 0 3rem;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
-@media (max-width:40rem){
-  .route{grid-template-columns:1fr;gap:1.5rem}
-  .route::before{left:.5rem;right:auto;top:0;bottom:0;width:3px;height:auto;background:repeating-linear-gradient(180deg,var(--teal) 0 14px,transparent 14px 22px)}
-  .route li{padding:0 0 0 2.5rem}
-  .route li::before{left:0}
-}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-
-/* ===== motion & polish ===== */
-body{overflow-x:hidden}
-.progress{position:fixed;top:0;left:0;width:100%;height:3px;background:var(--amber);transform:scaleX(0);transform-origin:0 50%;z-index:50}
-nav{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--bg) 92%,transparent);box-shadow:0 0 0 100vmax color-mix(in srgb,var(--bg) 92%,transparent);clip-path:inset(0 -100vmax)}
-nav a{position:relative}
-nav a::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:2px;background:var(--amber);transform:scaleX(0);transform-origin:left;transition:transform .3s}
-nav a:hover::after,nav a:focus-visible::after{transform:scaleX(1)}
-
-/* hero: drifting colour blob, letter-by-letter name, typed role */
-.hero{position:relative;isolation:isolate}
-.hero::before{content:"";position:absolute;top:-2rem;right:-8rem;width:30rem;height:30rem;z-index:-1;border-radius:42% 58% 60% 40%;background:radial-gradient(circle at 30% 30%,color-mix(in srgb,var(--amber) 40%,transparent),transparent 62%),radial-gradient(circle at 70% 70%,color-mix(in srgb,var(--teal) 35%,transparent),transparent 62%);filter:blur(28px);animation:drift 14s ease-in-out infinite alternate}
-@keyframes drift{to{transform:translate(-5rem,3rem) rotate(30deg) scale(1.15);border-radius:60% 40% 38% 62%}}
-.w{display:inline-block;white-space:nowrap;margin-right:.25em}
-.ch{display:inline-block;opacity:0;transform:translateY(70%) rotate(5deg);animation:rise .7s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(var(--i)*35ms + 150ms)}
-@keyframes rise{to{opacity:1;transform:none}}
-.role{font:500 1.3rem var(--head);color:var(--teal);margin:1.25rem 0 0;min-height:1.7em}
-.caret{display:inline-block;width:2px;height:1.1em;background:var(--amber);margin-left:3px;vertical-align:-.15em;animation:blink 1s steps(1) infinite}
-@keyframes blink{50%{opacity:0}}
-
-/* career route draws itself, then the goal node pulses */
-.route::before{clip-path:inset(0 100% 0 0);animation:draw 1.6s 1s cubic-bezier(.4,0,.2,1) forwards}
-@keyframes draw{to{clip-path:inset(0)}}
-@keyframes drawY{to{clip-path:inset(0)}}
-.route li::before{transform:scale(0);animation:pop .5s cubic-bezier(.3,1.6,.5,1) forwards;animation-delay:calc(var(--n)*.7s + .9s)}
-.route li:nth-child(1){--n:0}.route li:nth-child(2){--n:1}.route li:nth-child(3){--n:2}
-@keyframes pop{to{transform:scale(1)}}
-.route li:last-child::after{content:"";position:absolute;top:0;left:0;width:1.1rem;height:1.1rem;border-radius:50%;border:2px solid var(--amber);opacity:0;animation:ring 2s 3.2s ease-out infinite}
-@keyframes ring{0%{transform:scale(1);opacity:.9}100%{transform:scale(3);opacity:0}}
-.route li b,.route li span{opacity:0;animation:rise .6s forwards;animation-delay:calc(var(--n)*.7s + 1.1s)}
-
-/* buttons: light sweep */
-.btn{position:relative;overflow:hidden;transition:transform .2s,border-color .2s}
-.btn:hover{transform:translateY(-2px)}
-.btn::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent);transform:skewX(-20deg);transition:left .6s}
-.btn:hover::after{left:130%}
-
-/* cards: cursor spotlight, lift, tilt */
-.project,.cert{position:relative;transition:transform .2s ease-out,border-color .25s,box-shadow .25s}
-.project::after,.cert::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(14rem circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--amber) 20%,transparent),transparent 70%)}
-.project:hover::after,.cert:hover::after{opacity:1}
-.project:hover{transform:translateY(-5px);border-color:var(--amber);box-shadow:0 14px 30px -18px var(--teal)}
-.cert:hover{box-shadow:0 14px 30px -18px var(--teal)}
-.cert img{transition:transform .3s}
-.cert:hover img{transform:scale(1.08)}
-.stack li{transition:background .2s,color .2s}
-.stack li:hover{background:var(--teal);color:var(--bg)}
-
-/* career story: same dotted route as the hero, run vertically */
-.story-intro{max-width:42rem;color:var(--muted);margin:-.5rem 0 2.5rem}
-.story{list-style:none;margin:0;padding:0;position:relative;display:grid;gap:2rem}
-.story>li{position:relative;padding-left:2.75rem}
-.story>li:not(:last-child)::after{content:"";position:absolute;left:calc(.55rem - 1.5px);top:1.75rem;bottom:-3.75rem;width:3px;background:repeating-linear-gradient(180deg,var(--teal) 0 14px,transparent 14px 22px)}
-.story>li::before{content:"";position:absolute;left:0;top:1.2rem;width:1.1rem;height:1.1rem;border-radius:50%;background:var(--bg);border:3px solid var(--teal);z-index:1}
-.story>li:last-child::before{background:var(--amber);border-color:var(--amber)}
-.story>li:last-child::after{content:"";position:absolute;left:0;top:1.2rem;width:1.1rem;height:1.1rem;border-radius:50%;border:2px solid var(--amber);opacity:0;animation:ring 2s ease-out infinite}
-.chapter{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);transition:transform .2s ease-out,border-color .25s,box-shadow .25s}
-.chapter.solo{grid-template-columns:1fr}
-.chapter figure{margin:0;position:relative;min-height:13rem;background:var(--bg);overflow:hidden}
-.chapter figure img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
-.chapter:hover figure img{transform:scale(1.05)}
-.chapter .photo-ph{position:absolute;inset:.75rem;border:3px dashed var(--line);border-radius:8px;display:grid;place-items:center;color:var(--muted);font:700 1rem var(--head);text-align:center;padding:.5rem}
-.chapter .txt{padding:1.5rem;display:flex;flex-direction:column;gap:.75rem}
-.chapter .txt p{margin:0;color:var(--muted)}
-.eyebrow{font:600 .8rem var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--teal)}
-.chapter::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(14rem circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--amber) 20%,transparent),transparent 70%)}
-.chapter:hover::after{opacity:1}
-.chapter:hover{transform:translateY(-5px);border-color:var(--amber);box-shadow:0 14px 30px -18px var(--teal)}
-@media (max-width:40rem){
-  .chapter{grid-template-columns:1fr}
-  .chapter figure{min-height:0;aspect-ratio:16/9}
-}
-
-/* scroll reveal (only when JS is on) */
-.js .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
-.js .reveal.in{opacity:1;transform:none}
-
-@media (max-width:40rem){
-  .route::before{clip-path:inset(0 0 100% 0);animation-name:drawY}
-  .hero::before{width:20rem;height:20rem;right:-6rem}
-}
-@media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation:none!important;transition:none!important}
-  .ch,.route li b,.route li span,.js .reveal{opacity:1!important;transform:none!important}
-  .route::before{clip-path:none}.route li::before{transform:none}
-}
-
-/* ===== projects: clickable cards with a service flow ===== */
-.grid{grid-template-columns:repeat(2,1fr)}
-.project{padding:1.75rem 1.75rem 1.5rem 2.25rem;overflow:hidden;gap:1.1rem}
-.project::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--teal);transition:width .3s,background .3s}
-.project:hover::before{width:9px;background:var(--amber)}
-.project.feature{grid-column:1/-1}
-.project .top{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem}
-.project h3{font-size:1.4rem;line-height:1.2}
-.project h3 a{color:inherit;text-decoration:none}
-.project h3 a::after{content:"";position:absolute;inset:0;z-index:2}
-.project:has(a:focus-visible){outline:3px solid var(--amber);outline-offset:3px}
-.project h3 a:focus-visible{outline:none}
-.go{flex:none;width:2.5rem;height:2.5rem;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;color:var(--teal);transition:transform .35s cubic-bezier(.3,1.4,.5,1),background .25s,border-color .25s,color .25s}
-.project:hover .go{transform:rotate(-45deg);background:var(--amber);border-color:var(--amber);color:#13242e}
-.project .more{margin-top:auto;font-weight:600;color:var(--teal)}
-.built{font-size:.85rem;color:var(--muted);margin:0 0 -.5rem}
-
-/* how the ticket API fits together, drawn with the same dotted route as the hero */
-.flow{list-style:none;margin:.25rem 0 0;padding:1rem 1.1rem;display:grid;gap:.8rem;background:var(--bg);border-radius:8px}
-.flow li{display:flex;align-items:center;flex-wrap:wrap;gap:.6rem}
-.flow .lbl{width:7rem;font-size:.85rem;color:var(--muted)}
-.flow .node{font:600 .9rem var(--head);padding:.3rem .8rem;border-radius:6px;background:var(--surface);border:1px solid var(--line)}
-.flow .node.alert{border-color:var(--amber)}
-.flow .join{width:1.6rem;border-top:3px dotted var(--teal)}
-@media (max-width:48rem){.grid{grid-template-columns:1fr}.flow .lbl{width:100%}}
-</style>
+<title>Jervil Angelo De Leon | HRIS Technical Support, AWS Certified, Cloud & Infrastructure</title>
+<meta name="description" content="Portfolio of Jervil Angelo De Leon, HRIS Technical Support professional and AWS Certified Cloud Practitioner building serverless and infrastructure projects on AWS, including the live Teolohiya.site.">
+<meta name="author" content="Jervil Angelo De Leon">
+<meta name="theme-color" content="#1c1c1c">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Jervil Angelo De Leon | Cloud & Infrastructure Portfolio">
+<meta property="og:description" content="HRIS Technical Support professional, AWS Certified, building and deploying serverless and infrastructure projects on AWS.">
+<meta property="og:image" content="https://raw.githubusercontent.com/jervilangelo/de-leon-portfolio/main/img/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%238fa68e'/%3E%3Ctext x='16' y='23' font-family='Arial' font-size='19' font-weight='700' text-anchor='middle' fill='%231c1c1c'%3EJ%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+<link rel="stylesheet" href="css/home.css">
 <script>document.documentElement.classList.add("js")</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Jervil Angelo De Leon",
+  "jobTitle": "HRIS Technical Support",
+  "address": {"@type": "PostalAddress", "addressLocality": "Makati", "addressCountry": "PH"},
+  "alumniOf": "FEU Institute of Technology",
+  "knowsAbout": ["Amazon Web Services", "Serverless architecture", "Cloud infrastructure", "Networking", "Automation", "Technical support"],
+  "sameAs": ["https://www.linkedin.com/in/jervilangelo/", "https://github.com/jervilangelo"]
+}
+</script>
 </head>
 <body>
-<div class="progress" id="bar"></div>
-<div class="wrap">
-  <nav aria-label="Main">
-    <a href="#story">Story</a>
-    <a href="#projects">Projects</a>
-    <a href="#certifications">Certifications</a>
-    <a href="#contact">Contact</a>
-  </nav>
+<a class="skip" href="#main">Skip to content</a>
+<div class="progress" id="progress" aria-hidden="true"></div>
 
-  <header class="hero">
-    <h1>Jervil Angelo D. De Leon</h1>
-    <p class="role" aria-label="Role">I am <span id="typed"></span><span class="caret"></span></p>
-    <p class="lead">I’m a Technical Support professional and an FEU Institute of Technology graduate specializing in Animation and Game Development, with experience in programming and IT support. While working in technical support, I’m actively earning industry certifications and building hands-on projects in cloud computing, automation, and infrastructure as I work toward becoming a Cloud Engineer.</p>
-    <div class="btns">
-      <a class="btn primary" href="resume-cv/Jervil-Angelo-De-Leon-Resume.pdf" download>Download resume</a>
-      <a class="btn ghost" href="https://github.com/jervilangelo">View GitHub</a>
-      <a class="btn ghost" href="https://www.linkedin.com/in/jervilangelo/">LinkedIn</a>
-    </div>
-    <ol class="route" aria-label="Career path">
-      <li><b>Now</b><span>L1 Technical Support</span></li>
-      <li><b>Building</b><span>Certifications, projects and experience</span></li>
-      <li><b>Next</b><span>Cloud Engineer</span></li>
-    </ol>
-  </header>
-
-  <section id="story">
-    <h2>My career story</h2>
-    <p class="story-intro">From animation and game development to software, IT infrastructure, and now cloud engineering. Each stage of my career has built on what came before it and shaped the kind of engineer I want to become.</p>
-    <ol class="story" id="story-list" aria-label="Career story"></ol>
-  </section>
-
-  <section id="projects">
-    <h2>Projects</h2>
-    <div class="grid">
-
-      <article class="project feature">
-        <div class="top">
-          <h3><a href="https://github.com/jervilangelo/aws-serverless-ticketing-api" target="_blank" rel="noopener" aria-label="AWS Serverless Ticketing API, view on GitHub (opens in a new tab)">AWS Serverless Ticketing API (Lambda, DynamoDB, CloudWatch, API Gateway, SNS)</a></h3>
-          <span class="go" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8h12M9 3l5 5-5 5"/></svg></span>
-        </div>
-        <p>A small serverless API on AWS for logging and tracking HRIS support tickets. API Gateway takes the requests, a Lambda function handles them, and DynamoDB stores the tickets. A second Lambda sends me an email whenever a Critical ticket is created.</p>
-        <ol class="flow" aria-label="How the API works">
-          <li><span class="lbl">Every request</span><span class="node">API Gateway</span><i class="join"></i><span class="node">Lambda</span><i class="join"></i><span class="node">DynamoDB</span></li>
-          <li><span class="lbl">Critical ticket</span><span class="node">Lambda</span><i class="join"></i><span class="node">SNS</span><i class="join"></i><span class="node alert">Email to me</span></li>
-        </ol>
-        <p class="built">Services used</p>
-        <ul class="stack"><li>Lambda</li><li>DynamoDB</li><li>CloudWatch</li><li>API Gateway</li><li>SNS</li></ul>
-        <span class="more">View on GitHub</span>
-      </article>
-
-      <article class="project">
-        <div class="top">
-          <h3><a href="https://github.com/jervilangelo/hris-template-tracker-automation-" target="_blank" rel="noopener">HRIS Template Completion Tracker</a></h3>
-          <span class="go" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8h12M9 3l5 5-5 5"/></svg></span>
-        </div>
-        <p>A daily Power Automate flow scans a SharePoint library and flags files that have not been updated in 7 days. It keeps one row per file in an Excel Online table, and a Power BI dashboard shows completion across about 29 templates and 9 business units.</p>
-        <ul class="stack"><li>Power Automate</li><li>SharePoint</li><li>Excel Online</li><li>Power BI</li></ul>
-        <span class="more">Read the write-up on GitHub</span>
-      </article>
-
-      <article class="project">
-        <div class="top">
-          <h3><a href="https://github.com/jervilangelo/secure-ec2-web-server" target="_blank" rel="noopener">Secure EC2 Web Server</a></h3>
-          <span class="go" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8h12M9 3l5 5-5 5"/></svg></span>
-        </div>
-        <p>This portfolio, hosted on Nginx on an Amazon EC2 instance inside a custom VPC (10.0.0.0/16) in Singapore. HTTP is open to everyone, SSH is limited to my IP, and Session Manager access comes from an IAM role. An EBS snapshot serves as the backup, and there is no NAT gateway, to keep costs down.</p>
-        <ul class="stack"><li>EC2</li><li>VPC</li><li>Security Groups</li><li>IAM</li><li>EBS</li><li>Nginx</li></ul>
-        <span class="more">Read the full write-up on GitHub</span>
-      </article>
-
-    </div>
-  </section>
-
-  <section id="certifications">
-    <h2>Certifications</h2>
-    <h3 class="group">Latest</h3>
-    <div class="certs" id="certs-latest"></div>
-    <h3 class="group">Earlier</h3>
-    <div class="certs" id="certs-earlier"></div>
-  </section>
-
-  <section id="contact" class="contact">
-    <h2>Contact</h2>
-    <ul>
-      <li>Email: <a href="mailto:deleonangelojervil@gmail.com">deleonangelojervil@gmail.com</a></li>
-      <li>Mobile: <a href="tel:+639625865208">0962-586-5208</a></li>
-      <li>LinkedIn: <a href="https://www.linkedin.com/in/jervilangelo/">linkedin.com/in/jervilangelo</a></li>
-      <li>Based in Makati, Philippines</li>
+<header class="nav" id="nav">
+  <a class="wordmark" href="#top">Jervil Angelo De Leon</a>
+  <div class="nav-right">
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#teolohiya">Projects</a></li>
+      <li><a href="#services">AWS services</a></li>
+      <li><a href="#certifications">Certifications</a></li>
+      <li><a href="#journey">Journey</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
-  </section>
+    <a class="btn" href="resume-cv/Jervil-Angelo-De-Leon-Resume.pdf" download>Resume</a>
+  </div>
+</header>
 
-  <footer>&copy; <span id="y"></span> Jervil Angelo De Leon</footer>
-</div>
-<script>
-/* ===== EDIT HERE =====
-   img:    file name inside the /badges folder (PNG)
-   url:    where the badge opens when clicked (Credly, AWS, Coursera, a PDF in /certifications, etc.). Leave "" for no link.
-   latest: true shows it under "Latest", false under "Earlier" */
-const CERTS = [
-  {name:"AWS Certified AI Practitioner", issuer:"Amazon Web Services", date:"Jul 2026", img:"aws-ai-practitioner.png", url:"https://www.credly.com/badges/69244e1f-ff05-4cae-99f3-bb521c658079/public_url", latest:true},
-  {name:"Google System Administration and IT Infrastructure Services", issuer:"Google", date:"Feb 2026", img:"google-sysadmin-it-infrastructure.png", url:"https://www.coursera.org/account/accomplishments/records/CZDIWQ17CQ5I", latest:true},
-  {name:"Google IT Support Professional", issuer:"Google", date:"Feb 2026", img:"google-it-support.png", url:"https://coursera.org/verify/professional-cert/4WF59HM2YAON", latest:true},
-  {name:"Networking Basics", issuer:"Cisco", date:"Jan 2026", img:"cisco-networking-basics.png", url:"https://www.credly.com/badges/404bbb19-351f-4fae-9d9e-b72718a744fa/public_url", latest:true},
-  {name:"CCNA: Introduction to Networks", issuer:"Cisco", date:"Dec 2021", img:"ccna-itn.png", url:"https://www.credly.com/badges/c585d427-7005-42ef-8ca6-b1145a8d0656/public_url", latest:false},
-  {name:"CCNA: Switching, Routing, and Wireless Essentials", issuer:"Cisco", date:"Apr 2022", img:"ccna-srwe.png", url:"https://www.credly.com/badges/c3dcb35c-7b3a-40ce-9831-3a52850032e7/public_url", latest:false},
-  {name:"CyberOps Associate", issuer:"Cisco", date:"Nov 2022", img:"cisco-cyberops-associate.png", url:"https://www.credly.com/badges/51c76942-b928-47eb-8a49-53b52c83a9a6/public_url", latest:false},
-  {name:"Autodesk Certified User: Maya", issuer:"Autodesk", date:"Nov 2023", img:"autodesk-maya.png", url:"certifications/autodesk-maya.pdf", latest:false},
-  {name:"Information Technology Specialist in Databases", issuer:"Certiport", date:"Jan 2022", img:"its-databases.png", url:"certifications/its-databases.pdf", latest:false}
-];
+<main id="main">
 
-function initials(n){return n.replace(/[^A-Za-z ]/g,"").split(" ").filter(Boolean).slice(0,3).map(w=>w[0]).join("").toUpperCase()}
-function card(c){
-  const el=document.createElement(c.url?"a":"div");
-  el.className="cert";
-  if(c.url){el.href=c.url;el.target="_blank";el.rel="noopener";el.setAttribute("aria-label",c.name+", view credential (opens in a new tab)")}
-  const img=document.createElement("img");
-  img.src="badges/"+c.img; img.alt=c.name+" badge"; img.loading="lazy";
-  img.onerror=()=>{const d=document.createElement("div");d.className="ph";d.textContent=initials(c.name);img.replaceWith(d)};
-  const t=document.createElement("strong");t.textContent=c.name;
-  const m=document.createElement("small");m.textContent=c.issuer+" \u2022 "+c.date;
-  el.append(img,t,m);
-  if(c.url){const v=document.createElement("small");v.className="verify";v.textContent=c.url.endsWith(".pdf")?"View certificate":"Verify credential";el.append(v)}
-  return el;
-}
-CERTS.forEach(c=>document.getElementById(c.latest?"certs-latest":"certs-earlier").append(card(c)));
+<!-- ============ HERO: a contact sheet of real build evidence ============ -->
+<section class="hero" id="top" aria-labelledby="hero-title">
+  <div class="sheet">
+    <div class="col" style="--off:0px">
+      <figure class="fr"><img src="img/work/teo-home-s.webp" width="640" height="297" alt="Teolohiya.site homepage"><figcaption class="s1">Teolohiya.site · home</figcaption></figure>
+      <figure class="fr"><img src="img/work/tk-routes-s.webp" width="640" height="324" alt="API Gateway routes for the ticketing API"><figcaption class="s2">Ticketing API · routes</figcaption></figure>
+      <figure class="fr"><img src="img/work/story-unity-s.webp" width="800" height="600" alt="Unity animation project from college"><figcaption class="s3">College · Unity and C#</figcaption></figure>
+      <figure class="fr"><img src="img/work/ec2-sg-s.webp" width="640" height="277" alt="EC2 security group inbound rules"><figcaption class="s4">Secure EC2 · security group</figcaption></figure>
+      <figure class="fr"><img src="img/work/hris-dash-s.webp" width="640" height="356" alt="HRIS template tracker dashboard" loading="lazy"><figcaption class="s1">HRIS tracker · dashboard</figcaption></figure>
+      <figure class="fr"><img src="img/work/tk-logs-s.webp" width="640" height="324" alt="CloudWatch log streams" loading="lazy"><figcaption class="s2">Ticketing API · CloudWatch</figcaption></figure>
+    </div>
+    <div class="col" style="--off:-90px">
+      <figure class="fr"><img src="img/work/tk-arch-s.webp" width="640" height="306" alt="Ticketing API architecture diagram"><figcaption class="s3">Ticketing API · architecture</figcaption></figure>
+      <figure class="fr"><img src="img/work/eccm-mobile-s.webp" width="390" height="760" alt="ECCM website on a phone"><figcaption class="s4">ECCM website · phone</figcaption></figure>
+      <figure class="fr"><img src="img/work/teo-admin-s.webp" width="640" height="297" alt="Teolohiya.site admin team page"><figcaption class="s1">Teolohiya.site · admin</figcaption></figure>
+      <figure class="fr"><img src="img/work/ec2-instance-s.webp" width="640" height="297" alt="Running EC2 instance" loading="lazy"><figcaption class="s2">Secure EC2 · instance</figcaption></figure>
+      <figure class="fr"><img src="img/work/hris-matrix-s.webp" width="640" height="221" alt="Template completion matrix by business unit" loading="lazy"><figcaption class="s3">HRIS tracker · BU matrix</figcaption></figure>
+    </div>
+    <div class="col col--panel">
+      <div class="pair pair--top" aria-hidden="true">
+        <div class="col"><figure class="fr"><img src="img/work/teo-listings-s.webp" width="640" height="301" alt=""></figure></div>
+        <div class="col"><figure class="fr"><img src="img/work/eccm-ministries-s.webp" width="640" height="328" alt=""></figure></div>
+        <div class="col"><figure class="fr"><img src="img/work/ec2-vpc-s.webp" width="640" height="279" alt=""></figure></div>
+      </div>
 
-/* ===== CAREER STORY - EDIT HERE =====
-   img: file name inside the /img folder (leave "" for a text-only chapter)
-   pos: optional CSS object-position to choose which part of the photo stays in view */
-const STORY=[
-  {label:"Where it started", title:"Animation and Game Development", img:"portfolio-animation-unity-landscape.jpg", alt:"Animation code written in Unity during college", pos:"center",
-   text:["I chose Animation and Game Development because I have always been interested in animation, games, and technology. During college, I worked with Unity and wrote C# code for interactive projects, giving me an early foundation in programming, problem-solving, and software development."],
-   tags:["Unity","C#","Animation","Game Development"]},
-  {label:"Learning software development", title:"C# Back-End Programmer (Intern)", img:"portfolio-csharp-backend-landscape.jpg", alt:"C# back-end work from my internship", pos:"center",
-   text:["My internship gave me the opportunity to work with software beyond game development. I contributed to both front-end and back-end development and gained a better understanding of how applications, code, and different components work together.",
-         "This experience strengthened my programming fundamentals and taught me how to approach real-world technical problems in a development environment."],
-   tags:["C#","Back-End Development","Front-End Development","Software Development"]},
-  {label:"Milestone", title:"BSIT in Animation and Game Development", img:"grad-pic-feu.jpg", alt:"Graduation photo at FEU Institute of Technology", pos:"center 20%",
-   text:["I graduated from FEU Institute of Technology with a Bachelor of Science in Information Technology, specializing in Animation and Game Development. By graduation, I already had experience with programming and software development, giving me a solid technical foundation to carry into my professional career."],
-   tags:["BS Information Technology","Animation and Game Development","FEU Institute of Technology","Programming"]},
-  {label:"Into IT infrastructure", title:"Onsite Engineer at HP", img:"portfolio-hp-onsite-landscape.jpg", alt:"On site as an HP Onsite Engineer", pos:"center",
-   text:["My first full-time role brought me closer to the infrastructure side of IT. As an onsite engineer, I supported laptops, workstations, printers, POS systems, and other enterprise technology while working directly with clients and business partners.",
-         "This experience taught me how technology is supported in real-world environments\u2014not just how software is written. I gained hands-on experience with troubleshooting, hardware, operating systems, deployments, documentation, and working within service requirements.",
-         "It also helped me develop the communication and problem-solving skills needed to diagnose issues and deliver technical solutions in the field."],
-   tags:["IT Support","Hardware & Workstations","Operating Systems","Troubleshooting","Deployment","Client-facing Support","Enterprise IT"]},
-  {label:"Expanding into systems and cloud", title:"Technical Support \u2192 Cloud Engineering", img:"", alt:"", pos:"",
-   text:["Today, I work in Technical Support while continuing to expand my skills in systems, networking, automation, and cloud computing.",
-         "Rather than leaving my previous experience behind, I am building on it. My background in programming helps me understand software and automation; my experience in IT support gives me a practical understanding of systems and infrastructure; and my current work is allowing me to develop stronger experience with business applications and technical operations.",
-         "Alongside my work, I am earning certifications and building hands-on projects with AWS, automation, and infrastructure technologies. My goal is to bring these experiences together and grow into a Cloud Engineer who understands not only cloud services, but also the systems, networks, applications, and people that depend on them."],
-   tags:["Technical Support","AWS","Cloud Computing","Networking","Automation","Infrastructure","Systems Administration"]}
-];
-(function(){
-  const list=document.getElementById("story-list");
-  STORY.forEach((s,i)=>{
-    const li=document.createElement("li");
-    const art=document.createElement("article");art.className="chapter"+(s.img?"":" solo");
-    if(s.img){
-      const fig=document.createElement("figure");
-      const im=document.createElement("img");
-      im.src="img/"+s.img;im.alt=s.alt;im.loading="lazy";if(s.pos)im.style.objectPosition=s.pos;
-      im.onerror=()=>{const d=document.createElement("div");d.className="photo-ph";d.textContent="Add photo: "+s.img;im.replaceWith(d)};
-      fig.append(im);art.append(fig);
-    }
-    const txt=document.createElement("div");txt.className="txt";
-    const eb=document.createElement("span");eb.className="eyebrow";eb.textContent="Chapter "+(i+1)+" \u2022 "+s.label;
-    const h=document.createElement("h3");h.textContent=s.title;
-    const ps=s.text.map(t=>{const p=document.createElement("p");p.textContent=t;return p});
-    const ul=document.createElement("ul");ul.className="stack";
-    s.tags.forEach(t=>{const l=document.createElement("li");l.textContent=t;ul.append(l)});
-    txt.append(eb,h,...ps,ul);art.append(txt);li.append(art);list.append(li);
-  });
-})();
-document.getElementById("y").textContent=new Date().getFullYear();
+      <div class="panel">
+        <h1 id="hero-title">Jervil Angelo De Leon</h1>
+        <p class="panel-role">HRIS Technical Support · AWS Certified · Cloud &amp; Infrastructure</p>
+        <p class="panel-line">I support an HR system by day and build on AWS around it: a live serverless book platform, an event-driven ticketing API, and a hardened EC2 web server.</p>
+        <div class="panel-foot">
+          <a class="btn btn--dark" href="#teolohiya">See the projects <span class="arrow" aria-hidden="true">→</span></a>
+          <ul class="panel-links">
+            <li><a class="link" href="resume-cv/Jervil-Angelo-De-Leon-Resume.pdf" download>Resume</a></li>
+            <li><a class="link" href="https://github.com/jervilangelo" target="_blank" rel="noopener">GitHub</a></li>
+            <li><a class="link" href="https://www.linkedin.com/in/jervilangelo/" target="_blank" rel="noopener">LinkedIn</a></li>
+          </ul>
+        </div>
+      </div>
 
-/* ===== motion ===== */
-const reduce=matchMedia("(prefers-reduced-motion:reduce)").matches;
+      <div class="pair pair--bottom">
+        <div class="col">
+          <figure class="fr"><img src="img/work/ec2-ebs-s.webp" width="640" height="277" alt="EBS snapshot backup" loading="lazy"><figcaption class="s2">Secure EC2 · EBS snapshot</figcaption></figure>
+          <figure class="fr"><img src="img/work/hris-milestones-s.webp" width="640" height="358" alt="HRIS project milestones view" loading="lazy"><figcaption class="s4">HRIS tracker · milestones</figcaption></figure>
+        </div>
+        <div class="col">
+          <figure class="fr"><img src="img/work/tk-test-s.webp" width="640" height="324" alt="PowerShell test creating a ticket" loading="lazy"><figcaption class="s3">Ticketing API · tests</figcaption></figure>
+          <figure class="fr"><img src="img/work/teo-guidelines-s.webp" width="640" height="299" alt="Teolohiya.site community guidelines" loading="lazy"><figcaption class="s1">Teolohiya.site · guidelines</figcaption></figure>
+        </div>
+        <div class="col">
+          <figure class="fr"><img src="img/work/tk-throttle-s.webp" width="640" height="324" alt="API Gateway throttling settings" loading="lazy"><figcaption class="s4">Ticketing API · throttling</figcaption></figure>
+          <figure class="fr"><img src="img/work/hris-flow-s.webp" width="640" height="320" alt="Power Automate flow" loading="lazy"><figcaption class="s2">HRIS tracker · flow</figcaption></figure>
+        </div>
+      </div>
+    </div>
+    <div class="col" style="--off:-40px">
+      <figure class="fr"><video class="autoplay" muted loop playsinline preload="metadata" poster="img/work/teo-demo-poster.webp" width="920" height="520" aria-label="Walkthrough of the Teolohiya.site homepage and recent listings"><source src="img/work/teo-demo.mp4" type="video/mp4"></video><figcaption class="s4">Teolohiya.site · live</figcaption></figure>
+      <figure class="fr"><img src="img/work/eccm-home-s.webp" width="640" height="328" alt="ECCM website homepage"><figcaption class="s3">ECCM website · home</figcaption></figure>
+      <figure class="fr"><img src="img/work/story-grad-s.webp" width="800" height="617" alt="Graduation at FEU Institute of Technology"><figcaption class="s1">FEU Tech · BSIT graduation</figcaption></figure>
+      <figure class="fr"><img src="img/work/tk-email-s.webp" width="640" height="324" alt="Critical ticket alert email from SNS"><figcaption class="s2">Ticketing API · SNS alert</figcaption></figure>
+      <figure class="fr"><img src="img/work/story-hp-s.webp" width="800" height="557" alt="Onsite hardware work as an HP field engineer" loading="lazy"><figcaption class="s4">HP · onsite engineer</figcaption></figure>
+      <figure class="fr"><img src="img/work/teo-book-s.webp" width="640" height="297" alt="Teolohiya.site book detail page" loading="lazy"><figcaption class="s3">Teolohiya.site · book page</figcaption></figure>
+    </div>
+  </div>
+</section>
 
-// name appears letter by letter
-const h1=document.querySelector("h1");let li=0;
-const words=h1.textContent.trim().split(" ");
-h1.textContent="";h1.setAttribute("aria-label",words.join(" "));
-words.forEach(w=>{const ws=document.createElement("span");ws.className="w";ws.setAttribute("aria-hidden","true");
-  [...w].forEach(c=>{const s=document.createElement("span");s.className="ch";s.style.setProperty("--i",li++);s.textContent=c;ws.append(s)});
-  h1.append(ws)});
+<!-- ============ FLAGSHIP: Teolohiya.site ============ -->
+<section class="section frame flagship" id="teolohiya" aria-labelledby="teo-title">
+  <div class="grid">
+    <div class="flag-rail" data-reveal>
+      <h2 class="h2" id="teo-title">Teolohiya.site</h2>
+      <p class="flag-line">My flagship build, live on AWS: a moderated listing board where readers across the Philippines find Christian theological books, and members list the copies they want to pass on.</p>
+      <div class="flag-actions">
+        <a class="btn" href="teolohiya-case-study.html">Read the case study <span class="arrow" aria-hidden="true">→</span></a>
+        <a class="link ext" href="https://teolohiya.site" target="_blank" rel="noopener">Visit the live site</a>
+        <a class="link ext" href="https://github.com/jervilangelo/teolohiya-repo" target="_blank" rel="noopener">GitHub case study</a>
+      </div>
+    </div>
 
-// typed role (sentence starts with "I am", so each item starts with an article)
-const roles=["an HRIS L1 Technical Support specialist","an AWS Skill Builder learner","an Automation and AI Workflow builder","a future Cloud Engineer"];
-const tp=document.getElementById("typed");
-if(reduce){tp.textContent=roles[roles.length-1]}else{
-  let r=0,k=0,del=false;
-  (function tick(){const w=roles[r];k+=del?-1:1;tp.textContent=w.slice(0,k);let t=del?35:70;
-    if(!del&&k===w.length){del=true;t=1500}else if(del&&k===0){del=false;r=(r+1)%roles.length;t=300}
-    setTimeout(tick,t)})();
-}
+    <div class="flag-run">
+      <div class="run" tabindex="0" role="region" aria-label="Teolohiya.site screens, scrolls sideways">
+        <figure class="lifted shutter-wrap">
+          <div class="shutter" data-shutter><video class="autoplay" muted loop playsinline preload="metadata" poster="img/work/teo-demo-poster.webp" width="920" height="520" aria-label="Walkthrough of the live Teolohiya.site homepage and recent listings"><source src="img/work/teo-demo.mp4" type="video/mp4"></video></div>
+          <figcaption><span>Live walkthrough</span><span>teolohiya.site</span></figcaption>
+        </figure>
+        <figure><img src="img/work/teo-listings-l.webp" width="1346" height="633" alt="Book categories and recently listed books" loading="lazy"><figcaption><span>Recent listings</span><span>Approved books only</span></figcaption></figure>
+        <figure><img src="img/work/teo-book-l.webp" width="1344" height="624" alt="Book detail page with photos, price, condition and seller contact" loading="lazy"><figcaption><span>Book page</span><span>Seller contacted directly</span></figcaption></figure>
+        <figure><img src="img/work/teo-list-l.webp" width="1348" height="625" alt="Create a listing form" loading="lazy"><figcaption><span>List a book</span><span>Up to five photos</span></figcaption></figure>
+        <figure><img src="img/work/teo-admin-l.webp" width="1347" height="625" alt="Admin team and role management page" loading="lazy"><figcaption><span>Admin</span><span>Roles and audit log</span></figcaption></figure>
+      </div>
+    </div>
+  </div>
 
-// scroll progress bar
-const bar=document.getElementById("bar");let tick2=false;
-function prog(){const h=document.documentElement.scrollHeight-innerHeight;bar.style.transform="scaleX("+(h>0?scrollY/h:0)+")";tick2=false}
-addEventListener("scroll",()=>{if(!tick2){tick2=true;requestAnimationFrame(prog)}},{passive:true});prog();
+  <div class="grid flag-detail" data-reveal>
+    <div class="flag-col">
+      <h3 class="h3">What it does</h3>
+      <p>Visitors browse, search and report approved listings. Members sign in with Cognito, list books with up to five photos and track review status. Moderators approve or reject with reasons; admins manage roles and read the audit log. Payment and delivery happen outside the site, by design.</p>
+    </div>
+    <div class="flag-col">
+      <h3 class="h3">How it is built</h3>
+      <ol class="path" aria-label="Request path">
+        <li><span>Next.js App Router</span><span class="muted">Amplify Hosting, CloudFront, ACM</span></li>
+        <li><span>Sign-in and roles</span><span class="muted">Amazon Cognito groups</span></li>
+        <li><span>GraphQL API</span><span class="muted">AWS AppSync</span></li>
+        <li><span>Private and public data</span><span class="muted">Two DynamoDB models</span></li>
+        <li><span>Moderation actions</span><span class="muted">AWS Lambda</span></li>
+        <li><span>Book photos</span><span class="muted">Amazon S3, pending and approved paths</span></li>
+      </ol>
+    </div>
+    <div class="flag-col">
+      <h3 class="h3">Decisions that matter</h3>
+      <ul class="points">
+        <li>Listings stay private until approved; only sanitised copies reach the public table.</li>
+        <li>The browser can never approve: Lambda owns every moderation and role change, and writes an audit entry.</li>
+        <li>Optimistic locking stops a moderator approving a stale revision.</li>
+        <li>No always-on compute and no NAT gateway, with AWS Budgets alerts on the account.</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
-// reveal on scroll, then hand the element back so hover/tilt stays snappy
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.15});
-document.querySelectorAll("section h2,.story-intro,.story>li,.group,.project,.cert,.contact ul").forEach(el=>{
-  const sib=[...el.parentElement.children].indexOf(el);
-  el.classList.add("reveal");el.style.transitionDelay=(sib%6*80)+"ms";
-  el.addEventListener("transitionend",e=>{if(e.propertyName==="opacity"&&el.classList.contains("in")){el.classList.remove("reveal","in");el.style.transitionDelay=""}});
-  io.observe(el);
-});
+<!-- ============ OTHER PROJECTS: one strip per project ============ -->
+<section class="section frame work" id="projects" aria-labelledby="work-title">
+  <div class="work-grid">
+    <div class="work-rail">
+      <h2 class="h3" id="work-title">More projects</h2>
+      <p class="small muted">Four builds, newest first</p>
+    </div>
 
-// cursor spotlight on cards, 3D tilt on badges
-document.querySelectorAll(".project,.cert,.chapter").forEach(el=>{
-  el.addEventListener("pointermove",e=>{
-    const b=el.getBoundingClientRect(),x=e.clientX-b.left,y=e.clientY-b.top;
-    el.style.setProperty("--mx",x+"px");el.style.setProperty("--my",y+"px");
-    if(!reduce&&el.classList.contains("cert"))
-      el.style.transform="perspective(600px) rotateY("+((x/b.width-.5)*14)+"deg) rotateX("+((.5-y/b.height)*14)+"deg) translateY(-4px)";
-  });
-  el.addEventListener("pointerleave",()=>{el.style.transform=""});
-});
-</script>
+    <div class="strips">
+      <article class="strip" id="p-ticketing" data-reveal>
+        <div class="strip-frames">
+          <img src="img/work/tk-arch-s.webp" width="640" height="306" alt="Architecture: client, API Gateway, Lambda, DynamoDB, stream to alert Lambda and SNS email" loading="lazy" style="--r:2.09">
+          <img src="img/work/tk-routes-s.webp" width="640" height="324" alt="HTTP API routes in API Gateway" loading="lazy" style="--r:1.98">
+          <img src="img/work/tk-alarm-s.webp" width="640" height="324" alt="CloudWatch alarm on Lambda errors" loading="lazy" style="--r:1.98">
+          <img src="img/work/tk-email-s.webp" width="640" height="324" alt="Critical ticket alert email delivered by SNS" loading="lazy" style="--r:1.98">
+        </div>
+        <p class="strip-cap"><span><b>AWS Serverless Ticketing API</b></span><span class="muted">Event-driven HRIS tickets</span><span class="muted">2026</span></p>
+        <div class="strip-body">
+          <p>A serverless API for logging and tracking HRIS support tickets, modelled on the requests I handle at work, with made-up data. API Gateway takes the request, a Lambda function handles it and DynamoDB stores it. A DynamoDB stream feeds a second Lambda that emails me through SNS whenever a Critical ticket is created.</p>
+          <ul class="points">
+            <li>Six routes: CRUD, status and module filters, and a summary by status and module.</li>
+            <li>A <code>status-index</code> GSI turns status filters into queries instead of scans; SLA due dates are set by priority.</li>
+            <li>One narrow IAM role per function, no resource wildcards; API throttled to 5 requests a second.</li>
+            <li>JSON logs, one-week retention and a CloudWatch error alarm that emails through SNS.</li>
+          </ul>
+          <div class="strip-meta">
+            <ul class="tags" aria-label="Services"><li>API Gateway</li><li>Lambda</li><li>DynamoDB</li><li>DynamoDB Streams</li><li>SNS</li><li>CloudWatch</li><li>IAM</li><li>Python 3.12</li></ul>
+            <a class="link ext" href="https://github.com/jervilangelo/aws-serverless-ticketing-api" target="_blank" rel="noopener">Code and write-up on GitHub</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="strip" id="p-ec2" data-reveal>
+        <div class="strip-frames">
+          <img src="img/work/ec2-vpc-s.webp" width="640" height="279" alt="Custom VPC resource map with a public subnet and route table" loading="lazy" style="--r:2.29">
+          <img src="img/work/ec2-sg-s.webp" width="640" height="277" alt="Security group allowing HTTP from anywhere and SSH from one IP" loading="lazy" style="--r:2.31">
+          <img src="img/work/ec2-instance-s.webp" width="640" height="297" alt="Running EC2 instance in ap-southeast-1" loading="lazy" style="--r:2.15">
+          <img src="img/work/ec2-ebs-s.webp" width="640" height="277" alt="Completed EBS snapshot used as a backup" loading="lazy" style="--r:2.31">
+        </div>
+        <p class="strip-cap"><span><b>Secure EC2 Web Server</b></span><span class="muted">Nginx in a custom VPC</span><span class="muted">2026</span></p>
+        <div class="strip-body">
+          <p>A hands-on practice build for AWS networking and security: a static page served by Nginx on Amazon Linux 2023 inside a custom VPC (<code>10.0.0.0/16</code>) in Singapore. HTTP is open, SSH is limited to my IP, and Session Manager access comes from an IAM role on the instance. An EBS snapshot is the backup.</p>
+          <ul class="points">
+            <li>Root account behind MFA; daily work done as an IAM user.</li>
+            <li>No NAT gateway and a budget alert, to keep the bill predictable.</li>
+            <li>Solved: SSH "Permission denied" from a wrong key path, and Linux commands run in the wrong shell.</li>
+          </ul>
+          <div class="strip-meta">
+            <ul class="tags" aria-label="Services"><li>EC2</li><li>VPC</li><li>Security groups</li><li>IAM</li><li>Session Manager</li><li>EBS</li><li>Nginx</li></ul>
+            <a class="link ext" href="https://github.com/jervilangelo/secure-ec2-web-server" target="_blank" rel="noopener">Write-up on GitHub</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="strip" id="p-hris" data-reveal>
+        <div class="strip-frames">
+          <img src="img/work/hris-flow-s.webp" width="640" height="320" alt="Scheduled Power Automate flow" loading="lazy" style="--r:2">
+          <img src="img/work/hris-tracker-s.webp" width="640" height="299" alt="Tracker table with active and stale counts per business unit" loading="lazy" style="--r:2.14">
+          <img src="img/work/hris-dash-s.webp" width="640" height="356" alt="Template tracker dashboard" loading="lazy" style="--r:1.8">
+          <img src="img/work/hris-matrix-s.webp" width="640" height="221" alt="Completion matrix by business unit" loading="lazy" style="--r:2.9">
+        </div>
+        <p class="strip-cap"><span><b>HRIS Template Completion Tracker</b></span><span class="muted">Built for my HRIS rollout</span><span class="muted">2026</span></p>
+        <div class="strip-body">
+          <p>About 29 HR templates across 9 business units were being checked by hand. A daily Power Automate flow now scans the SharePoint library, flags files untouched for 7 days as stale, and upserts one row per file into an Excel Online table that feeds a Power BI completion dashboard.</p>
+          <ul class="points">
+            <li>Upsert keyed on each file's full path, so re-runs update rows instead of duplicating them.</li>
+            <li>Fixed a silent-skip bug by running the next step after the lookup succeeds or fails.</li>
+            <li>Completion is measured against the templates each unit actually uses; source files are only ever read.</li>
+          </ul>
+          <div class="strip-meta">
+            <ul class="tags" aria-label="Tools"><li>Power Automate</li><li>SharePoint</li><li>Excel Online</li><li>Power BI</li></ul>
+            <a class="link ext" href="https://github.com/jervilangelo/hris-template-tracker-automation-" target="_blank" rel="noopener">Case study on GitHub</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="strip" id="p-eccm" data-reveal>
+        <div class="strip-frames">
+          <img src="img/work/eccm-home-s.webp" width="640" height="328" alt="ECCM website homepage" loading="lazy" style="--r:1.95">
+          <img src="img/work/eccm-ministries-s.webp" width="640" height="328" alt="ECCM ministries page" loading="lazy" style="--r:1.95">
+          <img src="img/work/eccm-mobile-s.webp" width="390" height="760" alt="ECCM homepage on a phone" loading="lazy" style="--r:0.51">
+          <img src="img/work/eccm-expect-s.webp" width="640" height="328" alt="ECCM What to Expect page" loading="lazy" style="--r:1.95">
+        </div>
+        <p class="strip-cap"><span><b>ECCM Website</b></span><span class="muted">Church site, custom domain</span><span class="muted">2026</span></p>
+        <div class="strip-body">
+          <p>A multi-page website for Evangelical Covenant Church Manila, a nonprofit church: ministries, background, a guide for first-time visitors, giving and contact details. I built and deployed it, configured the custom domain, and added the SEO essentials.</p>
+          <ul class="points">
+            <li>Six pages: Home, About, What to Expect, Ministries, Giving and Contact.</li>
+            <li>Responsive layout for phones and desktops.</li>
+            <li><code>sitemap.xml</code> and <code>robots.txt</code> for search engines, plus favicons and a web manifest.</li>
+          </ul>
+          <div class="strip-meta">
+            <ul class="tags" aria-label="Tools"><li>HTML</li><li>CSS</li><li>Custom domain</li><li>SEO</li></ul>
+            <span class="strip-links">
+              <a class="link ext" href="https://ecc-manila.org/" target="_blank" rel="noopener">ecc-manila.org</a>
+              <a class="link ext" href="https://github.com/jervilangelo/eccm-web" target="_blank" rel="noopener">GitHub</a>
+            </span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AWS SERVICES: two-ended rows, filterable by project ============ -->
+<section class="section frame services" id="services" aria-labelledby="svc-title">
+  <div class="grid">
+    <div class="svc-intro">
+      <h2 class="h2" id="svc-title">AWS services I have used</h2>
+      <p class="svc-line">Twenty services across three AWS builds, each tied to what it did there. Pick a project to see its stack.</p>
+      <div class="svc-filter" role="group" aria-label="Show services used by">
+        <button type="button" aria-pressed="true" data-project="all">All projects</button>
+        <button type="button" aria-pressed="false" data-project="teo">Teolohiya.site</button>
+        <button type="button" aria-pressed="false" data-project="tk">Ticketing API</button>
+        <button type="button" aria-pressed="false" data-project="ec2">Secure EC2</button>
+      </div>
+      <p class="svc-count small" aria-live="polite"><span id="svc-count">20</span> of 20 services</p>
+      <p class="small muted svc-note">"Via Amplify" marks services that Amplify Gen 2 provisions and manages for Teolohiya.site, rather than ones I configured on their own.</p>
+    </div>
+
+    <div class="svc-list">
+      <div class="svc-group">
+        <h3>Compute</h3>
+        <ul>
+          <li data-p="ec2"><img src="img/aws/AmazonEC2.svg" alt="" width="28" height="28"><div><b>Amazon EC2</b><span>Amazon Linux 2023 instance running Nginx</span></div><em>Secure EC2</em></li>
+          <li data-p="tk teo"><img src="img/aws/AWSLambda.svg" alt="" width="28" height="28"><div><b>AWS Lambda</b><span>Ticket handler and alert functions; moderation and admin actions</span></div><em>Ticketing API, Teolohiya</em></li>
+        </ul>
+      </div>
+      <div class="svc-group">
+        <h3>Networking and delivery</h3>
+        <ul>
+          <li data-p="ec2"><img src="img/aws/AmazonVirtualPrivateCloud.svg" alt="" width="28" height="28"><div><b>Amazon VPC</b><span>Custom 10.0.0.0/16, public subnet, internet gateway, security groups</span></div><em>Secure EC2</em></li>
+          <li data-p="tk"><img src="img/aws/AmazonAPIGateway.svg" alt="" width="28" height="28"><div><b>Amazon API Gateway</b><span>HTTP API with six routes and a 5 req/s throttle</span></div><em>Ticketing API</em></li>
+          <li data-p="teo"><img src="img/aws/AmazonCloudFront.svg" alt="" width="28" height="28"><div><b>Amazon CloudFront</b><span>Content delivery for the hosted Next.js site, via Amplify</span></div><em>Teolohiya</em></li>
+        </ul>
+      </div>
+      <div class="svc-group">
+        <h3>Storage and databases</h3>
+        <ul>
+          <li data-p="tk teo"><img src="img/aws/AmazonDynamoDB.svg" alt="" width="28" height="28"><div><b>Amazon DynamoDB</b><span>On-demand table with a GSI and Streams; private and public listing models</span></div><em>Ticketing API, Teolohiya</em></li>
+          <li data-p="teo"><img src="img/aws/AmazonSimpleStorageService.svg" alt="" width="28" height="28"><div><b>Amazon S3</b><span>Book photos split into private pending and public approved paths</span></div><em>Teolohiya</em></li>
+          <li data-p="ec2"><img src="img/aws/AmazonElasticBlockStore.svg" alt="" width="28" height="28"><div><b>Amazon EBS</b><span>Snapshot of the web server volume as a backup</span></div><em>Secure EC2</em></li>
+        </ul>
+      </div>
+      <div class="svc-group">
+        <h3>Security and identity</h3>
+        <ul>
+          <li data-p="tk ec2 teo"><img src="img/aws/AWSIdentityandAccessManagement.svg" alt="" width="28" height="28"><div><b>AWS IAM</b><span>One least-privilege role per function; instance role; scoped app roles</span></div><em>All three</em></li>
+          <li data-p="teo"><img src="img/aws/AmazonCognito.svg" alt="" width="28" height="28"><div><b>Amazon Cognito</b><span>Sign-up, email sign-in, moderator and admin groups</span></div><em>Teolohiya</em></li>
+          <li data-p="teo"><img src="img/aws/AWSCertificateManager.svg" alt="" width="28" height="28"><div><b>AWS Certificate Manager</b><span>TLS certificate for HTTPS on the custom domain, via Amplify</span></div><em>Teolohiya</em></li>
+          <li data-p="teo"><img src="img/aws/AWSIAMIdentityCenter.svg" alt="" width="28" height="28"><div><b>AWS IAM Identity Center</b><span>SSO access to AWS without long-lived access keys</span></div><em>Teolohiya</em></li>
+          <li data-p="ec2"><img src="img/aws/AWSSystemsManager.svg" alt="" width="28" height="28"><div><b>AWS Systems Manager</b><span>Session Manager access to the instance through its IAM role</span></div><em>Secure EC2</em></li>
+        </ul>
+      </div>
+      <div class="svc-group">
+        <h3>Application integration</h3>
+        <ul>
+          <li data-p="teo"><img src="img/aws/AWSAppSync.svg" alt="" width="28" height="28"><div><b>AWS AppSync</b><span>GraphQL API for listings and related operations</span></div><em>Teolohiya</em></li>
+          <li data-p="tk"><img src="img/aws/AmazonSimpleNotificationService.svg" alt="" width="28" height="28"><div><b>Amazon SNS</b><span>Critical-ticket emails and alarm notifications</span></div><em>Ticketing API</em></li>
+        </ul>
+      </div>
+      <div class="svc-group">
+        <h3>Monitoring and cost</h3>
+        <ul>
+          <li data-p="tk"><img src="img/aws/AmazonCloudWatch.svg" alt="" width="28" height="28"><div><b>Amazon CloudWatch</b><span>Structured logs, one-week retention and an error alarm</span></div><em>Ticketing API</em></li>
+          <li data-p="teo ec2"><img src="img/aws/AWSBudgets.svg" alt="" width="28" height="28"><div><b>AWS Budgets</b><span>Spending alerts on the account</span></div><em>Teolohiya, Secure EC2</em></li>
+        </ul>
+      </div>
+      <div class="svc-group">
+        <h3>Deployment and infrastructure as code</h3>
+        <ul>
+          <li data-p="teo"><img src="img/aws/AWSAmplify.svg" alt="" width="28" height="28"><div><b>AWS Amplify Gen 2</b><span>Hosting, GitHub-connected deploys and the backend definition</span></div><em>Teolohiya</em></li>
+          <li data-p="teo"><img src="img/aws/AWSCloudFormation.svg" alt="" width="28" height="28"><div><b>AWS CloudFormation</b><span>Deploys the Amplify backend resources, via Amplify</span></div><em>Teolohiya</em></li>
+          <li data-p="teo"><img src="img/aws/AWSCloudDevelopmentKit.svg" alt="" width="28" height="28"><div><b>AWS CDK</b><span>Defines the backend as infrastructure as code, via Amplify</span></div><em>Teolohiya</em></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CERTIFICATIONS: recognition as a table ============ -->
+<section class="section frame certs" id="certifications" aria-labelledby="cert-title">
+  <div class="grid cert-head" data-reveal>
+    <h2 class="h2" id="cert-title">Certifications</h2>
+    <p class="cert-line">Two AWS and two Oracle Cloud credentials this year, on top of Google, Cisco and Certiport foundations.</p>
+    <ul class="cert-badges" aria-label="Latest cloud certifications">
+      <li><img src="badges/aws-ccp.png" width="600" height="600" alt="AWS Certified Cloud Practitioner badge" loading="lazy"></li>
+      <li><img src="badges/aws-ai-practitioner.png" width="600" height="600" alt="AWS Certified AI Practitioner badge" loading="lazy"></li>
+      <li><img src="badges/oci-associate.png" width="286" height="276" alt="Oracle Cloud Infrastructure Certified Foundations Associate badge" loading="lazy"></li>
+      <li><img src="badges/oci-ai.png" width="278" height="276" alt="Oracle Cloud Infrastructure Certified AI Foundations Associate badge" loading="lazy"></li>
+    </ul>
+  </div>
+
+  <div class="cert-table-wrap">
+    <table class="table cert-table">
+      <caption class="sr-only">Certifications by year, with issuer and credential link</caption>
+      <thead><tr><th scope="col">Year</th><th scope="col">Certification</th><th scope="col">Issuer</th><th scope="col" class="r">Credential</th></tr></thead>
+      <tbody>
+        <tr><td class="yr">2026</td><td><span class="cert-name"><img src="badges/aws-ccp.png" alt="" width="40" height="40" loading="lazy"><span>AWS Certified Cloud Practitioner</span></span></td><td class="muted">Amazon Web Services</td><td class="r"><a class="link ext" href="https://www.credly.com/badges/288410a2-4082-4f35-aa7a-b700e636a4ae/linked_in_profile" target="_blank" rel="noopener" aria-label="Verify credential: AWS Certified Cloud Practitioner">Verify</a></td></tr>
+        <tr><td class="yr"><span class="sr-only">2026</span></td><td><span class="cert-name"><img src="badges/aws-ai-practitioner.png" alt="" width="40" height="40" loading="lazy"><span>AWS Certified AI Practitioner</span></span></td><td class="muted">Amazon Web Services</td><td class="r"><a class="link ext" href="https://www.credly.com/badges/69244e1f-ff05-4cae-99f3-bb521c658079/public_url" target="_blank" rel="noopener" aria-label="Verify credential: AWS Certified AI Practitioner">Verify</a></td></tr>
+        <tr><td class="yr"><span class="sr-only">2026</span></td><td><span class="cert-name"><img src="badges/oci-associate.png" alt="" width="40" height="40" loading="lazy"><span>Oracle Cloud Infrastructure Certified Foundations Associate</span></span></td><td class="muted">Oracle</td><td class="r"><a class="link ext" href="https://catalog-education.oracle.com/ords/certview/sharebadge_m?id=3FA5AF9333F9ED712E262BA8A86421975241ECDD293F362F8F83AC2D94639242" target="_blank" rel="noopener" aria-label="Verify credential: Oracle Cloud Infrastructure Certified Foundations Associate">Verify</a></td></tr>
+        <tr><td class="yr"><span class="sr-only">2026</span></td><td><span class="cert-name"><img src="badges/oci-ai.png" alt="" width="40" height="40" loading="lazy"><span>Oracle Cloud Infrastructure Certified AI Foundations Associate</span></span></td><td class="muted">Oracle</td><td class="r"><a class="link ext" href="https://catalog-education.oracle.com/ords/certview/sharebadge?id=65E6F94D89BDDF6F2491DC77B17697DCB7B66918AFA5D572592CC413CF23709E" target="_blank" rel="noopener" aria-label="Verify credential: Oracle Cloud Infrastructure Certified AI Foundations Associate">Verify</a></td></tr>
+        <tr><td class="yr"><span class="sr-only">2026</span></td><td><span class="cert-name"><img src="badges/google-sysadmin-it-infrastructure.png" alt="" width="40" height="40" loading="lazy"><span>Google System Administration and IT Infrastructure Services</span></span></td><td class="muted">Google</td><td class="r"><a class="link ext" href="https://www.coursera.org/account/accomplishments/records/CZDIWQ17CQ5I" target="_blank" rel="noopener" aria-label="Verify credential: Google System Administration and IT Infrastructure Services">Verify</a></td></tr>
+        <tr><td class="yr"><span class="sr-only">2026</span></td><td><span class="cert-name"><img src="badges/google-it-support.png" alt="" width="40" height="40" loading="lazy"><span>Google IT Support Professional Certificate</span></span></td><td class="muted">Google</td><td class="r"><a class="link ext" href="https://coursera.org/verify/professional-cert/4WF59HM2YAON" target="_blank" rel="noopener" aria-label="Verify credential: Google IT Support Professional Certificate">Verify</a></td></tr>
+        <tr><td class="yr"><span class="sr-only">2026</span></td><td><span class="cert-name"><img src="badges/cisco-networking-basics.png" alt="" width="40" height="40" loading="lazy"><span>Networking Basics</span></span></td><td class="muted">Cisco</td><td class="r"><a class="link ext" href="https://www.credly.com/badges/404bbb19-351f-4fae-9d9e-b72718a744fa/public_url" target="_blank" rel="noopener" aria-label="Verify credential: Networking Basics">Verify</a></td></tr>
+        <tr class="group"><td class="yr">2023</td><td><span class="cert-name"><img src="badges/autodesk-maya.png" alt="" width="40" height="40" loading="lazy"><span>Autodesk Certified User: Maya</span></span></td><td class="muted">Autodesk</td><td class="r"><a class="link" href="certifications/autodesk-maya.pdf" aria-label="View certificate: Autodesk Certified User: Maya">View certificate</a></td></tr>
+        <tr><td class="yr"><span class="sr-only">2023</span></td><td><span class="cert-name"><span class="no-badge" aria-hidden="true">Linux</span><span>NDG Linux Essentials</span></span></td><td class="muted">Cisco Networking Academy</td><td class="r"><span class="sr-only">No public verification link</span></td></tr>
+        <tr class="group"><td class="yr">2022</td><td><span class="cert-name"><img src="badges/cisco-cyberops-associate.png" alt="" width="40" height="40" loading="lazy"><span>CyberOps Associate</span></span></td><td class="muted">Cisco</td><td class="r"><a class="link ext" href="https://www.credly.com/badges/51c76942-b928-47eb-8a49-53b52c83a9a6/public_url" target="_blank" rel="noopener" aria-label="Verify credential: CyberOps Associate">Verify</a></td></tr>
+        <tr><td class="yr"><span class="sr-only">2022</span></td><td><span class="cert-name"><img src="badges/ccna-srwe.png" alt="" width="40" height="40" loading="lazy"><span>CCNA: Switching, Routing, and Wireless Essentials</span></span></td><td class="muted">Cisco</td><td class="r"><a class="link ext" href="https://www.credly.com/badges/c3dcb35c-7b3a-40ce-9831-3a52850032e7/public_url" target="_blank" rel="noopener" aria-label="Verify credential: CCNA: Switching, Routing, and Wireless Essentials">Verify</a></td></tr>
+        <tr><td class="yr"><span class="sr-only">2022</span></td><td><span class="cert-name"><img src="badges/its-databases.png" alt="" width="40" height="40" loading="lazy"><span>Information Technology Specialist in Databases</span></span></td><td class="muted">Certiport</td><td class="r"><a class="link" href="certifications/its-databases.pdf" aria-label="View certificate: Information Technology Specialist in Databases">View certificate</a></td></tr>
+        <tr class="group"><td class="yr">2021</td><td><span class="cert-name"><img src="badges/ccna-itn.png" alt="" width="40" height="40" loading="lazy"><span>CCNA: Introduction to Networks</span></span></td><td class="muted">Cisco</td><td class="r"><a class="link ext" href="https://www.credly.com/badges/c585d427-7005-42ef-8ca6-b1145a8d0656/public_url" target="_blank" rel="noopener" aria-label="Verify credential: CCNA: Introduction to Networks">Verify</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ JOURNEY: wide photo, colour tile, facts ============ -->
+<section class="section frame journey" id="journey" aria-labelledby="jr-title">
+  <div class="grid jr-head" data-reveal>
+    <div class="jr-intro">
+      <h2 class="h2" id="jr-title">From support desk to cloud</h2>
+      <p class="lead">Troubleshooting, incident handling, documentation and working to service requirements are the same habits cloud operations runs on. I am building the AWS side of that through certifications and projects I deploy myself.</p>
+    </div>
+    <dl class="jr-facts">
+      <div><dt>Now</dt><dd>HRIS Technical Support, since July 2026</dd></div>
+      <div><dt>2025</dt><dd>Field / Onsite Engineer, HP service centre</dd></div>
+      <div><dt>2024</dt><dd>IT Intern, C# programmer</dd></div>
+      <div><dt>Degree</dt><dd>BSIT, Animation and Game Development, FEU Institute of Technology</dd></div>
+    </dl>
+  </div>
+
+  <div class="grid jr-tiles">
+    <figure class="jr-photo shutter-wrap">
+      <div class="shutter" data-shutter><img src="img/work/story-hp-l.webp" width="1600" height="1113" alt="Repairing enterprise hardware on site as an HP field engineer" loading="lazy"></div>
+      <figcaption class="jr-paper">
+        <b>Onsite Engineer, HP service centre</b>
+        <span>Laptops, workstations, printers and POS systems at client sites: OS installs, hardware faults, incident handling, and explaining fixes to the people who depend on them.</span>
+      </figcaption>
+    </figure>
+    <div class="jr-now">
+      <p class="jr-now-label">Today</p>
+      <p class="jr-now-text">Level 1 support for an HR information system used by seafarers and office staff. I resolve and escalate issues, document known fixes, and support the vendor rollout, which is where the template tracker came from.</p>
+    </div>
+  </div>
+
+  <div class="grid jr-earlier" data-reveal>
+    <figure>
+      <img src="img/work/story-unity-s.webp" width="800" height="600" alt="Animation code written in Unity during college" loading="lazy">
+      <figcaption><b>Where it started</b><span>Animation and Game Development: Unity and C# for interactive projects, my first real programming.</span></figcaption>
+    </figure>
+    <figure>
+      <img src="img/work/story-csharp-s.webp" width="800" height="600" alt="C# back-end work during my internship" loading="lazy">
+      <figcaption><b>C# programmer, internship</b><span>Front-end and back-end work on company applications, inside a real development workflow.</span></figcaption>
+    </figure>
+    <figure>
+      <img src="img/work/story-grad-s.webp" width="800" height="617" alt="Graduation day at FEU Institute of Technology" loading="lazy" style="object-position:center 20%">
+      <figcaption><b>BSIT, FEU Institute of Technology</b><span>Graduated in Animation and Game Development with programming and software experience to carry forward.</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ CONTACT: sentence, portrait, links ============ -->
+<section class="section frame contact" id="contact" aria-labelledby="ct-title">
+  <div class="grid ct-row" data-reveal>
+    <div class="ct-text">
+      <h2 class="h2" id="ct-title">Contact</h2>
+      <p class="ct-sentence">Hiring for a junior cloud, infrastructure or systems role? I would like to hear about it.</p>
+    </div>
+    <img class="ct-portrait" src="img/work/portrait-s.webp" width="360" height="360" alt="Portrait of Jervil Angelo De Leon" loading="lazy">
+    <div class="ct-links">
+      <p class="ct-q">Email is quickest.</p>
+      <ul>
+        <li><a class="link" href="mailto:deleonangelojervil@gmail.com">deleonangelojervil@gmail.com</a></li>
+        <li><a class="link ext" href="https://www.linkedin.com/in/jervilangelo/" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a class="link ext" href="https://github.com/jervilangelo" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a class="link" href="tel:+639625865208">0962 586 5208</a></li>
+        <li><a class="link" href="resume-cv/Jervil-Angelo-De-Leon-Resume.pdf" download>Download resume (PDF)</a></li>
+      </ul>
+      <p class="small muted">Makati, Philippines · GMT+8</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <span class="muted">Jervil Angelo De Leon, cloud and infrastructure portfolio</span>
+  <ul class="foot-links">
+    <li><a class="link" href="#teolohiya">Projects</a></li>
+    <li><a class="link" href="teolohiya-case-study.html">Teolohiya case study</a></li>
+    <li><a class="link" href="https://github.com/jervilangelo" target="_blank" rel="noopener">GitHub</a></li>
+    <li><a class="link" href="https://www.linkedin.com/in/jervilangelo/" target="_blank" rel="noopener">LinkedIn</a></li>
+  </ul>
+  <span class="muted">© <span data-year>2026</span></span>
+</footer>
+
+<script src="js/site.js" defer></script>
 </body>
 </html>
