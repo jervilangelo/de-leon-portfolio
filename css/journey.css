@@ -19,7 +19,7 @@
 }
 .story-line { position: absolute; left: 0; top: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; display: none; }
 .story-ready .story-line { display: block; }
-.sl-base { fill: none; stroke: rgba(241, 241, 239, 0.1); stroke-width: 1.5; }
+.sl-base { display: none; }
 .sl-glow { fill: none; stroke: rgba(169, 191, 168, 0.2); stroke-width: 9; stroke-linecap: round; }
 .sl-draw { fill: none; stroke: var(--line); stroke-width: 2; stroke-linecap: round; }
 .sl-spark { fill: #ffffff; filter: drop-shadow(0 0 6px rgba(169, 191, 168, 0.95)); opacity: 0; } /* taste-skill-ignore: the line's glowing tip */
