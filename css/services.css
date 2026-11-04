@@ -133,6 +133,7 @@
 @media (max-width: 900px) {
   .sv-web-head h2, .sv-web-head .lead { grid-column: 1 / -1; }
   .sv-case, .sv-case--lead { grid-column: 1 / -1; grid-row: auto; }
+  .sv-case--lead { position: static; }
 }
 
 /* ================= SHOWCASE VIDEOS ================= */
