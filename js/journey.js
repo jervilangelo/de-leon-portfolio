@@ -68,7 +68,13 @@
 
   function points() {
     var sb = story.getBoundingClientRect();
-    return nodes.map(function (n) {
+    return nodes.map(function (n, i) {
+      // the last chapter's line ends on the top of its cloud rather than on a node
+      var cloud = chapters[i].querySelector(".end-cloud");
+      if (cloud) {
+        var c = cloud.getBoundingClientRect();
+        return { x: c.left + c.width / 2 - sb.left, y: c.top + c.height * 0.05 - sb.top };
+      }
       var r = n.getBoundingClientRect();
       return { x: r.left + r.width / 2 - sb.left, y: r.top + r.height / 2 - sb.top };
     });
@@ -149,7 +155,7 @@
   }
   function render(p) {
     if (!samples.length) return;
-    var L = reduce ? total : lengthAtY(startY + p * (endY - startY));
+    var L = lengthAtY(startY + p * (endY - startY));
     var off = total - L;
     glow.style.strokeDashoffset = off; draw.style.strokeDashoffset = off;
     var idx = Math.min(samples.length - 1, Math.round((L / total) * (samples.length - 1)));
@@ -177,24 +183,24 @@
   }
 
   build();
-  if (reduce) {
-    chapters.forEach(function (c) { c.classList.add("is-lit", "is-seen"); });
-    render(1);
-  } else {
-    // the tip of the line follows a point 60% down the viewport
-    gsap.to(state, {
-      p: 1, ease: "none",
-      scrollTrigger: {
-        trigger: story,
-        start: function () { return "top+=" + startY + " 60%"; },
-        end: function () { return "top+=" + endY + " 60%"; },
-        scrub: 0.6,
-        invalidateOnRefresh: true
-      },
-      onUpdate: function () { render(state.p); }
-    });
-    render(0);
+  // The line is drawn by the visitor's own scrolling, so it runs even when reduced motion is requested;
+  // what moves on its own (parallax, the spark, slide-ins, the cloud's pulse) is left out in that case.
+  gsap.to(state, {
+    p: 1, ease: "none",
+    scrollTrigger: {
+      trigger: story,
+      start: function () { return "top+=" + startY + " 60%"; },
+      end: function () { return "top+=" + endY + " 60%"; },
+      scrub: reduce ? true : 0.6,
+      invalidateOnRefresh: true
+    },
+    onUpdate: function () { render(state.p); }
+  });
+  render(0);
 
+  if (reduce) {
+    chapters.forEach(function (c) { c.classList.add("is-seen"); });
+  } else {
     // text reveals as soon as a chapter scrolls into view; only the node waits for the line
     chapters.forEach(function (ch) {
       ScrollTrigger.create({ trigger: ch.querySelector(".ch-body"), start: "top 88%", once: true, onEnter: function () { ch.classList.add("is-seen"); } });

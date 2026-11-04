@@ -31,7 +31,8 @@
 .ch--l { justify-self: start; }
 .ch--r { justify-self: end; }
 .ch--wide { width: min(62%, 820px); }
-.ch--c { justify-self: center; width: min(62%, 720px); padding: 104px 0 0; text-align: center; }
+.ch--c { justify-self: center; width: min(62%, 720px); padding: 0; text-align: center; }
+.ch--end .ch-node, .ch--end::after { display: none; }
 
 .ch-node {
   position: absolute; left: 36px; bottom: 0; z-index: 2;
@@ -118,11 +119,22 @@
 @keyframes cpIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 
 /* ---- last chapter ---- */
-.end-cloud { width: 120px; height: auto; margin: 0 auto 28px; fill: none; stroke: #ffffff; stroke-width: 1.4; stroke-linejoin: round; filter: drop-shadow(0 0 10px rgba(169, 191, 168, 0.65)); } /* taste-skill-ignore: the closing cloud glows by design */
+.end-cloud {
+  width: 120px; height: auto; margin: 0 auto 28px; overflow: visible;
+  fill: rgba(169, 191, 168, 0); stroke: rgba(241, 241, 239, 0.35); stroke-width: 1.4; stroke-linejoin: round;
+  filter: drop-shadow(0 0 0 rgba(169, 191, 168, 0)); /* taste-skill-ignore: invisible start point so the glow can fade in */
+  transition: stroke 900ms ease, fill 1200ms ease, filter 1200ms var(--ease-out);
+}
+/* the line has reached the cloud: it lights up */
+.ch--end.is-lit .end-cloud, html:not(.story-ready) .end-cloud {
+  stroke: #ffffff; fill: rgba(169, 191, 168, 0.14);
+  filter: drop-shadow(0 0 14px rgba(169, 191, 168, 0.85)) drop-shadow(0 0 2px rgba(255, 255, 255, 0.9)); /* taste-skill-ignore: the closing cloud glows when the line reaches it */
+}
 @media (prefers-reduced-motion: no-preference) {
-  .story-ready .ch--end.is-seen .end-cloud { animation: endFloat 6s ease-in-out 1.6s infinite alternate; }
+  .story-ready .ch--end.is-lit .end-cloud { animation: endPulse 1400ms var(--ease-out) both, endFloat 6s ease-in-out 1400ms infinite alternate; }
 }
 @keyframes endFloat { from { transform: translateY(0); } to { transform: translateY(-8px); } }
+@keyframes endPulse { 0% { transform: scale(1); } 35% { transform: scale(1.08); } 100% { transform: scale(1); } }
 .end-cta { margin-top: 36px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
 
 /* ---- progress rail: a slim bar along the bottom of the screen (desktop) ---- */
