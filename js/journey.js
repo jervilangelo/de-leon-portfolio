@@ -66,14 +66,25 @@
   /* ---------- build the path through the nodes ---------- */
   var total = 0, samples = [], nodeLen = [], startY = 0, endY = 0;
 
+  var cloudTopCache = null;
+  function cloudTop(svgEl) {
+    if (cloudTopCache) return cloudTopCache;
+    var path = svgEl.querySelector("path"), L = path.getTotalLength(), best = { x: 32, y: 40 };
+    for (var k = 0; k <= 200; k++) { var pt = path.getPointAtLength((k / 200) * L); if (pt.y < best.y) best = { x: pt.x, y: pt.y }; }
+    best.y -= 1.2;                        // stop on the stroke, not inside it
+    cloudTopCache = best;
+    return best;
+  }
+
   function points() {
     var sb = story.getBoundingClientRect();
     return nodes.map(function (n, i) {
       // the last chapter's line ends on the top of its cloud rather than on a node
       var cloud = chapters[i].querySelector(".end-cloud");
       if (cloud) {
-        var c = cloud.getBoundingClientRect();
-        return { x: c.left + c.width / 2 - sb.left, y: c.top + c.height * 0.05 - sb.top };
+        // land on the highest point of the cloud's outline
+        var c = cloud.getBoundingClientRect(), top = cloudTop(cloud);
+        return { x: c.left + top.x * c.width / 64 - sb.left, y: c.top + top.y * c.height / 40 - sb.top };
       }
       var r = n.getBoundingClientRect();
       return { x: r.left + r.width / 2 - sb.left, y: r.top + r.height / 2 - sb.top };
@@ -119,7 +130,8 @@
       // from a right-hand node, carry on to the right edge and loop down (the wide sweep of the reference)
       if (aRight && !centred && gap > 300) route.push({ x: W - 36, y: a.y + gap * 0.3 });
       // then pass the next chapter on the empty side of its text and glide in beneath it
-      if (!centred) {
+      if (centred) route.push({ x: b.x, y: b.y - 64 });   // come straight down onto the cloud
+      else {
         if (bRight) route.push({ x: Math.max(60, bb.left - 190), y: b.y - 24 });
         else route.push({ x: Math.min(W - 60, bb.right + 190), y: b.y - 24 });
       }
@@ -169,10 +181,52 @@
       ch.classList.toggle("is-lit", lit);
       if (lit) { ch.classList.add("is-seen"); current = i; }
     });
+    if (endCh) setOrbit(endCh.classList.contains("is-lit"));
     if (rail) {
       rail.style.setProperty("--p", Math.max(0, Math.min(1, p)).toFixed(3));
       railLinks.forEach(function (a, i) { a.classList.toggle("is-current", i === current); });
     }
+  }
+
+  /* ---------- services orbiting the final cloud once it is lit ---------- */
+  var endCh = story.querySelector(".ch--end"), endStage = story.querySelector(".end-stage");
+  var orbitIcons = endStage ? Array.prototype.slice.call(endStage.querySelectorAll(".end-orbit img")) : [];
+  var orbitOn = false, orbitStart = 0, orbitRaf = 0, orbitRot = 0.6, orbitLast = 0, orbitInView = true;
+  function placeOrbit(t, e) {
+    var W = endStage.clientWidth, H = endStage.clientHeight, n = orbitIcons.length;
+    var rx = W * 0.5 - 22, ry = H * 0.2;
+    orbitIcons.forEach(function (img, i) {
+      var a = orbitRot + (i / n) * Math.PI * 2, z = Math.sin(a), depth = (z + 1) / 2;
+      var spread = 0.2 + 0.8 * e;
+      var x = Math.cos(a) * rx * spread, y = z * ry * spread + Math.sin(t / 900 + i) * 3;
+      img.style.transform = "translate3d(" + x.toFixed(1) + "px," + y.toFixed(1) + "px,0) scale(" + ((0.68 + 0.36 * depth) * (0.5 + 0.5 * e)).toFixed(3) + ")";
+      img.style.opacity = (e * (0.4 + 0.6 * depth)).toFixed(3);
+      img.style.zIndex = z > 0 ? 3 : 1;
+    });
+  }
+  function orbitFrame(t) {
+    if (!orbitStart) { orbitStart = t; orbitLast = t; }
+    orbitRot += Math.min(0.05, (t - orbitLast) / 1000) * (Math.PI * 2 / 40);
+    orbitLast = t;
+    var x = Math.max(0, Math.min(1, (t - orbitStart) / 1200)), e = 1 - Math.pow(1 - x, 3);
+    placeOrbit(t, e);
+    orbitRaf = requestAnimationFrame(orbitFrame);
+  }
+  function setOrbit(on) {
+    if (!endStage || on === orbitOn) return;
+    orbitOn = on;
+    cancelAnimationFrame(orbitRaf);
+    if (!on) { orbitIcons.forEach(function (img) { img.style.opacity = 0; }); orbitStart = 0; return; }
+    if (reduce) { placeOrbit(0, 1); return; }
+    orbitStart = 0;
+    if (orbitInView) orbitRaf = requestAnimationFrame(orbitFrame);
+  }
+  if (endStage && "IntersectionObserver" in window) {
+    new IntersectionObserver(function (es) {
+      orbitInView = es[0].isIntersecting;
+      cancelAnimationFrame(orbitRaf);
+      if (orbitOn && orbitInView && !reduce) { orbitLast = performance.now(); orbitRaf = requestAnimationFrame(orbitFrame); }
+    }).observe(endStage);
   }
 
   var state = { p: 0 };

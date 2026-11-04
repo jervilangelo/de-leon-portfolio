@@ -59,8 +59,8 @@
 /* reveal when the line reaches the chapter (only once the script is running) */
 @media (prefers-reduced-motion: no-preference) {
   .story-ready .ch-body > * { transition: opacity 800ms var(--ease-out), transform 900ms var(--ease-expo); }
-  .story-ready .ch:not(.is-seen) .ch-body > :not(.ch-art) { opacity: 0; transform: translateY(18px); }
-  .story-ready .ch:not(.is-seen) .ch-body > .ch-art { opacity: 0; }
+  .story-ready .ch:not(.is-seen) .ch-body > :not(.ch-art):not(.end-stage) { opacity: 0; transform: translateY(18px); }
+  .story-ready .ch:not(.is-seen) .ch-body > .ch-art, .story-ready .ch:not(.is-seen) .ch-body > .end-stage { opacity: 0; }
   .story-ready .ch-body > :nth-child(2) { transition-delay: 80ms; }
   .story-ready .ch-body > :nth-child(3) { transition-delay: 160ms; }
   .story-ready .ch-body > :nth-child(4) { transition-delay: 240ms; }
@@ -119,22 +119,25 @@
 @keyframes cpIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 
 /* ---- last chapter ---- */
+.end-stage { position: relative; width: min(360px, 100%); height: 200px; margin: 0 auto 24px; }
 .end-cloud {
-  width: 120px; height: auto; margin: 0 auto 28px; overflow: visible;
-  fill: rgba(169, 191, 168, 0); stroke: rgba(241, 241, 239, 0.35); stroke-width: 1.4; stroke-linejoin: round;
+  position: absolute; left: 50%; top: 50%; z-index: 2; width: 140px; height: auto; overflow: visible;
+  transform: translate(-50%, -50%);
+  fill: var(--story-bg); stroke: rgba(241, 241, 239, 0.35); stroke-width: 1.4; stroke-linejoin: round;
   filter: drop-shadow(0 0 0 rgba(169, 191, 168, 0)); /* taste-skill-ignore: invisible start point so the glow can fade in */
   transition: stroke 900ms ease, fill 1200ms ease, filter 1200ms var(--ease-out);
 }
 /* the line has reached the cloud: it lights up */
 .ch--end.is-lit .end-cloud, html:not(.story-ready) .end-cloud {
-  stroke: #ffffff; fill: rgba(169, 191, 168, 0.14);
+  stroke: #ffffff; fill: #1e231e;
   filter: drop-shadow(0 0 14px rgba(169, 191, 168, 0.85)) drop-shadow(0 0 2px rgba(255, 255, 255, 0.9)); /* taste-skill-ignore: the closing cloud glows when the line reaches it */
 }
-@media (prefers-reduced-motion: no-preference) {
-  .story-ready .ch--end.is-lit .end-cloud { animation: endPulse 1400ms var(--ease-out) both, endFloat 6s ease-in-out 1400ms infinite alternate; }
+.end-orbit img {
+  position: absolute; left: 50%; top: 50%; z-index: 1; width: 32px; height: 32px; margin: -16px 0 0 -16px;
+  border-radius: 6px; opacity: 0; will-change: transform, opacity;
+  box-shadow: 0 10px 18px -8px rgba(0, 0, 0, 0.7); /* taste-skill-ignore: floating icons carry depth */
 }
-@keyframes endFloat { from { transform: translateY(0); } to { transform: translateY(-8px); } }
-@keyframes endPulse { 0% { transform: scale(1); } 35% { transform: scale(1.08); } 100% { transform: scale(1); } }
+html:not(.story-ready) .end-orbit { display: none; }
 .end-cta { margin-top: 36px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
 
 /* ---- progress rail: a slim bar along the bottom of the screen (desktop) ---- */
@@ -171,7 +174,7 @@
   .ch, .ch--wide, .ch--c { width: 100%; margin: 0; padding: 0 0 0 42px; text-align: left; }
   .ch-node, .ch--c .ch-node { left: 12px; top: 4px; bottom: auto; margin: 0 0 0 -7px; }
   .ch::after, .ch--c::after { display: none; }
-  .ch--c .ch-art, .ch--c .ch-text, .end-cloud { margin-inline: 0; }
+  .ch--c .ch-art, .ch--c .ch-text, .end-stage { margin-inline: 0; }
   .end-cta { justify-content: flex-start; }
   .end-cta .btn { flex: 1 1 100%; }
   .cloud-badges { grid-template-columns: 1fr 1fr; }
