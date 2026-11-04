@@ -629,3 +629,11 @@
 @keyframes dlThump { 0% { transform: scale(1); } 35% { transform: scale(1.06); } 100% { transform: scale(1); } }
 .dl-bit { position: fixed; z-index: 90; pointer-events: none; }
 .dl-ghost { position: fixed; z-index: 89; margin: 0; pointer-events: none; box-shadow: 0 18px 30px rgba(0, 0, 0, 0.35); /* taste-skill-ignore: flying sheet is a transient overlay */ }
+
+
+/* ================= PROJECTS: live Teolohiya walkthrough in the flagship run ================= */
+.flag-run .lifted .tsim { width: 100%; }
+.flag-run .run .lifted figcaption.tsim-cap { flex-direction: row; justify-content: space-between; align-items: center; }
+@media (max-width: 900px) {
+  .flag-run .run .lifted .tsim { width: calc(var(--lift-h) * 1200 / 680); max-width: none; }
+}

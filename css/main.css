@@ -104,6 +104,8 @@ a { color: inherit; }
   .btn--ink:hover { background: #ffffff; }
   .btn--dark:hover { background: #333331; }
 }
+.btn--quiet { background: var(--surface-2); color: var(--ink); }
+@media (hover: hover) and (pointer: fine) { .btn--quiet:hover { background: #3c3c3a; } }
 .btn .arrow { transition: transform var(--t-ui) var(--ease-out); }
 @media (hover: hover) and (pointer: fine) { .btn:hover .arrow { transform: translateX(3px); } }
 

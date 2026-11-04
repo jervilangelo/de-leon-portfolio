@@ -14,8 +14,6 @@
 .hero-intro { margin-top: 32px; font-size: var(--step-lead); line-height: 1.32; letter-spacing: -0.01em; max-width: 30ch; }
 .hero-intro b { font-weight: 500; }
 .hero-cta { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 12px; }
-.btn--quiet { background: var(--surface-2); color: var(--ink); }
-@media (hover: hover) and (pointer: fine) { .btn--quiet:hover { background: #3c3c3a; } }
 .hero-facts { margin: 56px 0 0; display: flex; flex-wrap: wrap; gap: 20px 44px; }
 .hero-facts div { display: grid; gap: 2px; }
 .hero-facts dt { font-size: var(--step-lead); font-weight: 500; font-variant-numeric: tabular-nums; order: 0; }
