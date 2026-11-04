@@ -123,6 +123,7 @@
   aspect-ratio: 1.95;
 }
 .sv-case--lead .sv-case-pic { aspect-ratio: 920 / 520; cursor: auto; }
+.sv-case-pic.sv-case-video { aspect-ratio: 16 / 9; cursor: auto; }
 .sv-case-video .shutter { height: 100%; }
 .sv-case-video video { width: 100%; height: 100%; object-fit: cover; }
 .sv-case-pic img { width: 100%; height: 100%; object-fit: cover; object-position: left top; transition: transform 600ms var(--ease-soft); }
@@ -132,6 +133,68 @@
 @media (max-width: 900px) {
   .sv-web-head h2, .sv-web-head .lead { grid-column: 1 / -1; }
   .sv-case, .sv-case--lead { grid-column: 1 / -1; grid-row: auto; }
+}
+
+/* ================= SHOWCASE VIDEOS ================= */
+.sv-show-head { align-items: end; row-gap: 16px; margin-bottom: 48px; }
+.sv-show-kicker { grid-column: 1 / -1; color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; }
+.sv-show-head h2 { grid-column: 1 / 7; max-width: 12ch; }
+.sv-show-head .lead { grid-column: 7 / 13; max-width: 36ch; }
+
+.sv-show-reel { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap); }
+.sv-show-item { margin: 0; display: grid; gap: 14px; align-content: start; }
+.sv-show-item .shutter {
+  overflow: hidden; aspect-ratio: 16 / 9; background: var(--surface);
+  transition: clip-path 1100ms var(--ease-in-out), transform 700ms var(--ease-out), box-shadow 700ms var(--ease-out);
+}
+.sv-show-item video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.sv-show-item:nth-child(2) .shutter { transition-delay: 160ms, 0ms, 0ms; }
+.sv-show-item figcaption {
+  position: relative; display: flex; justify-content: space-between; align-items: baseline; gap: 16px;
+  padding-top: 12px; font-size: var(--step-small); color: var(--muted);
+}
+.sv-show-item figcaption b { font-weight: 500; font-size: var(--step-body); color: var(--ink); }
+.sv-show-item figcaption span { text-align: right; }
+.sv-show-item figcaption::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px; background: var(--accent);
+  transform: scaleX(0); transform-origin: left; transition: transform 1200ms var(--ease-expo) 500ms;
+}
+.sv-show-reel.is-in .sv-show-item figcaption::before { transform: scaleX(1); }
+.sv-show-reel.is-in .sv-show-item:nth-child(2) figcaption::before { transition-delay: 700ms; }
+@media (hover: hover) and (pointer: fine) {
+  .sv-show-item:hover .shutter { transform: translateY(-6px); box-shadow: 0 24px 48px -24px rgba(0, 0, 0, 0.6); }
+}
+
+.sv-show-body { margin-top: clamp(56px, 6vw, 96px); row-gap: 40px; }
+.sv-show-text { grid-column: 1 / 6; display: grid; gap: 20px; align-content: start; justify-items: start; }
+.sv-show-text p { max-width: 42ch; }
+.sv-show-list { grid-column: 7 / 13; list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--surface-2); }
+.sv-show-list li {
+  display: grid; grid-template-columns: 2.5em 10em 1fr; gap: 12px; align-items: baseline;
+  padding: 16px 0; border-bottom: 1px solid var(--surface-2);
+  counter-increment: show; transition: padding-left var(--t-ui) var(--ease-out);
+}
+.sv-show-list li::before { content: counter(show, decimal-leading-zero); color: var(--muted); font-size: var(--step-small); font-variant-numeric: tabular-nums; }
+.sv-show-list b { font-weight: 500; }
+.sv-show-list span { color: var(--muted); }
+.sv-show-list { counter-reset: show; }
+@media (hover: hover) and (pointer: fine) {
+  .sv-show-list li:hover { padding-left: 8px; }
+  .sv-show-list li:hover::before { color: var(--accent); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sv-show-item .shutter, .sv-show-item figcaption::before, .sv-show-list li { transition: none; }
+  .sv-show-item figcaption::before { transform: none; }
+}
+@media (max-width: 900px) {
+  .sv-show-head h2, .sv-show-head .lead, .sv-show-text, .sv-show-list { grid-column: 1 / -1; }
+  .sv-show-reel { grid-template-columns: 1fr; }
+}
+@media (max-width: 520px) {
+  .sv-show-list li { grid-template-columns: 2.5em 1fr; }
+  .sv-show-list span { grid-column: 2; }
+  .sv-show-item figcaption { flex-direction: column; gap: 4px; }
+  .sv-show-item figcaption span { text-align: left; }
 }
 
 .sv-kinds { margin-top: clamp(80px, 9vw, 136px); }

@@ -64,7 +64,11 @@
 .strip-cap b { font-weight: 500; font-size: var(--step-body); color: var(--ink); }
 .strip-cap span:last-child { text-align: right; font-variant-numeric: tabular-nums; }
 .strip-body { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); column-gap: var(--gap); row-gap: 28px; margin-top: 28px; }
-.strip-body > p { grid-column: 1 / 6; padding-right: 24px; }
+.strip-body > p, .strip-body > .strip-text { grid-column: 1 / 6; padding-right: 24px; }
+.strip-text { display: grid; gap: 16px; }
+.strip-video { margin: 0 0 8px; }
+.strip-video .shutter { overflow: hidden; background: var(--surface); aspect-ratio: 16 / 9; }
+.strip-video video { display: block; width: 100%; height: 100%; object-fit: cover; }
 .strip-body > .points { grid-column: 6 / 11; }
 .strip-meta { grid-column: 1 / -1; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px 32px; }
 .strip-links { display: flex; gap: 24px; flex-wrap: wrap; }
@@ -72,7 +76,7 @@
 @media (max-width: 900px) {
   .work-rail { grid-column: 1 / -1; position: static; display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 32px; }
   .strips { grid-column: 1 / -1; gap: 80px; }
-  .strip-body > p, .strip-body > .points { grid-column: 1 / -1; padding: 0; }
+  .strip-body > p, .strip-body > .strip-text, .strip-body > .points { grid-column: 1 / -1; padding: 0; }
 }
 @media (max-width: 640px) {
   .strip-frames { height: 120px; overflow-x: auto; scroll-snap-type: x mandatory; margin-right: calc(-1 * var(--margin)); padding-right: var(--margin); scrollbar-width: none; }

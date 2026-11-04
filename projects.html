@@ -441,22 +441,29 @@
       </article>
 
       <article class="strip" id="p-eccm" data-reveal>
+        <figure class="strip-video shutter-wrap">
+          <div class="shutter" data-shutter><video class="autoplay" muted loop playsinline controls preload="metadata" poster="img/work/eccm-showcase-poster.webp" width="1920" height="1080" aria-label="Showcase video for the ECC Manila website: its design system, hover interactions, scroll reveals and responsive layout"><source src="img/eccm-showcase.mp4" type="video/mp4"></video></div>
+        </figure>
         <div class="strip-frames">
-          <button class="zoom" type="button" data-full="img/work/eccm-home-l.webp" aria-label="Enlarge: ECCM website homepage" style="--r:1.95"><img src="img/work/eccm-home-s.webp" width="640" height="328" alt="ECCM website homepage" loading="lazy"></button>
           <button class="zoom" type="button" data-full="img/work/eccm-ministries-l.webp" aria-label="Enlarge: ECCM ministries page" style="--r:1.95"><img src="img/work/eccm-ministries-s.webp" width="640" height="328" alt="ECCM ministries page" loading="lazy"></button>
           <button class="zoom" type="button" data-full="img/work/eccm-mobile-l.webp" aria-label="Enlarge: ECCM homepage on a phone" style="--r:0.51"><img src="img/work/eccm-mobile-s.webp" width="390" height="760" alt="ECCM homepage on a phone" loading="lazy"></button>
           <button class="zoom" type="button" data-full="img/work/eccm-expect-l.webp" aria-label="Enlarge: ECCM What to Expect page" style="--r:1.95"><img src="img/work/eccm-expect-s.webp" width="640" height="328" alt="ECCM What to Expect page" loading="lazy"></button>
         </div>
         <p class="strip-cap"><span><b>ECCM Website</b></span><span class="muted">Church site, custom domain</span><span class="muted">2026</span></p>
         <div class="strip-body">
-          <p>A multi-page website for Evangelical Covenant Church Manila, a nonprofit church: ministries, background, a guide for first-time visitors, giving and contact details. I built and deployed it, configured the custom domain, and added the SEO essentials.</p>
+          <div class="strip-text">
+            <p>A multi-page website for Evangelical Covenant Church Manila, a nonprofit church: ministries, background, a guide for first-time visitors, giving and contact details. I designed, built and deployed it, configured the custom domain, and added the SEO essentials.</p>
+            <p>The design starts from a small system: a gold, deep gold, soft cream and ink palette, Newsreader for headings and Figtree for body text, and content held to a 1,120px reading width so long passages stay comfortable. Small motion carries it: directory rows slide on hover with CSS transitions, and sections reveal as you scroll using an <code>IntersectionObserver</code>. I also cut the showcase video above, in the same type and colours as the site.</p>
+          </div>
           <ul class="points">
             <li>Six pages: Home, About, What to Expect, Ministries, Giving and Contact.</li>
-            <li>Responsive layout for phones and desktops.</li>
+            <li>A first-time visitor guide that walks through the Lord's Day order of worship.</li>
+            <li>One responsive layout, tested on laptop, tablet and phone.</li>
+            <li>Hover micro-interactions and scroll reveals in plain CSS and JavaScript, no framework.</li>
             <li><code>sitemap.xml</code> and <code>robots.txt</code> for search engines, plus favicons and a web manifest.</li>
           </ul>
           <div class="strip-meta">
-            <ul class="tags" aria-label="Tools"><li>HTML</li><li>CSS</li><li>Custom domain</li><li>SEO</li></ul>
+            <ul class="tags" aria-label="Tools"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Custom domain</li><li>SEO</li><li>Showcase video</li></ul>
             <span class="strip-links">
               <a class="link ext" href="https://ecc-manila.org/" target="_blank" rel="noopener">ecc-manila.org</a>
               <a class="link ext" href="https://github.com/jervilangelo/eccm-web" target="_blank" rel="noopener">GitHub</a>
