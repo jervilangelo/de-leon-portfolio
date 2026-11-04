@@ -587,3 +587,45 @@
 .hl-badges { display: flex; flex: none; width: 88px; }
 .hl-badges img { width: 44px; height: 44px; object-fit: contain; }
 .hl-num { flex: none; width: 88px; font-size: var(--step-head); font-weight: 500; line-height: 1; letter-spacing: -0.03em; color: var(--accent-strong); text-align: center; }
+
+/* ================= RESUME: document downloads ================= */
+.docs { padding-top: clamp(40px, 5vw, 72px); }
+.docs-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap); }
+@media (max-width: 900px) { .docs-grid { grid-template-columns: 1fr; } }
+.doc {
+  position: relative; background: var(--surface); padding: 28px 24px 24px;
+  display: grid; grid-template-columns: 84px 1fr; grid-template-areas: "sheet text" "actions actions"; gap: 22px 20px;
+}
+.doc-text { grid-area: text; display: grid; gap: 10px; align-content: start; }
+.doc-actions { grid-area: actions; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
+.doc-sheet {
+  grid-area: sheet; width: 84px; height: 108px; padding: 12px 10px; background: var(--field);
+  display: flex; flex-direction: column; gap: 6px;
+  transform-origin: 50% 100%; transition: transform var(--t-ui) var(--ease-out);
+}
+.doc-sheet b { display: block; height: 7px; width: 62%; background: var(--field-ink); margin-bottom: 4px; }
+.doc-sheet i { display: block; height: 3px; background: var(--field-muted); opacity: 0.55; }
+.doc-sheet i:nth-child(3n) { width: 72%; }
+.doc-sheet i:nth-child(4n + 1) { width: 88%; }
+.doc--resume .doc-sheet { border-top: 6px solid var(--accent); }
+.doc--cv .doc-sheet { gap: 4px; }
+.doc--cv .doc-sheet i { height: 2px; }
+.doc--ats .doc-sheet { background: #ecebe6; }
+.doc--ats .doc-sheet b { width: 80%; }
+@media (hover: hover) and (pointer: fine) { .doc:hover .doc-sheet { transform: translateY(-4px) rotate(-3deg); } }
+.doc.is-sending .doc-sheet { animation: docPeel 700ms var(--ease-out); }
+@keyframes docPeel { 0% { transform: none; } 30% { transform: translateY(6px) scaleY(0.92); } 100% { transform: none; } }
+
+.dl-btn { position: relative; overflow: hidden; isolation: isolate; min-width: 200px; justify-content: space-between; }
+.dl-fill { position: absolute; inset: 0; z-index: -1; background: var(--ink); transform: scaleX(0); transform-origin: 0 50%; }
+.dl-btn.is-loading .dl-fill, .dl-btn.is-done .dl-fill { transform: scaleX(1); transition: transform 900ms var(--ease-in-out); }
+.dl-btn.is-loading, .dl-btn.is-done { color: var(--bg); }
+.dl-btn.is-loading .dl-icon { animation: dlDrop 600ms var(--ease-in-out) infinite; }
+.dl-btn.is-done .dl-icon { animation: dlPop 420ms var(--ease-expo); }
+.dl-btn.is-done { animation: dlThump 420ms var(--ease-out); }
+.dl-label, .dl-icon { display: inline-block; }
+@keyframes dlDrop { 0% { transform: translateY(-120%); opacity: 0; } 40% { opacity: 1; } 100% { transform: translateY(120%); opacity: 0; } }
+@keyframes dlPop { from { transform: scale(0) rotate(-45deg); } to { transform: none; } }
+@keyframes dlThump { 0% { transform: scale(1); } 35% { transform: scale(1.06); } 100% { transform: scale(1); } }
+.dl-bit { position: fixed; z-index: 90; pointer-events: none; }
+.dl-ghost { position: fixed; z-index: 89; margin: 0; pointer-events: none; box-shadow: 0 18px 30px rgba(0, 0, 0, 0.35); /* taste-skill-ignore: flying sheet is a transient overlay */ }

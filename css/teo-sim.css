@@ -1,0 +1,212 @@
+/* Teolohiya.site simulated walkthrough on the home page.
+   The stage is laid out at a fixed 1200 x 680 and scaled to fit by js/teo-sim.js. */
+
+.tsim {
+  --t-bg: #f2ebdf;
+  --t-ink: #24221d;
+  --t-muted: #6e695e;
+  --t-line: #b9b2a4;
+  --t-green: #2e4a3c;
+  --t-green-2: #3b5d4c;
+  --t-serif: "Newsreader", "Iowan Old Style", Georgia, serif;
+  --t-sans: "Hanken Grotesk", "Segoe UI", system-ui, sans-serif;
+  position: relative; width: 100%; aspect-ratio: 1200 / 680;
+  overflow: hidden; background: var(--surface);
+}
+.tsim-poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.tsim-stage {
+  position: absolute; left: 0; top: 0; width: 1200px; height: 680px;
+  transform-origin: 0 0; transform: scale(var(--s, 0.6));
+  background: var(--t-bg); color: var(--t-ink); font: 400 15px/1.45 var(--t-sans);
+  display: none; user-select: none; pointer-events: none;
+}
+.js .tsim.is-ready .tsim-stage { display: block; }
+.js .tsim.is-ready .tsim-poster { display: none; }
+
+/* browser chrome */
+.tsim-chrome {
+  height: 40px; display: flex; align-items: center; gap: 16px; padding: 0 16px;
+  background: #2a2a28; color: #d9d6cd; font: 400 13px/1 var(--t-sans);
+}
+.tsim-dots { display: flex; gap: 7px; }
+.tsim-dots i { width: 11px; height: 11px; border-radius: 50%; background: #55534d; }
+.tsim-url {
+  flex: 1; max-width: 560px; margin-inline: auto; height: 26px; border-radius: 13px;
+  background: #3a3936; display: flex; align-items: center; gap: 8px; padding: 0 14px;
+  overflow: hidden; white-space: nowrap;
+}
+.tsim-url::before {
+  content: ""; width: 9px; height: 10px; flex: none;
+  background: linear-gradient(#9c998f, #9c998f) 50% 100% / 9px 6px no-repeat;
+  border: 2px solid #9c998f; border-bottom: 0; border-radius: 5px 5px 0 0; box-sizing: border-box;
+}
+.tsim-url b { font-weight: 400; color: #f1efe8; }
+.tsim-load { position: absolute; left: 0; top: 38px; height: 2px; width: 100%; background: #8fa68e; transform-origin: 0 50%; transform: scaleX(0); opacity: 0; }
+.tsim-load.is-on { animation: tsimLoad 520ms var(--ease-out) forwards; }
+@keyframes tsimLoad { 0% { transform: scaleX(0); opacity: 1; } 80% { transform: scaleX(1); opacity: 1; } 100% { transform: scaleX(1); opacity: 0; } }
+
+/* site header */
+.tsim-view { position: absolute; inset: 40px 0 0 0; overflow: hidden; }
+.tsim-head {
+  position: absolute; inset: 0 0 auto 0; z-index: 3; height: 72px;
+  display: flex; align-items: center; justify-content: space-between; padding: 0 96px;
+  background: var(--t-bg);
+}
+.tsim-logo { font: 400 25px/1 var(--t-serif); letter-spacing: -0.01em; }
+.tsim-logo span { color: var(--t-green-2); }
+.tsim-nav { display: flex; align-items: center; gap: 24px; font-size: 14px; }
+.tsim-nav .on { box-shadow: inset 0 -1.5px 0 var(--t-ink); }
+.tsim-cta { background: var(--t-green); color: #f2ebdf; padding: 10px 16px; }
+
+/* pages */
+.tsim-page {
+  position: absolute; inset: 72px 0 0 0; padding: 18px 96px 0;
+  opacity: 0; visibility: hidden; transform: translateY(14px);
+  transition: opacity 420ms var(--ease-out), transform 520ms var(--ease-out), visibility 0s linear 420ms;
+}
+.tsim-page.is-on { opacity: 1; visibility: visible; transform: none; transition: opacity 420ms var(--ease-out), transform 520ms var(--ease-out); }
+
+.tsim-h1 { font: 400 66px/1.04 var(--t-serif); letter-spacing: -0.02em; max-width: 640px; }
+.tsim-sub { margin-top: 22px; max-width: 420px; font-size: 17px; line-height: 1.6; }
+.tsim-search {
+  margin-top: 30px; width: 512px; display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 0 12px; border-bottom: 1px solid var(--t-ink); font-size: 16px;
+}
+.tsim-field-text { color: var(--t-ink); }
+.tsim-field-text:empty::before { content: attr(data-ph); color: #8a8578; }
+.tsim-caret::after { content: ""; display: inline-block; width: 1.5px; height: 1.1em; margin-left: 1px; vertical-align: -0.18em; background: var(--t-ink); animation: tsimBlink 900ms steps(1) infinite; }
+@keyframes tsimBlink { 50% { opacity: 0; } }
+.tsim-search .go { color: var(--t-green); padding: 4px 6px; transition: background-color 160ms ease; }
+.tsim-row { margin-top: 24px; display: flex; align-items: center; gap: 24px; font-size: 16px; }
+.tsim-btn { display: inline-block; background: var(--t-green); color: #f2ebdf; padding: 15px 23px; font-weight: 500; transition: background-color 160ms ease, transform 140ms var(--ease-out); }
+.tsim-u { text-decoration: underline; text-underline-offset: 4px; }
+
+/* hero decoration: a falling shelf of spines on the right */
+.tsim-shelf-hero { position: absolute; right: 96px; bottom: 60px; display: flex; align-items: flex-end; gap: 4px; }
+.tsim-shelf-hero i, .tsim-shelf i { display: block; width: 16px; background: var(--c); height: var(--h); transform-origin: 50% 100%; }
+.tsim-page.is-on .tsim-shelf-hero i { animation: tsimSpine 700ms var(--ease-expo) both; animation-delay: calc(var(--n) * 45ms + 200ms); }
+@keyframes tsimSpine { from { transform: scaleY(0); } to { transform: none; } }
+
+/* browse */
+.tsim-cats { display: flex; gap: 22px; font-size: 14px; }
+.tsim-cats .on { box-shadow: inset 0 -1.5px 0 var(--t-ink); }
+.tsim-shelf { margin-top: 26px; display: flex; align-items: flex-end; gap: 3px; padding-bottom: 0; border-bottom: 1px solid var(--t-line); height: 74px; }
+.tsim-page.is-on .tsim-shelf i { animation: tsimSpine 600ms var(--ease-expo) both; animation-delay: calc(var(--n) * 30ms); }
+.tsim-label { margin-top: 14px; font-size: 14px; height: 20px; }
+.tsim-grid { margin-top: 12px; display: flex; gap: 16px; }
+.tsim-card { width: 186px; flex: none; transition: opacity 360ms ease, transform 420ms var(--ease-out), width 480ms var(--ease-in-out), margin 480ms var(--ease-in-out); }
+.tsim-card.is-out { opacity: 0; transform: scale(0.94); width: 0; margin-right: -16px; }
+.tsim-card.is-hover { transform: translateY(-6px); }
+.tsim-card .ph { height: 248px; overflow: hidden; background: #ddd5c6; }
+.tsim-card .meta { display: flex; justify-content: space-between; gap: 8px; margin-top: 8px; font-size: 13.5px; white-space: nowrap; }
+.tsim-card .meta + .meta { margin-top: 2px; color: var(--t-muted); }
+
+/* covers: two real photos cropped from the live site, the rest drawn */
+.cov { width: 100%; height: 100%; background: url("../img/work/teo-listings-l.webp") no-repeat; }
+.cov-1, .cov-2 { --w: 186px; background-size: calc(var(--w) * 1346 / 264) auto; }
+.cov-1 { background-position: calc(var(--w) * -119 / 264) calc(var(--w) * -237 / 264); }
+.cov-2 { background-position: calc(var(--w) * -399 / 264) calc(var(--w) * -237 / 264); }
+.cov-d {
+  background: radial-gradient(120% 80% at 30% 10%, rgba(255,255,255,0.16), transparent 60%), var(--c);
+  width: 100%; height: 100%; display: grid; place-items: center; padding: 26px 22px; position: relative;
+}
+.cov-d::before { content: ""; position: absolute; inset: 14px; border: 1px solid rgba(242,235,223,0.42); }
+.cov-d p { font: 400 21px/1.08 var(--t-serif); color: #f2ebdf; text-align: center; letter-spacing: 0.01em; }
+.cov-d p small { display: block; margin-top: 12px; font: 500 10px/1 var(--t-sans); letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.8; }
+
+/* book detail */
+.tsim-back { font-size: 13.5px; }
+.tsim-book { margin-top: 14px; display: grid; grid-template-columns: 330px 1fr; gap: 40px; }
+.tsim-book .photo { height: 440px; overflow: hidden; position: relative; }
+.tsim-book .photo .cov-1 { --w: 330px; }
+.tsim-book .next { position: absolute; right: 10px; top: 50%; width: 36px; height: 36px; margin-top: -18px; background: rgba(242,235,223,0.9); display: grid; place-items: center; font-size: 16px; }
+.tsim-kicker { font-size: 12.5px; color: var(--t-muted); }
+.tsim-title { font: 400 44px/1.05 var(--t-serif); margin-top: 4px; letter-spacing: -0.01em; }
+.tsim-author { margin-top: 10px; font-size: 16px; }
+.tsim-price { margin-top: 12px; font: 400 32px/1 var(--t-serif); }
+.tsim-dl { margin-top: 18px; display: grid; grid-template-columns: 96px 1fr; gap: 6px 0; font-size: 13px; max-width: 480px; padding-bottom: 18px; border-bottom: 1px solid var(--t-line); }
+.tsim-dl dt { color: var(--t-muted); }
+.tsim-seller { margin-top: 14px; font-size: 12.5px; color: var(--t-muted); }
+.tsim-seller + p { font-size: 16px; margin-top: 2px; }
+.tsim-actions { margin-top: 14px; display: flex; align-items: center; gap: 18px; font-size: 15px; }
+.tsim-actions .tsim-btn { padding: 12px 18px; }
+.tsim-note { margin-top: 18px; font-size: 12.5px; color: var(--t-muted); max-width: 420px; line-height: 1.5; }
+
+/* toast */
+.tsim-toast {
+  position: absolute; right: 28px; bottom: 28px; z-index: 6; transform: translateY(20px); opacity: 0;
+  background: var(--t-ink); color: #f2ebdf; padding: 13px 18px; font-size: 14px; display: flex; align-items: center; gap: 10px;
+  transition: opacity 300ms ease, transform 420ms var(--ease-out);
+}
+.tsim-toast::before { content: ""; width: 8px; height: 8px; background: #8fa68e; }
+.tsim-toast.is-on { opacity: 1; transform: none; }
+
+/* list a book */
+.tsim-form { width: 650px; margin: 0 auto; }
+.tsim-form h2 { font: 400 44px/1 var(--t-serif); letter-spacing: -0.01em; }
+.tsim-form > p { margin-top: 8px; font-size: 13.5px; color: var(--t-muted); }
+.tsim-fields { margin-top: 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 16px; }
+.tsim-fields .wide { grid-column: 1 / -1; }
+.tsim-f label { display: block; font-size: 12.5px; margin-bottom: 4px; }
+.tsim-f .box { height: 36px; border: 1px solid var(--t-line); display: flex; align-items: center; justify-content: space-between; padding: 0 11px; font-size: 14.5px; background: rgba(255,255,255,0.18); transition: border-color 160ms ease, box-shadow 160ms ease; }
+.tsim-f .box.is-focus { border-color: var(--t-green); box-shadow: 0 0 0 1px var(--t-green); }
+.tsim-f .box.sel::after { content: ""; width: 7px; height: 7px; border-right: 1.5px solid var(--t-ink); border-bottom: 1.5px solid var(--t-ink); transform: rotate(45deg) translate(-2px, -2px); }
+.tsim-f .box .swap { display: inline-block; transition: opacity 180ms ease, transform 260ms var(--ease-out); }
+.tsim-f .box .swap.is-swap { opacity: 0; transform: translateY(-6px); }
+.tsim-photos { display: flex; gap: 8px; align-items: center; height: 64px; border: 1px dashed var(--t-line); padding: 0 10px; font-size: 13px; color: var(--t-muted); }
+.tsim-photos .th { width: 40px; height: 50px; flex: none; transform: scale(0); transition: transform 380ms var(--ease-expo); }
+.tsim-photos .th.is-on { transform: none; }
+.tsim-photos .th .cov-d { padding: 0; }
+.tsim-photos .th .cov-d::before { inset: 4px; }
+.tsim-submit { margin-top: 16px; display: flex; align-items: center; gap: 16px; font-size: 13px; color: var(--t-muted); }
+.tsim-submit .tsim-btn { padding: 12px 20px; color: #f2ebdf; }
+.tsim-done {
+  position: absolute; inset: 0; z-index: 2; background: var(--t-bg);
+  display: grid; place-content: center; justify-items: center; text-align: center; gap: 14px;
+  opacity: 0; visibility: hidden; transition: opacity 360ms ease, visibility 0s linear 360ms;
+}
+.tsim-done.is-on { opacity: 1; visibility: visible; transition: opacity 360ms ease; }
+.tsim-done h3 { font: 400 40px/1.05 var(--t-serif); }
+.tsim-done p { font-size: 15px; color: var(--t-muted); max-width: 380px; }
+.tsim-check { width: 64px; height: 64px; border-radius: 50%; background: var(--t-green); display: grid; place-items: center; }
+.tsim-check svg { width: 30px; height: 30px; stroke: #f2ebdf; stroke-width: 3; fill: none; stroke-dasharray: 40; stroke-dashoffset: 40; }
+.tsim-done.is-on .tsim-check { animation: tsimPop 520ms var(--ease-expo) both; }
+.tsim-done.is-on .tsim-check svg { animation: tsimDraw 480ms 220ms var(--ease-out) forwards; }
+@keyframes tsimPop { from { transform: scale(0.3); } to { transform: none; } }
+@keyframes tsimDraw { to { stroke-dashoffset: 0; } }
+
+/* moderate */
+.tsim-mod h2 { font: 400 44px/1 var(--t-serif); letter-spacing: -0.01em; }
+.tsim-mod > p { margin-top: 8px; font-size: 14px; color: var(--t-muted); }
+.tsim-queue { margin-top: 24px; border-top: 1px solid var(--t-line); }
+.tsim-q { display: grid; grid-template-columns: 56px 1fr auto; align-items: center; gap: 18px; padding: 14px 0; border-bottom: 1px solid var(--t-line); transition: opacity 400ms ease, transform 500ms var(--ease-out), background-color 300ms ease; }
+.tsim-q .th { display: block; width: 56px; height: 72px; }
+.tsim-q .th .cov-d { padding: 0; }
+.tsim-q .th .cov-d::before { inset: 5px; }
+.tsim-q h4 { font: 400 22px/1.1 var(--t-serif); letter-spacing: 0; }
+.tsim-q .sm { font-size: 13px; color: var(--t-muted); margin-top: 4px; }
+.tsim-q .acts { display: flex; align-items: center; gap: 14px; font-size: 14px; }
+.tsim-pill { font-size: 12px; padding: 5px 9px; border: 1px solid var(--t-line); color: var(--t-muted); transition: all 260ms ease; }
+.tsim-pill.is-live { background: var(--t-green); border-color: var(--t-green); color: #f2ebdf; }
+.tsim-q.is-new { background: rgba(46, 74, 60, 0.07); }
+.tsim-q.is-gone { opacity: 0; transform: translateX(40px); }
+
+/* pointer */
+.tsim-cursor {
+  position: absolute; left: 0; top: 0; z-index: 10; width: 22px; height: 22px;
+  transform: translate(var(--x, 900px), var(--y, 560px));
+  transition-property: transform; transition-timing-function: var(--ease-in-out);
+}
+.tsim-cursor svg { width: 22px; height: 22px; filter: drop-shadow(0 1px 1.5px rgba(0,0,0,0.35)); transition: transform 120ms var(--ease-out); transform-origin: 3px 3px; }
+.tsim-cursor.is-down svg { transform: scale(0.82); }
+.tsim-ripple { position: absolute; z-index: 9; width: 40px; height: 40px; margin: -20px 0 0 -20px; border-radius: 50%; border: 2px solid var(--t-green); animation: tsimRipple 520ms var(--ease-out) forwards; }
+@keyframes tsimRipple { from { transform: scale(0.2); opacity: 0.9; } to { transform: scale(1.3); opacity: 0; } }
+.tsim .is-press { transform: scale(0.96); }
+.tsim .tsim-btn.is-hot, .tsim .tsim-cta.is-hot { background: var(--t-green-2); }
+.tsim .go.is-hot { background: rgba(46, 74, 60, 0.12); }
+
+/* caption under the demo */
+.tsim-cap { display: flex; justify-content: space-between; gap: 16px; padding-top: 10px; font-size: var(--step-small); }
+.tsim-steps { display: flex; gap: 6px; list-style: none; }
+.tsim-steps li { width: 22px; height: 3px; background: var(--surface-2); align-self: center; transition: background-color 300ms ease; }
+.tsim-steps li.is-on { background: var(--accent); }
