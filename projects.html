@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Projects | AWS Serverless, EC2 and Automation Builds by Jervil Angelo De Leon</title>
-<meta name="description" content="AWS projects by Jervil Angelo De Leon: Teolohiya.site on Amplify Gen 2, a serverless ticketing API with Lambda, DynamoDB and SNS, a secure EC2 web server in a custom VPC, plus HRIS automation and a church website.">
+<meta name="description" content="AWS projects by Jervil Angelo De Leon: Teolohiya.site on Amplify Gen 2, a serverless ticketing API with Lambda, DynamoDB and SNS, a secure EC2 web server in a custom VPC, plus PinansyalPH money calculators, HRIS automation and a church website.">
 <meta name="author" content="Jervil Angelo De Leon">
 <meta name="theme-color" content="#1c1c1c">
 <link rel="canonical" href="https://jervilangelo.github.io/de-leon-portfolio/projects.html">
@@ -12,7 +12,7 @@
 <meta property="og:url" content="https://jervilangelo.github.io/de-leon-portfolio/projects.html">
 <meta property="og:site_name" content="Jervil Angelo De Leon">
 <meta property="og:title" content="Projects | AWS Serverless, EC2 and Automation Builds by Jervil Angelo De Leon">
-<meta property="og:description" content="AWS projects by Jervil Angelo De Leon: Teolohiya.site on Amplify Gen 2, a serverless ticketing API with Lambda, DynamoDB and SNS, a secure EC2 web server in a custom VPC, plus HRIS automation and a church website.">
+<meta property="og:description" content="AWS projects by Jervil Angelo De Leon: Teolohiya.site on Amplify Gen 2, a serverless ticketing API with Lambda, DynamoDB and SNS, a secure EC2 web server in a custom VPC, plus PinansyalPH money calculators, HRIS automation and a church website.">
 <meta property="og:image" content="https://jervilangelo.github.io/de-leon-portfolio/img/og-cover.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
@@ -62,7 +62,7 @@
   <div class="grid">
     <div class="page-head-text">
       <h1 id="page-title">Projects</h1>
-      <p class="lead">Five things I have built and shipped: three on AWS, one automation for my HRIS work, and one website for a church in Manila.</p>
+      <p class="lead">Six things I have built and shipped: three on AWS, free money calculators for Filipinos, one automation for my HRIS work, and one website for a church in Manila.</p>
     </div>
   </div>
 </section>
@@ -126,10 +126,43 @@
   <div class="work-grid">
     <div class="work-rail">
       <h2 class="h3" id="work-title">More builds</h2>
-      <p class="small muted">Four builds, newest first</p>
+      <p class="small muted">Five builds, newest first</p>
     </div>
 
     <div class="strips">
+      <article class="strip" id="p-pinansyalph" data-reveal>
+        <figure class="strip-video shutter-wrap">
+          <div class="shutter" data-shutter><video class="autoplay" muted loop playsinline controls preload="metadata" poster="img/work/pph-showcase-poster.webp" width="1920" height="1080" aria-label="Showcase video for PinansyalPH: the home page, the MP2 and inflation tools, and the 13th month pay calculator"><source src="img/PinansyalPH-Showcase-Under25MB.mp4" type="video/mp4"></video></div>
+        </figure>
+        <div class="strip-frames">
+          <button class="zoom" type="button" data-full="img/work/pph-sweldo-l.webp" aria-label="Enlarge: PinansyalPH take-home pay calculator" style="--r:1.6"><img src="img/work/pph-sweldo-s.webp" width="640" height="400" alt="PinansyalPH take-home pay calculator" loading="lazy"></button>
+          <button class="zoom" type="button" data-full="img/work/pph-mobile-l.webp" aria-label="Enlarge: PinansyalPH homepage on a phone" style="--r:0.46"><img src="img/work/pph-mobile-s.webp" width="390" height="844" alt="PinansyalPH homepage on a phone" loading="lazy"></button>
+          <button class="zoom" type="button" data-full="img/work/pph-compare-l.webp" aria-label="Enlarge: MP2 compared with digital bank savings" style="--r:1.6"><img src="img/work/pph-compare-s.webp" width="640" height="400" alt="MP2 compared with digital bank savings" loading="lazy"></button>
+          <button class="zoom" type="button" data-full="img/work/pph-inflation-l.webp" aria-label="Enlarge: Philippine inflation page with PSA data" style="--r:1.6"><img src="img/work/pph-inflation-s.webp" width="640" height="400" alt="Philippine inflation page with PSA data" loading="lazy"></button>
+        </div>
+        <p class="strip-cap"><span><b>PinansyalPH</b></span><span class="muted">Money tools for Filipinos</span><span class="muted">Nov 2026</span></p>
+        <div class="strip-body">
+          <div class="strip-text">
+            <p>"Worth it ba sa Pilipinas?" PinansyalPH is a free, open-source set of personal finance calculators built on official Philippine data. It works out take-home pay and 13th month pay, projects Pag-IBIG MP2 and digital bank savings after tax, and measures them against PSA inflation. It shows the arithmetic instead of telling people what to do with their money: no sign-up, no ads, no tracking, and inputs stay in the browser.</p>
+            <p>Every figure carries its source, reference period and retrieval date. A daily GitHub Actions workflow pulls PSA inflation and DOE fuel prices, validates them against shared zod schemas, keeps the previous file if a source fails, and commits only real changes. Bank rates and the MP2 dividend are checked by hand and never auto-published. The copy is in Taglish, and the showcase video above walks through the tools.</p>
+          </div>
+          <ul class="points">
+            <li>Seven tools: Sweldo, 13th Month Pay, MP2, Digital banks, Compare, Inflation and Gas.</li>
+            <li>Payroll follows SSS, PhilHealth, Pag-IBIG and BIR rules, versioned in one data file; 13th month pay follows PD 851 and checks the ₱90,000 tax exemption.</li>
+            <li>Money maths in decimal.js, rounded to centavos only where an institution would.</li>
+            <li>Savings shown in today's pesos; MP2 and bank products sit side by side, and nothing is ranked by headline rate.</li>
+            <li>111 unit tests and 52 browser tests run before every deploy, across widths from 360px to 1920px.</li>
+          </ul>
+          <div class="strip-meta">
+            <ul class="tags" aria-label="Tools"><li>React</li><li>TypeScript</li><li>Vite</li><li>Tailwind CSS</li><li>Recharts</li><li>GitHub Actions</li><li>Playwright</li><li>Showcase video</li></ul>
+            <span class="strip-links">
+              <a class="link ext" href="https://jervilangelo.github.io/pinansyalph-v2/" target="_blank" rel="noopener">Live site</a>
+              <a class="link ext" href="https://github.com/jervilangelo/pinansyalph-v2" target="_blank" rel="noopener">GitHub</a>
+            </span>
+          </div>
+        </div>
+      </article>
+
       <article class="strip" id="p-ticketing" data-reveal>
         <div class="strip-frames">
           <button class="zoom" type="button" data-full="img/work/tk-table-l.webp" aria-label="Enlarge: HrisTickets items in DynamoDB" style="--r:2.09"><img src="img/work/tk-table-s.webp" width="640" height="306" alt="HrisTickets items in DynamoDB" loading="lazy"></button>

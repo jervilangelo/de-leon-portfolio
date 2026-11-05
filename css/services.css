@@ -117,7 +117,7 @@
   display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gap); row-gap: 40px;
 }
 .sv-case { grid-column: 8 / 13; display: grid; gap: 16px; align-content: start; }
-.sv-case--lead { grid-column: 1 / 8; grid-row: span 2; align-self: start; position: sticky; top: calc(var(--nav-h) + 24px); }
+.sv-case--lead { grid-column: 1 / 8; grid-row: span 3; align-self: start; position: sticky; top: calc(var(--nav-h) + 24px); }
 .sv-case-pic {
   display: block; width: 100%; padding: 0; border: 0; cursor: zoom-in; overflow: hidden; background: var(--surface);
   aspect-ratio: 1.95;
@@ -143,6 +143,7 @@
 .sv-show-head .lead { grid-column: 7 / 13; max-width: 36ch; }
 
 .sv-show-reel { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap); }
+.sv-show-item:nth-child(3) { grid-column: 1 / -1; }
 .sv-show-item { margin: 0; display: grid; gap: 14px; align-content: start; }
 .sv-show-item .shutter {
   overflow: hidden; aspect-ratio: 16 / 9; background: var(--surface);
