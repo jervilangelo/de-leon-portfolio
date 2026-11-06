@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Projects | AWS Serverless, EC2 and Automation Builds by Jervil Angelo De Leon</title>
-<meta name="description" content="AWS projects by Jervil Angelo De Leon: Teolohiya.site on Amplify Gen 2, a serverless ticketing API with Lambda, DynamoDB and SNS, a secure EC2 web server in a custom VPC, plus PinansyalPH money calculators, HRIS automation and a church website.">
+<meta name="description" content="AWS projects by Jervil Angelo De Leon: Teolohiya.site on Amplify Gen 2, a serverless ticketing API with Lambda, DynamoDB and SNS, a secure EC2 web server in a custom VPC, plus Schedrift Gantt charts for Microsoft Project, PinansyalPH money calculators, HRIS automation and a church website.">
 <meta name="author" content="Jervil Angelo De Leon">
 <meta name="theme-color" content="#1c1c1c">
 <link rel="canonical" href="https://jervilangelo.github.io/de-leon-portfolio/projects">
@@ -12,7 +12,7 @@
 <meta property="og:url" content="https://jervilangelo.github.io/de-leon-portfolio/projects">
 <meta property="og:site_name" content="Jervil Angelo De Leon">
 <meta property="og:title" content="Projects | AWS Serverless, EC2 and Automation Builds by Jervil Angelo De Leon">
-<meta property="og:description" content="AWS projects by Jervil Angelo De Leon: Teolohiya.site on Amplify Gen 2, a serverless ticketing API with Lambda, DynamoDB and SNS, a secure EC2 web server in a custom VPC, plus PinansyalPH money calculators, HRIS automation and a church website.">
+<meta property="og:description" content="AWS projects by Jervil Angelo De Leon: Teolohiya.site on Amplify Gen 2, a serverless ticketing API with Lambda, DynamoDB and SNS, a secure EC2 web server in a custom VPC, plus Schedrift Gantt charts for Microsoft Project, PinansyalPH money calculators, HRIS automation and a church website.">
 <meta property="og:image" content="https://jervilangelo.github.io/de-leon-portfolio/img/og-cover.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
@@ -62,17 +62,17 @@
   <div class="grid">
     <div class="page-head-text" data-reveal>
       <h1 id="page-title">Projects</h1>
-      <p class="lead">Seven things I have built and shipped: four on AWS, two web apps, an automation for my HRIS work and a church website. Open any project to see how it works.</p>
+      <p class="lead">Eight things I have built and shipped: four on AWS, three web apps, an automation for my HRIS work and a church website. Open any project to see how it works.</p>
     </div>
   </div>
   <div class="pj-bar" data-reveal>
     <div class="pj-filter" role="group" aria-label="Filter projects">
-      <button type="button" aria-pressed="true" data-cat="all">All <span>7</span></button>
+      <button type="button" aria-pressed="true" data-cat="all">All <span>8</span></button>
       <button type="button" aria-pressed="false" data-cat="cloud">Cloud and AWS <span>4</span></button>
-      <button type="button" aria-pressed="false" data-cat="web">Websites and apps <span>3</span></button>
+      <button type="button" aria-pressed="false" data-cat="web">Websites and apps <span>4</span></button>
       <button type="button" aria-pressed="false" data-cat="automation">Automation <span>1</span></button>
     </div>
-    <p class="small muted pj-status" id="pj-status" aria-live="polite">Showing all 7 projects</p>
+    <p class="small muted pj-status" id="pj-status" aria-live="polite">Showing all 8 projects</p>
   </div>
 </section>
 
@@ -82,6 +82,43 @@
      dialog hero, card media, and the full write-up inside .pj-detail. Newest goes first. -->
 <section class="frame pj-section" id="projects" aria-label="All projects">
   <div class="pj-grid" id="pj-grid">
+    <article class="pj pj--feature" id="p-schedrift" data-cat="web" data-video="img/schedrift-showcase.mp4" data-poster="img/work/sd-showcase-poster.webp" data-reveal>
+      <div class="pj-media"><div class="shutter" data-shutter><video class="autoplay" muted loop playsinline preload="metadata" poster="img/work/sd-showcase-poster.webp" width="1920" height="1080" aria-hidden="true" tabindex="-1"><source src="img/schedrift-showcase.mp4" type="video/mp4"></video></div><span class="pj-badge"><span class="pj-dot" aria-hidden="true"></span>Showcase video</span></div>
+      <div class="pj-body">
+        <p class="pj-kicker"><span>Nov 2026</span><span>Web app · Open source</span></p>
+        <h3 class="pj-title"><button class="pj-open" type="button" aria-haspopup="dialog">Schedrift</button></h3>
+        <p class="pj-line">Turns Microsoft Project schedules into presentation-ready Gantt charts, with critical path analysis and delay simulation that shows what a slipped task does to Go-Live.</p>
+        <ul class="pj-tags" aria-label="Main tools"><li>React</li><li>TypeScript</li><li>SVG Gantt</li><li>Node.js</li><li>MPXJ</li><li>Playwright</li></ul>
+        <span class="pj-more" aria-hidden="true">View project <span class="arrow">→</span></span>
+      </div>
+      <div class="pj-detail">
+        <div class="strip-frames">
+          <button class="zoom" type="button" data-full="img/work/sd-present-l.webp" aria-label="Enlarge: Schedrift fullscreen executive presentation" style="--r:1.76"><img src="img/work/sd-present-s.webp" width="640" height="364" alt="Fullscreen executive presentation with project phases, milestones and Go-Live" loading="lazy"></button>
+          <button class="zoom" type="button" data-full="img/work/sd-executive-l.webp" aria-label="Enlarge: Executive Gantt chart" style="--r:1.76"><img src="img/work/sd-executive-s.webp" width="640" height="364" alt="Executive Gantt chart with phases and milestones" loading="lazy"></button>
+          <button class="zoom" type="button" data-full="img/work/sd-simulation-l.webp" aria-label="Enlarge: Delay simulation" style="--r:1.76"><img src="img/work/sd-simulation-s.webp" width="640" height="364" alt="Delay simulation moving Go-Live by six days, with the driving dependency chain" loading="lazy"></button>
+        </div>
+        <div class="strip-body">
+          <div class="strip-text">
+            <p>Microsoft Project is good for planning, but hard to explain in a meeting. Schedrift answers the question stakeholders actually ask: if this task slips, what happens to Go-Live? It imports <code>.mpp</code>, <code>.mpx</code> and Microsoft Project XML files and shows the whole plan in one presentation-ready view, without changing the original file.</p>
+            <p>Select one or more tasks, change their start or duration in working days, and the timeline and Go-Live variance update, along with the dependency chain driving the change. Dependencies are imported as defined (FS, SS, FF and SF, with lags), and a delay only reaches a successor when it uses up the gap already between them. Scenarios stay separate from the approved schedule. The showcase video above walks through it with a synthetic ERP rollout.</p>
+          </div>
+          <ul class="points">
+            <li>Executive and Detailed Gantt views, critical path focus and total float, on a custom SVG renderer with row virtualization.</li>
+            <li>Present mode for fullscreen meetings, baseline comparison, and Excel or CSV updates that keep the imported dependencies.</li>
+            <li>Local-first: a Node server bound to <code>127.0.0.1</code>, no cloud, no login and no telemetry. <code>.mpp</code> files are parsed by Java and MPXJ from temporary copies and never modified.</li>
+            <li>The import report flags cycles, missing predecessors, invalid dates and unsupported features.</li>
+            <li>Vitest unit and integration tests and Playwright browser tests, all on synthetic schedules.</li>
+          </ul>
+          <div class="strip-meta">
+            <ul class="tags" aria-label="Tools"><li>React</li><li>TypeScript</li><li>Zustand</li><li>Vite</li><li>Tailwind CSS</li><li>Node.js</li><li>Java</li><li>MPXJ</li><li>Vitest</li><li>Playwright</li><li>Showcase video</li></ul>
+            <span class="strip-links">
+              <a class="link ext" href="https://github.com/jervilangelo/schedrift" target="_blank" rel="noopener">GitHub</a>
+              <a class="link ext" href="https://github.com/jervilangelo/schedrift/blob/main/docs/SCHEDRIFT_MASTER_BLUEPRINT.md" target="_blank" rel="noopener">Design blueprint</a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </article>
     <article class="pj pj--feature" id="p-bayanihandr" data-cat="cloud" data-video="img/bayanihan-dr-showcase.mp4" data-poster="img/work/bdr-showcase-poster.webp" data-reveal>
       <div class="pj-media"><div class="shutter" data-shutter><video class="autoplay" muted loop playsinline preload="metadata" poster="img/work/bdr-showcase-poster.webp" width="1920" height="1080" aria-hidden="true" tabindex="-1"><source src="img/bayanihan-dr-showcase.mp4" type="video/mp4"></video></div><span class="pj-badge"><span class="pj-dot" aria-hidden="true"></span>Showcase video</span></div>
       <div class="pj-body">
