@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="480" viewBox="0 0 1200 480" role="img" aria-labelledby="title desc">
+<title id="title">Jervil Angelo De Leon — Building my way into the cloud</title>
+<desc id="desc">Dark editorial portfolio banner with a floating cloud, AWS-inspired infrastructure network, sage green highlights and subtle accessible animations.</desc>
+<defs>
+ <radialGradient id="halo" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#8fa68e" stop-opacity=".24"/><stop offset="100%" stop-color="#8fa68e" stop-opacity="0"/></radialGradient>
+ <linearGradient id="cloud" x1=".24" y1="0" x2=".65" y2="1"><stop offset="0" stop-color="#FBFBF9"/><stop offset=".47" stop-color="#ECEEE9"/><stop offset=".84" stop-color="#C6CDC2"/><stop offset="1" stop-color="#91A28F"/></linearGradient>
+</defs>
+<style>
+@keyframes drift {0%,100%{transform:translateY(-5px)}50%{transform:translateY(7px)}}
+@keyframes trace {to{stroke-dashoffset:-48}}
+@keyframes enter {0%,9%{opacity:.15;transform:translateY(12px)}30%,90%,100%{opacity:1;transform:translateY(0)}}
+@keyframes pulse {0%,55%,100%{opacity:.5}76%{opacity:1}}
+@keyframes linkdraw {0%,10%{stroke-dashoffset:420}45%,100%{stroke-dashoffset:0}}
+.cloud-float{animation:drift 9s ease-in-out infinite}
+.link{animation:trace 12s linear infinite}
+.intro{animation:enter 9s cubic-bezier(.22,1,.36,1) infinite}
+.intro2{animation-delay:.2s}.intro3{animation-delay:.4s}
+.node{animation:pulse 8s ease-in-out infinite}
+.network{stroke-dasharray:420;stroke-dashoffset:0;animation:linkdraw 9s ease-in-out infinite}
+@media(prefers-reduced-motion:reduce){.cloud-float,.link,.intro,.node,.network{animation:none!important}}
+</style>
+<rect width="1200" height="480" rx="18" fill="#1C1C1C"/>
+<rect x="26" y="26" width="1148" height="428" rx="3" fill="none" stroke="#3A3A37"/>
+<rect x="56" y="54" width="9" height="9" fill="#8FA68E"/>
+<text x="78" y="65" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="700" letter-spacing="2" fill="#A9BFA8">JERVIL ANGELO DE LEON</text>
+<g class="intro" fill="#F1F1EF" font-family="'Clash Grotesk','Arial',sans-serif" font-weight="500" letter-spacing="-2.3">
+<text x="56" y="158" font-size="54">Building my way</text>
+<text x="56" y="218" font-size="54">into the <tspan fill="#A9BFA8">cloud.</tspan></text>
+</g>
+<g class="intro intro2" font-family="Arial,Helvetica,sans-serif" fill="#C8C9C4" font-size="18">
+<text x="58" y="268">Cloud infrastructure. Automation. Real projects.</text>
+<text x="58" y="297">Learning through hands-on engineering.</text>
+</g>
+<rect x="56" y="336" width="164" height="41" fill="#8FA68E"/>
+<text x="138" y="362" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" letter-spacing=".8" font-weight="700" fill="#1C1C1C">AWS &amp; CLOUD</text>
+<rect x="230" y="336" width="188" height="41" fill="#303030"/>
+<text x="324" y="362" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" letter-spacing=".7" font-weight="700" fill="#F1F1EF">PROJECT PORTFOLIO</text>
+<text x="57" y="426" font-family="Arial,Helvetica,sans-serif" font-size="13" fill="#A3A49F" letter-spacing="1.1">BUILD  /  LEARN  /  DOCUMENT  /  IMPROVE</text>
+<!-- Network scaffold: custom diagram, not trademark logos -->
+<g transform="translate(618 35)">
+<ellipse cx="275" cy="208" rx="285" ry="210" fill="url(#halo)"/>
+<g stroke="#566A58" stroke-width="1.5" fill="none">
+<path class="network" d="M274 204L74 122M274 204L159 51M274 204L374 43M274 204L480 122M274 204L492 287M274 204L377 369M274 204L157 360M274 204L60 277"/>
+<ellipse cx="274" cy="208" rx="232" ry="163" stroke="#3A483C" stroke-dasharray="4 10"/>
+</g>
+<g class="cloud-float">
+<ellipse cx="275" cy="319" rx="165" ry="22" fill="#000000" opacity=".24"/>
+<g fill="url(#cloud)">
+<circle cx="211" cy="177" r="73"/><circle cx="295" cy="144" r="93"/><circle cx="371" cy="189" r="67"/>
+<rect x="146" y="198" width="287" height="91" rx="45"/>
+<circle cx="175" cy="242" r="47"/><circle cx="272" cy="224" r="72"/><circle cx="362" cy="231" r="66"/><circle cx="403" cy="242" r="39"/>
+</g>
+<path d="M175 260H400" stroke="#7B927D" opacity=".25" stroke-width="2" stroke-linecap="round"/>
+</g>
+<g font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="700" fill="#F1F1EF" text-anchor="middle">
+<g class="node"><rect x="20" y="100" width="110" height="37" fill="#303730" stroke="#728C73"/><text x="75" y="123">COMPUTE</text></g>
+<g class="node"><rect x="111" y="32" width="97" height="37" fill="#303730" stroke="#728C73"/><text x="160" y="55">STORAGE</text></g>
+<g class="node"><rect x="319" y="24" width="112" height="37" fill="#303730" stroke="#728C73"/><text x="375" y="47">SERVERLESS</text></g>
+<g class="node"><rect x="436" y="103" width="94" height="37" fill="#303730" stroke="#728C73"/><text x="483" y="126">NETWORK</text></g>
+<g class="node"><rect x="450" y="269" width="88" height="37" fill="#303730" stroke="#728C73"/><text x="494" y="292">SECURITY</text></g>
+<g class="node"><rect x="325" y="348" width="102" height="37" fill="#303730" stroke="#728C73"/><text x="376" y="371">DATABASE</text></g>
+<g class="node"><rect x="103" y="342" width="110" height="37" fill="#303730" stroke="#728C73"/><text x="158" y="365">AUTOMATION</text></g>
+<g class="node"><rect x="16" y="258" width="88" height="37" fill="#303730" stroke="#728C73"/><text x="60" y="281">MONITOR</text></g>
+</g></g>
+</svg>
