@@ -8,7 +8,7 @@
 
 I work in **HRIS Technical Support** and build practical systems to deepen my experience with cloud computing, infrastructure, networking, and software development.
 
-**[Explore my portfolio](https://jervilangelo.github.io/de-leon-portfolio/)** · [Projects](https://jervilangelo.github.io/de-leon-portfolio/projects) · [Certifications](https://jervilangelo.github.io/de-leon-portfolio/certifications) · [Journey](https://jervilangelo.github.io/de-leon-portfolio/journey) · [Contact](https://jervilangelo.github.io/de-leon-portfolio/contact)
+**[Explore my portfolio](https://jervilangelo.online/)** · [Projects](https://jervilangelo.online/projects) · [Certifications](https://jervilangelo.online/certifications) · [Journey](https://jervilangelo.online/journey) · [Contact](https://jervilangelo.online/contact)
 
 <br />
 
@@ -38,7 +38,7 @@ The portfolio brings together cloud projects, software applications, professiona
 | **[PinansyalPH](https://jervilangelo.github.io/pinansyalph-v2/)** | Open-source Philippine financial literacy calculators and economic data visualizations. | [Source](https://github.com/jervilangelo/pinansyalph-v2) |
 | **[ECCM Website](https://ecc-manila.org/)** | A responsive website for a local church, built as a nonprofit contribution. | [Source](https://github.com/jervilangelo/eccm-web) |
 
-The full [Projects page](https://jervilangelo.github.io/de-leon-portfolio/projects) includes additional cloud infrastructure and HRIS-related builds.
+The full [Projects page](https://jervilangelo.online/projects) includes additional cloud infrastructure and HRIS-related builds.
 
 ## What this site includes
 
@@ -94,7 +94,7 @@ The SVG is a stylized illustration, not a screenshot or official AWS logo set. A
 
 ## Connect
 
-**[Visit the portfolio](https://jervilangelo.github.io/de-leon-portfolio/)** · **[GitHub](https://github.com/jervilangelo)** · **[LinkedIn](https://www.linkedin.com/in/jervilangelo/)** · **[Contact page](https://jervilangelo.github.io/de-leon-portfolio/contact)**
+**[Visit the portfolio](https://jervilangelo.online/)** · **[GitHub](https://github.com/jervilangelo)** · **[LinkedIn](https://www.linkedin.com/in/jervilangelo/)** · **[Contact page](https://jervilangelo.online/contact)**
 
 ---
 
