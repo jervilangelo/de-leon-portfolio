@@ -62,17 +62,17 @@
   <div class="grid">
     <div class="page-head-text" data-reveal>
       <h1 id="page-title">Projects</h1>
-      <p class="lead">Eight things I have built and shipped: four on AWS, three web apps, an automation for my HRIS work and a church website. Open any project to see how it works.</p>
+      <p class="lead">Nine things I have built and shipped: five on AWS, three web apps, an automation for my HRIS work and a church website. Open any project to see how it works.</p>
     </div>
   </div>
   <div class="pj-bar" data-reveal>
     <div class="pj-filter" role="group" aria-label="Filter projects">
-      <button type="button" aria-pressed="true" data-cat="all">All <span>8</span></button>
-      <button type="button" aria-pressed="false" data-cat="cloud">Cloud and AWS <span>4</span></button>
+      <button type="button" aria-pressed="true" data-cat="all">All <span>9</span></button>
+      <button type="button" aria-pressed="false" data-cat="cloud">Cloud and AWS <span>5</span></button>
       <button type="button" aria-pressed="false" data-cat="web">Websites and apps <span>4</span></button>
       <button type="button" aria-pressed="false" data-cat="automation">Automation <span>1</span></button>
     </div>
-    <p class="small muted pj-status" id="pj-status" aria-live="polite">Showing all 8 projects</p>
+    <p class="small muted pj-status" id="pj-status" aria-live="polite">Showing all 9 projects</p>
   </div>
 </section>
 
@@ -82,6 +82,71 @@
      dialog hero, card media, and the full write-up inside .pj-detail. Newest goes first. -->
 <section class="frame pj-section" id="projects" aria-label="All projects">
   <div class="pj-grid" id="pj-grid">
+    <article class="pj pj--feature" id="p-opsentra" data-cat="cloud" data-video="img/opsentra-showcase-1080p60.mp4" data-poster="img/work/ops-showcase-poster.webp" data-reveal>
+      <div class="pj-media"><div class="shutter" data-shutter><video class="autoplay" muted loop playsinline preload="metadata" poster="img/work/ops-showcase-poster.webp" width="1920" height="1080" aria-hidden="true" tabindex="-1"><source src="img/opsentra-showcase-1080p60.mp4" type="video/mp4"></video></div><span class="pj-badge"><span class="pj-dot" aria-hidden="true"></span>Showcase video</span></div>
+      <div class="pj-body">
+        <p class="pj-kicker"><span>Nov 2026</span><span>Cloud · CloudOps</span></p>
+        <h3 class="pj-title"><button class="pj-open" type="button" aria-haspopup="dialog">Opsentra</button></h3>
+        <p class="pj-line">A cloud operations and incident response platform for AWS: detect an outage, investigate it, and run an approved, audited fix that only counts once health checks prove the service is back.</p>
+        <ul class="pj-tags" aria-label="Main tools"><li>Terraform</li><li>Lambda</li><li>EventBridge</li><li>Systems Manager</li><li>CloudWatch</li><li>Cognito</li><li>React</li></ul>
+        <span class="pj-more" aria-hidden="true">View project <span class="arrow">→</span></span>
+      </div>
+      <div class="pj-detail">
+        <div class="strip-frames">
+          <button class="zoom" type="button" data-full="img/work/ops-arch-l.webp" aria-label="Enlarge: Opsentra architecture on AWS" style="--r:1.78"><img src="img/work/ops-arch-s.webp" width="640" height="360" alt="Opsentra architecture: dashboard, Cognito, API Gateway, Lambda, DynamoDB, CloudWatch, EventBridge, SNS, EC2 and Systems Manager" loading="lazy"></button>
+          <button class="zoom" type="button" data-full="img/work/ops-detect-l.webp" aria-label="Enlarge: Incident evidence from failed health probes" style="--r:1.78"><img src="img/work/ops-detect-s.webp" width="640" height="360" alt="Incident evidence showing three failed health probes and the CloudWatch alarm" loading="lazy"></button>
+          <button class="zoom" type="button" data-full="img/work/ops-approve-l.webp" aria-label="Enlarge: Approving a recovery runbook" style="--r:1.78"><img src="img/work/ops-approve-s.webp" width="640" height="360" alt="Confirmation dialog to approve and run the Restart Nginx runbook, with a required approval reason" loading="lazy"></button>
+          <button class="zoom" type="button" data-full="img/work/ops-analytics-l.webp" aria-label="Enlarge: Analytics from a live AWS run" style="--r:1.78"><img src="img/work/ops-analytics-s.webp" width="640" height="360" alt="Analytics page with MTTA, MTTR, recovery outcomes and availability from a live AWS run" loading="lazy"></button>
+        </div>
+        <div class="strip-body">
+          <div class="strip-text">
+            <p>A UI-first command center that lets an operations team watch AWS workloads, detect an outage, investigate it and run a recovery from one web app, without a terminal or console hopping. A disposable lab (an EC2 host running Nginx) is probed over HTTP every minute. When the probe fails, a CloudWatch alarm goes through EventBridge to Lambda, which opens one deduplicated incident and sends one SNS alert.</p>
+            <p>An operator acknowledges and investigates, then requests an allowlisted, hash-pinned Systems Manager runbook. An admin approves it and it runs exactly once. The incident is only marked resolved after three healthy probes, not when a command reports success: an SSM "Success" with the service still down is escalated instead. Every step, including denied attempts, lands in an append-only audit trail.</p>
+          </div>
+          <ul class="points">
+            <li>Verified recovery: <b>3 healthy probes</b> after the fix before an incident closes; a reconciler every 2 minutes catches missed events.</li>
+            <li>No arbitrary actions: requests carry only a runbook or scenario ID, roles come from Cognito groups (viewer, operator, admin), and every route but health needs a JWT.</li>
+            <li>Analytics with MTTA, MTTR, runbook outcomes and availability, plus sanitized JSON and CSV reports with no account IDs or ARNs.</li>
+            <li>Built in ten gated phases with tests and evidence for each; the security audit found no critical or high issues. Lab cost is about USD 0.01 to 0.02 an hour, and observed usage for 1 to 13 November 2026 was about USD 0.035.</li>
+            <li>Public Demo Mode on GitHub Pages runs a synthetic engine in the browser; Live Mode signs in to Cognito and drives real AWS resources.</li>
+          </ul>
+        </div>
+
+        <div class="tk-detail">
+          <div class="tk-block">
+            <h3 class="h3">AWS services</h3>
+            <ul class="bdr-aws">
+              <li><img src="img/aws/AWSLambda.svg" alt="" width="32" height="32" loading="lazy"><div><b>AWS Lambda</b><span>API, ingest, reconciler, remediation coordinator, lab controller and the HTTP probe</span></div></li>
+              <li><img src="img/aws/AmazonEventBridge.svg" alt="" width="32" height="32" loading="lazy"><div><b>Amazon EventBridge</b><span>Routes alarm and SSM status events to Lambda</span></div></li>
+              <li><img src="img/aws/AmazonCloudWatch.svg" alt="" width="32" height="32" loading="lazy"><div><b>CloudWatch</b><span>Probe metric, alarm, structured logs and an operations dashboard</span></div></li>
+              <li><img src="img/aws/AWSSystemsManager.svg" alt="" width="32" height="32" loading="lazy"><div><b>Systems Manager</b><span>Two fixed, hash-pinned runbook documents</span></div></li>
+              <li><img src="img/aws/AmazonAPIGateway.svg" alt="" width="32" height="32" loading="lazy"><div><b>API Gateway</b><span>HTTP API with JWT auth on every route but health</span></div></li>
+              <li><img src="img/aws/AmazonCognito.svg" alt="" width="32" height="32" loading="lazy"><div><b>Amazon Cognito</b><span>PKCE sign-in and viewer, operator and admin groups</span></div></li>
+              <li><img src="img/aws/AmazonDynamoDB.svg" alt="" width="32" height="32" loading="lazy"><div><b>Amazon DynamoDB</b><span>Incidents, audit trail, remediations and lab runs</span></div></li>
+              <li><img src="img/aws/AmazonSimpleNotificationService.svg" alt="" width="32" height="32" loading="lazy"><div><b>Amazon SNS</b><span>One email alert per incident</span></div></li>
+              <li><img src="img/aws/AmazonEC2.svg" alt="" width="32" height="32" loading="lazy"><div><b>Amazon EC2</b><span>Disposable Nginx lab host, destroyed after a demo</span></div></li>
+              <li><img src="img/aws/AWSIdentityandAccessManagement.svg" alt="" width="32" height="32" loading="lazy"><div><b>AWS IAM</b><span>Least-privilege policies; IAM Access Analyzer reports no findings</span></div></li>
+              <li><img src="img/aws/AmazonSimpleStorageService.svg" alt="" width="32" height="32" loading="lazy"><div><b>Amazon S3</b><span>Versioned, encrypted Terraform state with native locking</span></div></li>
+              <li><img src="img/tools/terraform.svg" alt="" width="32" height="32" loading="lazy"><div><b>Terraform</b><span>Control plane, disposable lab and state bootstrap, with mocked tests</span></div></li>
+            </ul>
+          </div>
+
+          <div class="tk-block">
+            <h3 class="h3">Incident flow</h3>
+            <p class="bdr-flow">probe fails <span aria-hidden="true">→</span> CloudWatch alarm <span aria-hidden="true">→</span> EventBridge <span aria-hidden="true">→</span> incident + alert <span aria-hidden="true">→</span> investigate <span aria-hidden="true">→</span> approve runbook <span aria-hidden="true">→</span> SSM fix <span aria-hidden="true">→</span> 3 healthy probes <span aria-hidden="true">→</span> resolved</p>
+            <p class="tk-note muted">Demo Mode uses synthetic data for a fictional organisation; no real customer data. Scenario A (Nginx outage) runs live on AWS; scenarios B and C are Demo-only for now.</p>
+          </div>
+
+          <div class="strip-meta">
+            <ul class="tags" aria-label="Tools"><li>Terraform</li><li>AWS</li><li>Python 3.12</li><li>React</li><li>TypeScript</li><li>Vite</li><li>pytest</li><li>Vitest</li><li>Playwright</li><li>axe</li><li>GitHub Pages</li></ul>
+            <span class="strip-links">
+              <a class="link ext" href="https://jervilangelo.github.io/opsentra/" target="_blank" rel="noopener">Live demo</a>
+              <a class="link ext" href="https://github.com/jervilangelo/opsentra" target="_blank" rel="noopener">GitHub</a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </article>
     <article class="pj pj--feature" id="p-bayanihandr" data-cat="cloud" data-video="img/bayanihan-dr-showcase.mp4" data-poster="img/work/bdr-showcase-poster.webp" data-reveal>
       <div class="pj-media"><div class="shutter" data-shutter><video class="autoplay" muted loop playsinline preload="metadata" poster="img/work/bdr-showcase-poster.webp" width="1920" height="1080" aria-hidden="true" tabindex="-1"><source src="img/bayanihan-dr-showcase.mp4" type="video/mp4"></video></div><span class="pj-badge"><span class="pj-dot" aria-hidden="true"></span>Showcase video</span></div>
       <div class="pj-body">
@@ -689,15 +754,16 @@
   <div class="grid">
     <div class="svc-intro">
       <h2 class="h2" id="svc-title">AWS services across these builds</h2>
-      <p class="svc-line">Twenty AWS services and Terraform across four builds, each tied to what it did there. Pick a project to see its stack.</p>
+      <p class="svc-line">Twenty-one AWS services and Terraform across five builds, each tied to what it did there. Pick a project to see its stack.</p>
       <div class="svc-filter" role="group" aria-label="Show services used by">
         <button type="button" aria-pressed="true" data-project="all">All projects</button>
+        <button type="button" aria-pressed="false" data-project="ops">Opsentra</button>
         <button type="button" aria-pressed="false" data-project="bdr">BayanihanDR</button>
         <button type="button" aria-pressed="false" data-project="teo">Teolohiya.site</button>
         <button type="button" aria-pressed="false" data-project="tk">Ticketing API</button>
         <button type="button" aria-pressed="false" data-project="ec2">Secure EC2</button>
       </div>
-      <p class="svc-count small" aria-live="polite"><span id="svc-count">21</span> of 21 services and tools</p>
+      <p class="svc-count small" aria-live="polite"><span id="svc-count">22</span> of 22 services and tools</p>
       <p class="small muted svc-note">"Via Amplify" marks services that Amplify Gen 2 provisions and manages for Teolohiya.site, rather than ones I configured on their own.</p>
     </div>
 
@@ -705,54 +771,55 @@
       <div class="svc-group">
         <h3>Compute</h3>
         <ul>
-          <li data-p="ec2 bdr"><img src="img/aws/AmazonEC2.svg" alt="" width="28" height="28"><div><b>Amazon EC2</b><span>Nginx web server; a temporary t3.small recovery host created by Terraform</span></div><em>Secure EC2, BayanihanDR</em></li>
-          <li data-p="tk teo"><img src="img/aws/AWSLambda.svg" alt="" width="28" height="28"><div><b>AWS Lambda</b><span>Ticket handler and alert functions; moderation and admin actions</span></div><em>Ticketing API, Teolohiya</em></li>
+          <li data-p="ec2 bdr ops"><img src="img/aws/AmazonEC2.svg" alt="" width="28" height="28"><div><b>Amazon EC2</b><span>Nginx web servers, including a disposable incident lab; a temporary t3.small recovery host created by Terraform</span></div><em>Secure EC2, BayanihanDR, Opsentra</em></li>
+          <li data-p="tk teo ops"><img src="img/aws/AWSLambda.svg" alt="" width="28" height="28"><div><b>AWS Lambda</b><span>Ticket handler and alert functions; moderation and admin actions; incident ingest, remediation and an HTTP health probe</span></div><em>Ticketing API, Teolohiya, Opsentra</em></li>
         </ul>
       </div>
       <div class="svc-group">
         <h3>Networking and delivery</h3>
         <ul>
           <li data-p="ec2 bdr"><img src="img/aws/AmazonVirtualPrivateCloud.svg" alt="" width="28" height="28"><div><b>Amazon VPC</b><span>Custom VPCs with public subnets; a recovery network with no inbound rules and an S3 endpoint</span></div><em>Secure EC2, BayanihanDR</em></li>
-          <li data-p="tk"><img src="img/aws/AmazonAPIGateway.svg" alt="" width="28" height="28"><div><b>Amazon API Gateway</b><span>HTTP API with six routes and a 5 req/s throttle</span></div><em>Ticketing API</em></li>
+          <li data-p="tk ops"><img src="img/aws/AmazonAPIGateway.svg" alt="" width="28" height="28"><div><b>Amazon API Gateway</b><span>HTTP API with six routes and a 5 req/s throttle; a JWT-protected operations API</span></div><em>Ticketing API, Opsentra</em></li>
           <li data-p="teo"><img src="img/aws/AmazonCloudFront.svg" alt="" width="28" height="28"><div><b>Amazon CloudFront</b><span>Content delivery for the hosted Next.js site, via Amplify</span></div><em>Teolohiya</em></li>
         </ul>
       </div>
       <div class="svc-group">
         <h3>Storage and databases</h3>
         <ul>
-          <li data-p="tk teo"><img src="img/aws/AmazonDynamoDB.svg" alt="" width="28" height="28"><div><b>Amazon DynamoDB</b><span>On-demand table with a GSI and Streams; private and public listing models</span></div><em>Ticketing API, Teolohiya</em></li>
-          <li data-p="teo bdr"><img src="img/aws/AmazonSimpleStorageService.svg" alt="" width="28" height="28"><div><b>Amazon S3</b><span>Book photos in pending and approved paths; encrypted, versioned backups and Terraform state</span></div><em>Teolohiya, BayanihanDR</em></li>
+          <li data-p="tk teo ops"><img src="img/aws/AmazonDynamoDB.svg" alt="" width="28" height="28"><div><b>Amazon DynamoDB</b><span>On-demand table with a GSI and Streams; listing models; incidents and an append-only audit trail</span></div><em>Ticketing API, Teolohiya, Opsentra</em></li>
+          <li data-p="teo bdr ops"><img src="img/aws/AmazonSimpleStorageService.svg" alt="" width="28" height="28"><div><b>Amazon S3</b><span>Book photos in pending and approved paths; encrypted, versioned backups and Terraform state</span></div><em>Teolohiya, BayanihanDR, Opsentra</em></li>
           <li data-p="ec2"><img src="img/aws/AmazonElasticBlockStore.svg" alt="" width="28" height="28"><div><b>Amazon EBS</b><span>Snapshot of the web server volume as a backup</span></div><em>Secure EC2</em></li>
         </ul>
       </div>
       <div class="svc-group">
         <h3>Security and identity</h3>
         <ul>
-          <li data-p="tk ec2 teo bdr"><img src="img/aws/AWSIdentityandAccessManagement.svg" alt="" width="28" height="28"><div><b>AWS IAM</b><span>One least-privilege role per function; instance roles; an upload-only backup writer</span></div><em>All four</em></li>
-          <li data-p="teo"><img src="img/aws/AmazonCognito.svg" alt="" width="28" height="28"><div><b>Amazon Cognito</b><span>Sign-up, email sign-in, moderator and admin groups</span></div><em>Teolohiya</em></li>
+          <li data-p="tk ec2 teo bdr ops"><img src="img/aws/AWSIdentityandAccessManagement.svg" alt="" width="28" height="28"><div><b>AWS IAM</b><span>One least-privilege role per function; instance roles; an upload-only backup writer</span></div><em>All five</em></li>
+          <li data-p="teo ops"><img src="img/aws/AmazonCognito.svg" alt="" width="28" height="28"><div><b>Amazon Cognito</b><span>Sign-up, email sign-in, moderator and admin groups; viewer, operator and admin roles</span></div><em>Teolohiya, Opsentra</em></li>
           <li data-p="teo"><img src="img/aws/AWSCertificateManager.svg" alt="" width="28" height="28"><div><b>AWS Certificate Manager</b><span>TLS certificate for HTTPS on the custom domain, via Amplify</span></div><em>Teolohiya</em></li>
           <li data-p="teo bdr"><img src="img/aws/AWSIAMIdentityCenter.svg" alt="" width="28" height="28"><div><b>AWS IAM Identity Center</b><span>SSO access to AWS without long-lived access keys</span></div><em>Teolohiya, BayanihanDR</em></li>
-          <li data-p="ec2 bdr"><img src="img/aws/AWSSystemsManager.svg" alt="" width="28" height="28"><div><b>AWS Systems Manager</b><span>Session Manager access through an IAM role, with no SSH on the recovery host</span></div><em>Secure EC2, BayanihanDR</em></li>
+          <li data-p="ec2 bdr ops"><img src="img/aws/AWSSystemsManager.svg" alt="" width="28" height="28"><div><b>AWS Systems Manager</b><span>Session Manager access with no SSH; hash-pinned runbooks that restart a failed service</span></div><em>Secure EC2, BayanihanDR, Opsentra</em></li>
         </ul>
       </div>
       <div class="svc-group">
         <h3>Application integration</h3>
         <ul>
           <li data-p="teo"><img src="img/aws/AWSAppSync.svg" alt="" width="28" height="28"><div><b>AWS AppSync</b><span>GraphQL API for listings and related operations</span></div><em>Teolohiya</em></li>
-          <li data-p="tk"><img src="img/aws/AmazonSimpleNotificationService.svg" alt="" width="28" height="28"><div><b>Amazon SNS</b><span>Critical-ticket emails and alarm notifications</span></div><em>Ticketing API</em></li>
+          <li data-p="tk ops"><img src="img/aws/AmazonSimpleNotificationService.svg" alt="" width="28" height="28"><div><b>Amazon SNS</b><span>Critical-ticket emails, alarm notifications and one alert per incident</span></div><em>Ticketing API, Opsentra</em></li>
+          <li data-p="ops"><img src="img/aws/AmazonEventBridge.svg" alt="" width="28" height="28"><div><b>Amazon EventBridge</b><span>Routes CloudWatch alarm and SSM status events to Lambda</span></div><em>Opsentra</em></li>
         </ul>
       </div>
       <div class="svc-group">
         <h3>Monitoring and cost</h3>
         <ul>
-          <li data-p="tk bdr"><img src="img/aws/AmazonCloudWatch.svg" alt="" width="28" height="28"><div><b>Amazon CloudWatch</b><span>Structured logs, one-week retention, an error alarm and a host status alarm</span></div><em>Ticketing API, BayanihanDR</em></li>
+          <li data-p="tk bdr ops"><img src="img/aws/AmazonCloudWatch.svg" alt="" width="28" height="28"><div><b>Amazon CloudWatch</b><span>Structured logs, alarms on errors, host status and health probes, and an operations dashboard</span></div><em>Ticketing API, BayanihanDR, Opsentra</em></li>
           <li data-p="teo ec2 bdr"><img src="img/aws/AWSBudgets.svg" alt="" width="28" height="28"><div><b>AWS Budgets</b><span>Spending alerts on the account, defined in Terraform for BayanihanDR</span></div><em>Teolohiya, Secure EC2, BayanihanDR</em></li>
         </ul>
       </div>
       <div class="svc-group">
         <h3>Deployment and infrastructure as code</h3>
         <ul>
-          <li data-p="bdr" class="svc-tf"><img src="img/tools/terraform.svg" alt="" width="28" height="28"><div><b>Terraform</b><span>Five modules, S3 remote state with locking, one switch from standby to a full recovery site</span></div><em>BayanihanDR</em></li>
+          <li data-p="bdr ops" class="svc-tf"><img src="img/tools/terraform.svg" alt="" width="28" height="28"><div><b>Terraform</b><span>S3 remote state with locking; one switch from standby to a full recovery site; a control plane and disposable lab</span></div><em>BayanihanDR, Opsentra</em></li>
           <li data-p="teo"><img src="img/aws/AWSAmplify.svg" alt="" width="28" height="28"><div><b>AWS Amplify Gen 2</b><span>Hosting, GitHub-connected deploys and the backend definition</span></div><em>Teolohiya</em></li>
           <li data-p="teo"><img src="img/aws/AWSCloudFormation.svg" alt="" width="28" height="28"><div><b>AWS CloudFormation</b><span>Deploys the Amplify backend resources, via Amplify</span></div><em>Teolohiya</em></li>
           <li data-p="teo"><img src="img/aws/AWSCloudDevelopmentKit.svg" alt="" width="28" height="28"><div><b>AWS CDK</b><span>Defines the backend as infrastructure as code, via Amplify</span></div><em>Teolohiya</em></li>

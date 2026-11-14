@@ -33,6 +33,7 @@ The portfolio brings together cloud projects, software applications, professiona
 | Project | What it demonstrates | Repository |
 | :-- | :-- | :-- |
 | **[Teolohiya.site](https://teolohiya.site/)** | A Philippine theological-book listing platform; Next.js and AWS infrastructure, authentication, storage, and application deployment. | [Source](https://github.com/jervilangelo/teolohiya.site) |
+| **[Opsentra](https://jervilangelo.github.io/opsentra/)** | A cloud operations and incident response platform for AWS: event-driven detection, approved and audited SSM remediation, and verified recovery, built with Terraform. | [Source](https://github.com/jervilangelo/opsentra) |
 | **[BayanihanDR](https://github.com/jervilangelo/bayanihan-dr)** | A disaster recovery proof of concept using Terraform and AWS infrastructure automation. | [Source](https://github.com/jervilangelo/bayanihan-dr) |
 | **[Schedrift](https://github.com/jervilangelo/schedrift)** | Presentation-ready project timelines, Gantt visualization, task dependencies, and delay simulation. | [Source](https://github.com/jervilangelo/schedrift) |
 | **[PinansyalPH](https://jervilangelo.github.io/pinansyalph-v2/)** | Open-source Philippine financial literacy calculators and economic data visualizations. | [Source](https://github.com/jervilangelo/pinansyalph-v2) |

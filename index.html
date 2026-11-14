@@ -21,13 +21,13 @@
 <link href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/main.css?v=20261105a">
 <link rel="stylesheet" href="css/cloud.css?v=20261105a">
-<link rel="stylesheet" href="css/pages.css?v=20261105a">
+<link rel="stylesheet" href="css/pages.css?v=20261114a">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500&family=Newsreader:opsz@6..72&display=swap" rel="stylesheet">
 <script>document.documentElement.classList.add("js")</script>
 <script>
-(function(){var m={teolohiya:"projects#teolohiya",projects:"projects#projects","p-bayanihandr":"projects#p-bayanihandr","p-ticketing":"projects#p-ticketing","p-ec2":"projects#p-ec2","p-hris":"projects#p-hris","p-eccm":"projects#p-eccm","p-pinansyalph":"projects#p-pinansyalph","p-schedrift":"projects#p-schedrift",services:"projects#services",certifications:"certifications",journey:"journey",story:"journey",contact:"contact"};var t=m[location.hash.slice(1)];if(t)location.replace(t);})();
+(function(){var m={teolohiya:"projects#teolohiya",projects:"projects#projects","p-opsentra":"projects#p-opsentra","p-bayanihandr":"projects#p-bayanihandr","p-ticketing":"projects#p-ticketing","p-ec2":"projects#p-ec2","p-hris":"projects#p-hris","p-eccm":"projects#p-eccm","p-pinansyalph":"projects#p-pinansyalph","p-schedrift":"projects#p-schedrift",services:"projects#services",certifications:"certifications",journey:"journey",story:"journey",contact:"contact"};var t=m[location.hash.slice(1)];if(t)location.replace(t);})();
 </script>
 <script type="application/ld+json">
 {
@@ -74,8 +74,8 @@
       <a class="btn btn--quiet" href="certifications">View certifications</a>
     </div>
     <dl class="hero-facts">
-      <div><dt>8</dt><dd>Projects built</dd></div>
-      <div><dt>20</dt><dd>AWS services used</dd></div>
+      <div><dt>9</dt><dd>Projects built</dd></div>
+      <div><dt>21</dt><dd>AWS services used</dd></div>
       <div><dt>13</dt><dd>Certifications</dd></div>
     </dl>
   </div>
@@ -130,7 +130,7 @@
         <div class="orb" style="left:50%;top:88%"><img src="img/aws/AmazonCloudWatch.svg" data-file="AmazonCloudWatch" alt="" width="64" height="64"><span>CloudWatch</span></div>
     </div>
   </div>
-  <p class="sr-only">AWS services used in my projects include Lambda, S3, DynamoDB, EC2, API Gateway, Cognito, Amplify, CloudWatch, IAM, VPC and SNS.</p>
+  <p class="sr-only">AWS services used in my projects include Lambda, S3, DynamoDB, EC2, API Gateway, Cognito, Amplify, CloudWatch, IAM, VPC, SNS and EventBridge.</p>
 </section>
 
 <section class="section frame feature" aria-labelledby="feat-title">
@@ -159,10 +159,36 @@
   </div>
 </section>
 
+<section class="section frame feature feature--flip" aria-labelledby="feat-ops-title">
+  <div class="grid feature-grid" data-reveal>
+    <figure class="feature-media shutter-wrap">
+      <div class="shutter" data-shutter><video class="autoplay" muted loop playsinline controls preload="metadata" poster="img/work/ops-showcase-poster.webp" width="1920" height="1080" aria-label="Showcase video for Opsentra: cloud operations and incident response on AWS"><source src="img/opsentra-showcase-1080p60.mp4" type="video/mp4"></video></div>
+      <figcaption class="small"><span>Opsentra showcase video</span><span class="muted">Serverless on AWS</span></figcaption>
+    </figure>
+    <div class="feature-text">
+      <h2 class="h2" id="feat-ops-title">Opsentra</h2>
+      <p>A cloud operations and incident response platform for AWS. It detects an outage, opens one incident, and runs an approved, audited fix. An incident only closes after <b>3 healthy probes</b> confirm the service is back, not when a command says it succeeded.</p>
+      <ul class="feature-icons" aria-label="Main tools and AWS services">
+        <li><img src="img/aws/AWSLambda.svg" alt="" width="32" height="32" loading="lazy"><span>Lambda</span></li>
+        <li><img src="img/aws/AmazonEventBridge.svg" alt="" width="32" height="32" loading="lazy"><span>EventBridge</span></li>
+        <li><img src="img/aws/AmazonCloudWatch.svg" alt="" width="32" height="32" loading="lazy"><span>CloudWatch</span></li>
+        <li><img src="img/aws/AWSSystemsManager.svg" alt="" width="32" height="32" loading="lazy"><span>Systems Manager</span></li>
+        <li><img src="img/aws/AmazonCognito.svg" alt="" width="32" height="32" loading="lazy"><span>Cognito</span></li>
+        <li><img src="img/tools/terraform.svg" alt="" width="32" height="32" loading="lazy"><span>Terraform</span></li>
+      </ul>
+      <div class="feature-links">
+        <a class="btn" href="projects#p-opsentra">See the project <span class="arrow" aria-hidden="true">→</span></a>
+        <a class="link ext" href="https://github.com/jervilangelo/opsentra" target="_blank" rel="noopener">View on GitHub</a>
+        <a class="link ext" href="https://jervilangelo.github.io/opsentra/" target="_blank" rel="noopener">Live demo</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="section frame explore" aria-labelledby="explore-title">
   <h2 class="h3" id="explore-title">Keep exploring</h2>
   <ul class="explore-list" data-reveal>
-    <li><a href="projects"><span class="explore-name">Projects</span><span class="explore-note">Terraform disaster recovery on AWS, a serverless ticketing API, a hardened EC2 server, Gantt charts for Microsoft Project, money calculators and more</span><span class="arrow" aria-hidden="true">→</span></a></li>
+    <li><a href="projects"><span class="explore-name">Projects</span><span class="explore-note">A CloudOps incident response platform, Terraform disaster recovery on AWS, a serverless ticketing API, a hardened EC2 server, Gantt charts for Microsoft Project, money calculators and more</span><span class="arrow" aria-hidden="true">→</span></a></li>
     <li><a href="certifications"><span class="explore-name">Certifications</span><span class="explore-note">AWS, Oracle Cloud, Google, Cisco and Certiport, with verification links</span><span class="arrow" aria-hidden="true">→</span></a></li>
     <li><a href="journey"><span class="explore-name">Journey</span><span class="explore-note">From animation and game development to support desk to cloud</span><span class="arrow" aria-hidden="true">→</span></a></li>
     <li><a href="services"><span class="explore-name">Services</span><span class="explore-note">Freelance websites, branding and motion work for businesses and organisations</span><span class="arrow" aria-hidden="true">→</span></a></li>

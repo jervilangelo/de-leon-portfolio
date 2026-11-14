@@ -399,7 +399,9 @@
 .feature-icons img { width: 32px; height: 32px; border-radius: 6px; transition: transform var(--t-ui) var(--ease-out); }
 @media (hover: hover) and (pointer: fine) { .feature-icons li:hover img { transform: translateY(-3px); } }
 .feature-links { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; }
-@media (max-width: 900px) { .feature-media, .feature-text { grid-column: 1 / -1; } }
+.feature--flip .feature-media { grid-column: 6 / 13; grid-row: 1; }
+.feature--flip .feature-text { grid-column: 1 / 5; grid-row: 1; }
+@media (max-width: 900px) { .feature-media, .feature-text, .feature--flip .feature-media, .feature--flip .feature-text { grid-column: 1 / -1; grid-row: auto; } }
 
 /* ================= HOME: keep exploring ================= */
 .explore h2 { margin-bottom: 24px; }
