@@ -63,7 +63,7 @@
   }
 
   var sparkle = toggle.querySelector("svg");
-  var smokeLayers = stage.querySelectorAll(".portrait-smoke, .portrait-foreground-smoke");
+  var smokePuff = stage.querySelector(".portrait-smoke-puff");
   var toggleEffects = [];
 
   function playToggleEffects() {
@@ -75,14 +75,11 @@
       { transform: "rotate(90deg) scale(1)" }
     ], { duration: 420, easing: "ease-out" })];
 
-    var direction = creative ? 1 : -1;
-    smokeLayers.forEach(function (layer, i) {
-      toggleEffects.push(layer.animate([
-        { transform: "translate(0, 0) scale(1)" },
-        { transform: "translate(" + (direction * (i ? 5 : 3)) + "%, -2%) scale(1.07, 0.97)", offset: 0.34 },
-        { transform: "translate(0, 0) scale(1)" }
-      ], { duration: 920, easing: "cubic-bezier(0.18, 0.7, 0.32, 1)" }));
-    });
+    toggleEffects.push(smokePuff.animate([
+      { opacity: 0 },
+      { opacity: 0.88, offset: 0.28 },
+      { opacity: 0 }
+    ], { duration: 1150, easing: "ease-out" }));
   }
 
   toggle.hidden = false;

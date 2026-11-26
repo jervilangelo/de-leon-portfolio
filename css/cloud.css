@@ -87,6 +87,14 @@
   transform: translate(-50%, -50%);
   animation: foreground-smoke-drift 9s ease-in-out infinite alternate;
 }
+.portrait-smoke-puff {
+  position: absolute; z-index: 4; pointer-events: none;
+  left: 50%; top: calc(var(--portrait-center) + 26%); width: 87%; aspect-ratio: 4;
+  transform: translate(-50%, -50%);
+  background: url("../img/work/hero-foreground-smoke.svg") center / contain no-repeat;
+  opacity: 0;
+}
+[data-theme="light"] .portrait-smoke-puff { filter: brightness(0.8); }
 @keyframes foreground-smoke-drift {
   from { transform: translate(-53%, -48%) scale(0.97); opacity: 0.72; }
   to { transform: translate(-47%, -54%) scale(1.03); opacity: 0.96; }
