@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
 <link href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/main.css?v=projects-about">
-<link rel="stylesheet" href="css/pages.css?v=projects-about">
+<link rel="stylesheet" href="css/pages.css?v=portfolio-follow-up">
 <script>document.documentElement.classList.add("js")</script>
 <script type="application/ld+json">
 {
@@ -77,6 +77,113 @@
       <p>I like automating the tasks people have to repeat. At work, I built an <a class="link" href="projects#p-hris">HRIS template tracker</a> that checks submissions daily and shows the team where to follow up.</p>
       <p>I also love books. I built <a class="link" href="projects#teolohiya">Teolohiya.site</a> to help readers in the Philippines find theological books and contact sellers. Deploying it on AWS gave me a chance to work through how sign-in, photo uploads, and moderation fit together in an app people can use.</p>
     </div>
+  </div>
+</section>
+<section class="section frame about-index" aria-labelledby="experience-title">
+  <div class="about-index-heading">
+    <h2 class="h2" id="experience-title">Work experience</h2>
+    <a class="link" href="resume">Read my full Resume/CV <span aria-hidden="true">&rarr;</span></a>
+  </div>
+  <ol class="about-experience">
+    <li>
+      <p class="about-role-date"><time datetime="2026-07">July 2026</time> to present</p>
+      <div>
+        <h3>HRIS Technical Support</h3>
+        <p class="muted">First Maritime Shared Services / PTC Group · Makati City</p>
+        <ul class="points">
+          <li>Provide Level 1 support for seafarers and office staff, resolve user issues, and escalate complex cases.</li>
+          <li>Coordinate data gathering and template completion with the implementation vendor.</li>
+          <li>Built a <a class="link" href="projects#p-hris">template tracker</a> to automate progress checks. Document recurring issues and known fixes for the support team.</li>
+        </ul>
+      </div>
+    </li>
+    <li>
+      <p class="about-role-date"><time datetime="2025-05">May</time> to <time datetime="2025-11">November 2025</time></p>
+      <div>
+        <h3>Field / Onsite Engineer</h3>
+        <p class="muted">HP Service Center / Actionlabs IT Services Phils Corp · Makati City</p>
+        <p>Installed operating systems and diagnosed and repaired printers, POS systems, laptops, and workstations at client sites.</p>
+      </div>
+    </li>
+    <li>
+      <p class="about-role-date"><time datetime="2024-01">January</time> to <time datetime="2024-07">July 2024</time></p>
+      <div>
+        <h3>IT Intern / C# Programmer</h3>
+        <p class="muted">TechFactors Inc. · Quezon City</p>
+        <p>Developed front-end and back-end features for company applications in C# alongside the development team.</p>
+      </div>
+    </li>
+  </ol>
+</section>
+
+<section class="section frame about-index" aria-labelledby="about-aws-title">
+  <div class="about-index-heading">
+    <h2 class="h2" id="about-aws-title">AWS services I’ve used</h2>
+    <a class="link" href="projects#services">Browse the project stacks <span aria-hidden="true">&rarr;</span></a>
+  </div>
+  <div class="about-aws-grid">
+    <section>
+      <h3>Compute</h3>
+      <dl>
+        <div><dt>Amazon EC2</dt><dd>Runs Nginx in Secure EC2 and the temporary BayanihanDR recovery host.</dd></div>
+        <div><dt>AWS Lambda</dt><dd>Handles ticket requests, listing moderation, and incident events.</dd></div>
+      </dl>
+    </section>
+    <section>
+      <h3>Networking and delivery</h3>
+      <dl>
+        <div><dt>Amazon VPC</dt><dd>Defines subnets and routing for Secure EC2 and BayanihanDR.</dd></div>
+        <div><dt>Amazon API Gateway</dt><dd>Exposes the Ticketing API and Opsentra’s authenticated API.</dd></div>
+        <div><dt>Amazon CloudFront</dt><dd>Delivers Teolohiya.site through Amplify Hosting.</dd></div>
+      </dl>
+    </section>
+    <section>
+      <h3>Storage and databases</h3>
+      <dl>
+        <div><dt>Amazon DynamoDB</dt><dd>Stores tickets, listings, and Opsentra incident history.</dd></div>
+        <div><dt>Amazon S3</dt><dd>Stores Teolohiya.site photos and verified BayanihanDR backups.</dd></div>
+        <div><dt>Amazon EBS</dt><dd>Provides the Secure EC2 volume and its backup snapshot.</dd></div>
+      </dl>
+    </section>
+    <section>
+      <h3>Security and identity</h3>
+      <dl>
+        <div><dt>AWS Identity and Access Management (IAM)</dt><dd>Scopes permissions for functions, instances, and backup uploads.</dd></div>
+        <div><dt>Amazon Cognito</dt><dd>Manages sign-in and role groups for Teolohiya.site and Opsentra.</dd></div>
+        <div><dt>AWS Certificate Manager</dt><dd>Provides HTTPS for Teolohiya.site through Amplify.</dd></div>
+        <div><dt>AWS IAM Identity Center</dt><dd>Provides sign-on with temporary credentials for BayanihanDR operations.</dd></div>
+      </dl>
+    </section>
+    <section>
+      <h3>Application integration</h3>
+      <dl>
+        <div><dt>AWS AppSync</dt><dd>Serves the GraphQL listings API for Teolohiya.site.</dd></div>
+        <div><dt>Amazon SNS</dt><dd>Sends critical-ticket emails and Opsentra incident alerts.</dd></div>
+        <div><dt>Amazon EventBridge</dt><dd>Routes alarms and runbook status events in Opsentra.</dd></div>
+      </dl>
+    </section>
+    <section>
+      <h3>Operations, monitoring, and cost</h3>
+      <dl>
+        <div><dt>AWS Systems Manager</dt><dd>Provides Session Manager access and runs approved Opsentra fixes.</dd></div>
+        <div><dt>Amazon CloudWatch</dt><dd>Collects logs and tracks health and errors across the AWS labs.</dd></div>
+        <div><dt>AWS Budgets</dt><dd>Tracks spending and sends alerts for builds such as BayanihanDR.</dd></div>
+      </dl>
+    </section>
+    <section>
+      <h3>Deployment</h3>
+      <dl>
+        <div><dt>AWS Amplify Gen 2</dt><dd>Hosts Teolohiya.site and manages its backend deployments.</dd></div>
+        <div><dt>AWS CloudFormation</dt><dd>Provisions the resources defined by the Amplify backend.</dd></div>
+      </dl>
+    </section>
+    <section>
+      <h3>Infrastructure tools</h3>
+      <dl>
+        <div><dt>Terraform</dt><dd>Provisions Opsentra’s control plane and the BayanihanDR recovery site.</dd></div>
+        <div><dt>AWS CDK</dt><dd>Defines Teolohiya.site infrastructure through Amplify Gen 2.</dd></div>
+      </dl>
+    </section>
   </div>
 </section>
 <section class="section frame direction" aria-labelledby="dir-title">

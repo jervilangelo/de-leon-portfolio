@@ -34,24 +34,6 @@
     });
   }
 
-  /* Defer video requests until the preview is visible or the visitor presses Play. */
-  var previews = cards.map(function (card) {
-    return { video: card.querySelector(".pj-preview-video"), src: card.dataset.video, visible: false };
-  });
-
-  function syncPreviews() {
-    previews.forEach(function (preview) {
-      var video = preview.video;
-      if (!video) return;
-      if (!preview.visible || motion.matches || document.hidden || document.querySelector(".pjd[open]")) {
-        video.pause();
-        return;
-      }
-      if (!video.hasAttribute("src")) video.src = preview.src;
-      if (!video.error) video.play().catch(function () {});
-    });
-  }
-
   function showLoading(video, container) {
     function loading() { container.classList.add("is-loading"); }
     function ready() { container.classList.remove("is-loading"); }
@@ -62,16 +44,6 @@
     });
   }
 
-  previews.forEach(function (preview) {
-    if (!preview.video) return;
-    var container = preview.video.parentElement;
-    showLoading(preview.video, container);
-    preview.video.addEventListener("error", function () {
-      // The poster remains visible as the media element has a fallback background.
-      container.classList.add("has-error");
-    });
-  });
-
   if ("IntersectionObserver" in window) {
     var reveal = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
@@ -81,17 +53,7 @@
       });
     }, { threshold: 0.1 });
     cards.forEach(function (card) { reveal.observe(card); });
-    var byVideo = new Map(previews.map(function (preview) { return [preview.video, preview]; }));
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        byVideo.get(entry.target).visible = entry.intersectionRatio >= 0.2;
-      });
-      syncPreviews();
-    }, { threshold: 0.2 });
-    previews.forEach(function (preview) { if (preview.video) observer.observe(preview.video); });
   }
-  motion.addEventListener("change", syncPreviews);
-  document.addEventListener("visibilitychange", syncPreviews);
 
   /* ---------------- dialog ---------------- */
   var dlg = document.getElementById("pjd");
@@ -120,6 +82,7 @@
 
   function playShowcase() {
     if (!player || player.hasAttribute("src")) return;
+    player.controls = true;
     player.src = current.dataset.video;
     player.play().catch(function () {});
   }
@@ -139,7 +102,7 @@
       var fallback = document.createElement("p");
       player = video;
       video.playsInline = true;
-      video.controls = true;
+      video.controls = false;
       video.preload = "none";
       video.poster = card.dataset.poster;
       video.width = 1920;
@@ -188,7 +151,6 @@
     fill(card);
     if (!dlg.open) dlg.showModal();
     document.documentElement.classList.add("pjd-lock");
-    syncPreviews();
     if (watch) {
       playShowcase();
       player.focus();
@@ -205,7 +167,6 @@
     detail = null;
     if (location.hash === "#" + current.id) history.replaceState(null, "", location.pathname + location.search);
     opener.focus({ preventScroll: true });
-    syncPreviews();
   });
   dlg.querySelector(".pjd-close").addEventListener("click", function () { dlg.close(); });
   steps.forEach(function (step) {

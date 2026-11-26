@@ -709,10 +709,9 @@ html:not(.pj-filters) .pj-bar { display: none; }
 .pj[hidden] { display: none; }
 .pj--feature { grid-column: 1 / -1; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); align-items: start; }
 .pj-media { position: relative; overflow: hidden; aspect-ratio: 16 / 9; background: var(--surface-2); }
-.pj-preview, .pj-preview-video, .pj-poster { position: absolute; inset: 0; width: 100%; height: 100%; }
-.pj-preview-video, .pj-poster { display: block; object-fit: cover; }
-.pj-preview.has-error .pj-preview-video { visibility: hidden; }
-.pj-preview.is-loading::after, .pjd-hero.is-loading::after {
+.pj-poster { display: block; width: 100%; height: 100%; object-fit: cover; }
+.pj-media .pj-watch { gap: 9px; width: max-content; max-width: calc(100% - 24px); }
+.pjd-hero.is-loading::after {
   content: ""; position: absolute; inset: 0; pointer-events: none;
   background: linear-gradient(110deg, transparent 25%, rgb(255 255 255 / 18%) 50%, transparent 75%) 100% 0 / 240% 100%;
 }
@@ -737,7 +736,7 @@ html:not(.pj-filters) .pj-bar { display: none; }
   .pj.is-entering { opacity: .65; transform: translateY(6px); }
   .pj.pj-seen { animation: pj-reveal 260ms ease-out; }
   @keyframes pj-reveal { from { opacity: .8; transform: translateY(5px); } }
-  .pj-preview.is-loading::after, .pjd-hero.is-loading::after { animation: pj-loading 1.3s linear infinite; }
+  .pjd-hero.is-loading::after { animation: pj-loading 1.3s linear infinite; }
   @keyframes pj-loading { to { background-position: -70% 0; } }
 }
 @media (max-width: 900px) {
@@ -764,9 +763,9 @@ html:not(.pj-filters) .pj-bar { display: none; }
 .pjd-hero { position: relative; aspect-ratio: 16 / 9; background: var(--surface) center / cover; overflow: hidden; border-radius: 8px; }
 .pjd-hero video, .pjd-hero img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .pjd-hero video[hidden], .pjd-hero [hidden] { display: none; }
-.pjd-play, .pjd-media-error { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+.pj-watch, .pjd-play, .pjd-media-error { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
 .pjd-media-error { width: max-content; max-width: 90%; padding: 12px 16px; background: var(--bg); border-radius: 6px; }
-.pjd-play:active { transform: translate(-50%, -50%); }
+.pj-watch:active, .pjd-play:active { transform: translate(-50%, -50%); }
 .pjd-head { display: grid; gap: 16px; padding: 40px 0 8px; }
 .pjd-title { font-size: clamp(2.25rem, 1rem + 4vw, 4.5rem); line-height: 0.95; letter-spacing: -0.04em; font-weight: 500; }
 .pjd-line { max-width: 56ch; color: var(--muted); }
@@ -842,4 +841,34 @@ html:not(.pj-filters) .pj-bar { display: none; }
   .about-story .about-text, .about-story .about-portrait { grid-column: 1 / -1; }
   .about-story .about-text { grid-row: 1; }
   .about-story .about-portrait { max-width: 420px; }
+}
+
+.about-index-heading {
+  display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 12px 24px;
+  margin-bottom: clamp(20px, 4vw, 40px);
+}
+.about-experience { list-style: none; border-top: 1px solid var(--surface-hover); }
+.about-experience > li {
+  display: grid; grid-template-columns: minmax(0, 13rem) minmax(0, 1fr);
+  gap: 8px 28px; padding: clamp(16px, 2.5vw, 32px) 0;
+  border-bottom: 1px solid var(--surface-hover);
+}
+.about-experience > li > div { display: grid; gap: 8px; max-width: 75ch; }
+.about-experience h3, .about-aws-grid h3 { font-size: var(--step-lead); font-weight: 500; line-height: 1.15; }
+.about-role-date { color: var(--accent-strong); font-size: var(--step-small); }
+.about-aws-grid {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px;
+}
+.about-aws-grid section {
+  padding: clamp(16px, 2vw, 28px); border: 1px solid var(--surface-hover);
+  border-radius: 8px; background: var(--surface);
+}
+.about-aws-grid dl { display: grid; gap: 14px; margin: 16px 0 0; }
+.about-aws-grid dt { font-weight: 500; }
+.about-aws-grid dd { margin: 2px 0 0; color: var(--muted); font-size: var(--step-small); }
+@media (max-width: 960px) {
+  .about-aws-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 650px) {
+  .about-experience > li, .about-aws-grid { grid-template-columns: minmax(0, 1fr); }
 }
