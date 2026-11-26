@@ -2,7 +2,7 @@
    Without this file every write-up still shows under its card. */
 (function () {
   "use strict";
-  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var motion = window.matchMedia("(prefers-reduced-motion: reduce)");
   var grid = document.getElementById("pj-grid");
   if (!grid) return;
   var cards = Array.prototype.slice.call(grid.querySelectorAll(".pj"));
@@ -12,6 +12,7 @@
   var status = document.getElementById("pj-status");
   var labels = { all: "all", cloud: "cloud and AWS", web: "website and app", automation: "automation" };
   if (filter) {
+    document.documentElement.classList.add("pj-filters");
     filter.addEventListener("click", function (e) {
       var btn = e.target.closest("button");
       if (!btn) return;
@@ -24,7 +25,7 @@
         if (on === !c.hidden) return;
         if (on) {
           c.hidden = false;
-          if (!reduce) { c.classList.add("is-entering"); requestAnimationFrame(function () { requestAnimationFrame(function () { c.classList.remove("is-entering"); }); }); }
+          if (!motion.matches) { c.classList.add("is-entering"); requestAnimationFrame(function () { requestAnimationFrame(function () { c.classList.remove("is-entering"); }); }); }
         } else {
           c.hidden = true;
         }
@@ -32,6 +33,65 @@
       if (status) status.textContent = cat === "all" ? "Showing all " + n + " projects" : "Showing " + n + " " + labels[cat] + " project" + (n === 1 ? "" : "s");
     });
   }
+
+  /* Defer video requests until the preview is visible or the visitor presses Play. */
+  var previews = cards.map(function (card) {
+    return { video: card.querySelector(".pj-preview-video"), src: card.dataset.video, visible: false };
+  });
+
+  function syncPreviews() {
+    previews.forEach(function (preview) {
+      var video = preview.video;
+      if (!video) return;
+      if (!preview.visible || motion.matches || document.hidden || document.querySelector(".pjd[open]")) {
+        video.pause();
+        return;
+      }
+      if (!video.hasAttribute("src")) video.src = preview.src;
+      if (!video.error) video.play().catch(function () {});
+    });
+  }
+
+  function showLoading(video, container) {
+    function loading() { container.classList.add("is-loading"); }
+    function ready() { container.classList.remove("is-loading"); }
+    video.addEventListener("loadstart", loading);
+    video.addEventListener("waiting", loading);
+    ["loadeddata", "playing", "pause", "error", "abort", "emptied"].forEach(function (name) {
+      video.addEventListener(name, ready);
+    });
+  }
+
+  previews.forEach(function (preview) {
+    if (!preview.video) return;
+    var container = preview.video.parentElement;
+    showLoading(preview.video, container);
+    preview.video.addEventListener("error", function () {
+      // The poster remains visible as the media element has a fallback background.
+      container.classList.add("has-error");
+    });
+  });
+
+  if ("IntersectionObserver" in window) {
+    var reveal = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("pj-seen");
+        reveal.unobserve(entry.target);
+      });
+    }, { threshold: 0.1 });
+    cards.forEach(function (card) { reveal.observe(card); });
+    var byVideo = new Map(previews.map(function (preview) { return [preview.video, preview]; }));
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        byVideo.get(entry.target).visible = entry.intersectionRatio >= 0.2;
+      });
+      syncPreviews();
+    }, { threshold: 0.2 });
+    previews.forEach(function (preview) { if (preview.video) observer.observe(preview.video); });
+  }
+  motion.addEventListener("change", syncPreviews);
+  document.addEventListener("visibilitychange", syncPreviews);
 
   /* ---------------- dialog ---------------- */
   var dlg = document.getElementById("pjd");
@@ -45,127 +105,135 @@
   var line = document.getElementById("pjd-line");
   var body = document.getElementById("pjd-body");
   var steps = dlg.querySelectorAll(".pjd-step");
-  var current = null, detail = null, opener = null;
+  var current, detail, opener, player;
 
-  function visibleCards() { return cards.filter(function (c) { return !c.hidden; }); }
+  function clearHero() {
+    if (player) {
+      player.pause();
+      player.removeAttribute("src");
+      player.load();
+      player = null;
+    }
+    hero.replaceChildren();
+    hero.classList.remove("is-loading");
+  }
+
+  function playShowcase() {
+    if (!player || player.hasAttribute("src")) return;
+    player.src = current.dataset.video;
+    player.play().catch(function () {});
+  }
 
   function fill(card) {
-    // put the previous write-up back where it came from
-    if (detail && current) current.appendChild(detail);
+    if (detail) current.appendChild(detail);
+    clearHero();
     current = card;
     detail = card.querySelector(".pj-detail");
-
-    kicker.textContent = Array.prototype.map.call(card.querySelectorAll(".pj-kicker span"), function (s) { return s.textContent; }).join(" · ");
-    title.textContent = card.querySelector(".pj-open").textContent;
+    kicker.textContent = card.querySelector(".pj-kicker").innerText;
+    title.textContent = card.querySelector(".pj-title").textContent;
     line.textContent = card.querySelector(".pj-line").textContent;
 
-    hero.innerHTML = "";
-    var v = card.getAttribute("data-video");
-    if (v) {
-      var vid = document.createElement("video");
-      vid.muted = true; vid.loop = true; vid.playsInline = true; vid.controls = true;
-      vid.setAttribute("playsinline", ""); vid.setAttribute("preload", "auto");
-      vid.poster = card.getAttribute("data-poster") || "";
-      vid.width = 1920; vid.height = 1080;
-      vid.setAttribute("aria-label", "Showcase video for " + title.textContent);
-      vid.src = v;
-      hero.appendChild(vid);
-      if (!reduce) { var p = vid.play(); if (p && p.catch) p.catch(function () {}); }
-    } else {
-      var img = document.createElement("img");
-      img.src = card.getAttribute("data-image");
-      img.alt = card.getAttribute("data-alt") || "";
-      img.decoding = "async";
-      hero.appendChild(img);
+    if (card.dataset.video) {
+      var video = document.createElement("video");
+      var play = document.createElement("button");
+      var fallback = document.createElement("p");
+      player = video;
+      video.playsInline = true;
+      video.controls = true;
+      video.preload = "none";
+      video.poster = card.dataset.poster;
+      video.width = 1920;
+      video.height = 1080;
+      video.tabIndex = 0;
+      video.setAttribute("aria-label", "Showcase video for " + title.textContent);
+      play.className = "btn pjd-play";
+      play.type = "button";
+      play.textContent = "Play showcase";
+      play.addEventListener("click", function () { playShowcase(); video.focus(); });
+      video.addEventListener("play", function () { play.hidden = true; });
+      fallback.className = "pjd-media-error";
+      fallback.setAttribute("role", "status");
+      fallback.tabIndex = -1;
+      fallback.hidden = true;
+      fallback.textContent = "The showcase couldn’t load. The case study is available below.";
+      showLoading(video, hero);
+      video.addEventListener("error", function () {
+        if (player !== video) return;
+        var restoreFocus = document.activeElement === video || document.activeElement === play;
+        video.hidden = true;
+        play.hidden = true;
+        fallback.hidden = false;
+        if (restoreFocus) fallback.focus({ preventScroll: true });
+      });
+      hero.style.backgroundImage = 'url("' + card.dataset.poster + '")';
+      hero.append(video, play, fallback);
     }
-    hero.classList.toggle("is-image", !v);
 
     body.appendChild(detail);
     panel.scrollTop = 0;
-
-    var list = visibleCards(), i = list.indexOf(card);
-    steps.forEach(function (b) {
-      var t = list[(i + Number(b.getAttribute("data-step")) + list.length) % list.length];
-      b.hidden = list.length < 2;
-      b.querySelector(".pjd-step-name").textContent = t.querySelector(".pj-open").textContent;
-      b.__target = t;
+    var list = cards.filter(function (entry) { return !entry.hidden; });
+    var i = list.indexOf(card);
+    steps.forEach(function (step) {
+      var target = list[(i + Number(step.dataset.step) + list.length) % list.length];
+      step.hidden = list.length < 2;
+      step.querySelector(".pjd-step-name").textContent = target.querySelector(".pj-title").textContent;
+      step.dataset.target = target.id;
     });
     history.replaceState(null, "", "#" + card.id);
   }
 
-  // Grow the hero out of the card's media, then let the rest of the panel rise in.
-  function animateFrom(card) {
-    if (reduce || !hero.animate) return;
-    var from = card.querySelector(".pj-media").getBoundingClientRect();
-    var to = hero.getBoundingClientRect();
-    if (!to.width) return;
-    var sx = from.width / to.width, sy = from.height / to.height;
-    hero.animate([
-      { transformOrigin: "0 0", transform: "translate(" + (from.left - to.left) + "px," + (from.top - to.top) + "px) scale(" + sx + "," + sy + ")" },
-      { transformOrigin: "0 0", transform: "none" }
-    ], { duration: 620, easing: "cubic-bezier(0.16, 1, 0.3, 1)" });
-    dlg.querySelectorAll(".pjd-top, .pjd-head, .pjd-body, .pjd-nav").forEach(function (el, k) {
-      el.animate([{ opacity: 0, transform: "translateY(24px)" }, { opacity: 1, transform: "none" }],
-        { duration: 700, delay: 180 + k * 70, easing: "cubic-bezier(0.22, 1, 0.36, 1)", fill: "backwards" });
-    });
-  }
-
-  function open(card, fromCard) {
-    opener = card.querySelector(".pj-open");
+  function open(card, trigger, watch) {
+    if (card.hidden) filter.querySelector('[data-cat="all"]').click();
+    opener = trigger || card.querySelector(".pj-open");
     fill(card);
-    dlg.showModal();
+    if (!dlg.open) dlg.showModal();
     document.documentElement.classList.add("pjd-lock");
-    if (fromCard) animateFrom(card);
-    dlg.querySelector(".pjd-close").focus({ preventScroll: true });
-  }
-
-  function step(card) {
-    fill(card);
-    if (reduce) return;
-    dlg.querySelectorAll(".pjd-hero, .pjd-head, .pjd-body").forEach(function (el, k) {
-      el.animate([{ opacity: 0, transform: "translateY(16px)" }, { opacity: 1, transform: "none" }],
-        { duration: 500, delay: k * 60, easing: "cubic-bezier(0.22, 1, 0.36, 1)", fill: "backwards" });
-    });
-  }
-
-  function close() {
-    if (!dlg.open) return;
-    if (reduce || !panel.animate) { dlg.close(); return; }
-    var a = panel.animate([{ opacity: 1, transform: "none" }, { opacity: 0, transform: "translateY(20px) scale(0.99)" }],
-      { duration: 220, easing: "ease-in" });
-    a.onfinish = function () { dlg.close(); };
+    syncPreviews();
+    if (watch) {
+      playShowcase();
+      player.focus();
+    } else {
+      dlg.querySelector(".pjd-close").focus({ preventScroll: true });
+    }
   }
 
   dlg.addEventListener("close", function () {
+    if (dlg.open) return;
     document.documentElement.classList.remove("pjd-lock");
-    var v = hero.querySelector("video");
-    if (v) { v.pause(); v.removeAttribute("src"); v.load(); }
-    hero.innerHTML = "";
-    if (detail && current) current.appendChild(detail);
+    clearHero();
+    current.appendChild(detail);
     detail = null;
-    history.replaceState(null, "", location.pathname + location.search);
-    if (opener) opener.focus({ preventScroll: true });
-    current = null;
+    if (location.hash === "#" + current.id) history.replaceState(null, "", location.pathname + location.search);
+    opener.focus({ preventScroll: true });
+    syncPreviews();
   });
-  dlg.addEventListener("cancel", function (e) { e.preventDefault(); close(); });
-  dlg.querySelector(".pjd-close").addEventListener("click", close);
-  dlg.addEventListener("click", function (e) { if (e.target === dlg) close(); });
-  steps.forEach(function (b) { b.addEventListener("click", function () { if (b.__target) step(b.__target); }); });
+  dlg.querySelector(".pjd-close").addEventListener("click", function () { dlg.close(); });
+  steps.forEach(function (step) {
+    step.addEventListener("click", function () {
+      fill(document.getElementById(step.dataset.target));
+      dlg.querySelector(".pjd-close").focus({ preventScroll: true });
+    });
+  });
 
   cards.forEach(function (card) {
-    card.querySelector(".pj-open").addEventListener("click", function () { open(card, true); });
+    card.querySelectorAll(".pj-open, .pj-watch").forEach(function (link) {
+      link.setAttribute("aria-haspopup", "dialog");
+      link.addEventListener("click", function (event) {
+        if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+        event.preventDefault();
+        open(card, link, link.classList.contains("pj-watch"));
+      });
+    });
   });
 
-  /* ---------------- deep links: projects#p-ticketing opens that project ---------------- */
   function fromHash() {
-    var id = decodeURIComponent(location.hash.slice(1));
-    if (!id) return;
-    var card = document.getElementById(id);
-    if (card && card.classList.contains("pj")) {
-      card.scrollIntoView({ block: "center" });
-      open(card, false);
-    }
+    var id = location.hash.slice(1);
+    var card = cards.find(function (entry) { return entry.id === id || entry.id + "-case" === id; });
+    if (!card || (dlg.open && card === current)) return;
+    card.scrollIntoView({ block: "center" });
+    open(card);
   }
+
   fromHash();
-  window.addEventListener("hashchange", function () { if (!dlg.open) fromHash(); });
+  window.addEventListener("hashchange", fromHash);
 })();

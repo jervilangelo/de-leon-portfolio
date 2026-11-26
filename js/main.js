@@ -10,17 +10,97 @@
   var nav = document.getElementById("nav");
   var toggle = nav && nav.querySelector(".menu-toggle");
   if (toggle) {
+    var projectsLink = nav.querySelector("[data-projects-link]");
+    var projectsTrigger = document.createElement("button");
+    var projectsPanel = document.createElement("div");
+    var projectsItem = projectsLink.parentElement;
+    projectsItem.classList.add("nav-projects");
+    projectsTrigger.type = "button";
+    projectsTrigger.className = "nav-projects-trigger";
+    projectsTrigger.textContent = projectsLink.textContent;
+    projectsTrigger.setAttribute("aria-controls", "nav-projects-panel");
+    projectsTrigger.setAttribute("aria-expanded", "false");
+    projectsPanel.id = "nav-projects-panel";
+    projectsPanel.className = "nav-projects-panel";
+    projectsPanel.hidden = true;
+
+    var projectRows = [
+      ["p-resolve", "Resolve", "Browser boundaries and voluntary accountability", "resolve.svg"],
+      ["p-opsentra", "Opsentra", "AWS incident response and verified recovery", "opsentra.svg"],
+      ["p-bayanihandr", "BayanihanDR", "Disaster recovery drills with Terraform", "bayanihandr.svg"],
+      ["p-schedrift", "Schedrift", "Gantt charts and schedule delay simulation", "schedrift.png"],
+      ["teolohiya", "Teolohiya.site", "Christian book listings in the Philippines", "teolohiya.png"],
+      ["p-pinansyalph", "PinansyalPH", "Philippine personal finance calculators", "pinansyalph.svg"],
+      ["p-ticketing", "Serverless Ticketing API", "HRIS support tickets and critical alerts", "", "TK"],
+      ["p-ec2", "Secure EC2 Web Server", "Nginx hosting and restricted AWS access", "", "EC"],
+      ["p-hris", "HRIS Template Tracker", "Daily submission checks and Power BI reporting", "", "HR"],
+      ["p-eccm", "ECCM Website", "Service information for a Manila church", "eccm.png"]
+    ];
+    var projectList = document.createElement("ul");
+    projectList.className = "nav-project-list";
+    projectRows.forEach(function ([id, name, description, logo, initials]) {
+      var row = document.createElement("li");
+      var link = document.createElement("a");
+      link.className = "nav-project-row";
+      link.href = projectsLink.href + "#" + id;
+      var mark = document.createElement("span");
+      mark.className = "nav-project-mark";
+      mark.setAttribute("aria-hidden", "true");
+      if (logo) {
+        var img = document.createElement("img");
+        img.src = "img/work/logos/" + logo;
+        img.alt = "";
+        img.loading = "lazy";
+        mark.appendChild(img);
+      } else {
+        mark.textContent = initials;
+      }
+      var copy = document.createElement("span");
+      var title = document.createElement("strong");
+      title.textContent = name;
+      var subtitle = document.createElement("small");
+      subtitle.textContent = description;
+      copy.append(title, subtitle);
+      link.append(mark, copy);
+      row.appendChild(link);
+      projectList.appendChild(row);
+    });
+    projectsLink.textContent = "View all projects →";
+    projectsLink.classList.add("nav-project-all");
+    projectsPanel.append(projectList, projectsLink);
+    projectsItem.append(projectsTrigger, projectsPanel);
+
+    function setProjectsOpen(open) {
+      projectsPanel.hidden = !open;
+      projectsTrigger.setAttribute("aria-expanded", String(open));
+      if (open) projectList.scrollTop = 0;
+    }
+
+    projectsTrigger.addEventListener("click", function () { setProjectsOpen(projectsPanel.hidden); });
     var setOpen = function (open) {
       nav.classList.toggle("is-open", open);
       toggle.setAttribute("aria-expanded", String(open));
       toggle.textContent = open ? "Close" : "Menu";
+      if (!open) setProjectsOpen(false);
     };
     toggle.addEventListener("click", function () { setOpen(!nav.classList.contains("is-open")); });
     nav.querySelectorAll(".nav-links a").forEach(function (a) { a.addEventListener("click", function () { setOpen(false); }); });
     document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && nav.classList.contains("is-open")) { setOpen(false); toggle.focus(); }
+      if (e.defaultPrevented || e.key !== "Escape" || document.querySelector("dialog[open]")) return;
+      if (!projectsPanel.hidden) {
+        e.preventDefault();
+        setProjectsOpen(false);
+        projectsTrigger.focus();
+      } else if (nav.classList.contains("is-open")) {
+        setOpen(false);
+        toggle.focus();
+      }
     });
-    document.addEventListener("click", function (e) { if (nav.classList.contains("is-open") && !nav.contains(e.target)) setOpen(false); });
+    document.addEventListener("click", function (e) {
+      if (!projectsItem.contains(e.target)) setProjectsOpen(false);
+      if (nav.classList.contains("is-open") && !nav.contains(e.target)) setOpen(false);
+    });
+    window.matchMedia("(max-width: 900px)").addEventListener("change", function () { setOpen(false); });
   }
 
   /* ---- scroll progress (one rAF per frame) ---- */

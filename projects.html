@@ -20,8 +20,8 @@
 <link rel="preconnect" href="https://api.fontshare.com">
 <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
 <link href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/main.css?v=20261126-theme">
-<link rel="stylesheet" href="css/pages.css?v=20261126-theme">
+<link rel="stylesheet" href="css/main.css?v=projects-about">
+<link rel="stylesheet" href="css/pages.css?v=projects-about">
 <script>document.documentElement.classList.add("js")</script>
 <script type="application/ld+json">
 {
@@ -48,7 +48,7 @@
   <div class="nav-right">
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
     <ul class="nav-links" id="nav-links">
-      <li><a href="projects" aria-current="page">Projects</a></li>
+      <li><a data-projects-link href="projects" aria-current="page">Projects</a></li>
       <li><a href="certifications">Certifications</a></li>
       <li><a href="journey">Journey</a></li>
       <li><a href="about">About</a></li>
@@ -67,12 +67,12 @@
 
 <section class="frame page-head pj-head" aria-labelledby="page-title">
   <div class="grid">
-    <div class="page-head-text" data-reveal>
+    <div class="page-head-text">
       <h1 id="page-title">Projects</h1>
-      <p class="lead">Ten projects across cloud infrastructure, browser extensions, web apps, and HRIS automation. Open any project to see how it works.</p>
+      <p class="lead">I build tools for cloud operations, web publishing, and the support work I do every day. Each case study explains what I built, who it serves, and the decisions behind it.</p>
     </div>
   </div>
-  <div class="pj-bar" data-reveal>
+  <div class="pj-bar">
     <div class="pj-filter" role="group" aria-label="Filter projects">
       <button type="button" aria-pressed="true" data-cat="all">All <span>10</span></button>
       <button type="button" aria-pressed="false" data-cat="cloud">Cloud and AWS <span>6</span></button>
@@ -86,26 +86,24 @@
 <!-- ============ PROJECTS: one card each; the card opens its details in a dialog ============
      To add a project: copy an <article class="pj">, give it a unique id (p-name), data-cat
      (cloud, web, automation), data-video + data-poster (or data-image + data-alt) for the
-     dialog hero, card media, and the full write-up inside .pj-detail. Newest goes first. -->
+     dialog hero, card media, and the full write-up inside .pj-detail. -->
 <section class="frame pj-section" id="projects" aria-label="All projects">
   <div class="pj-grid" id="pj-grid">
-    <article class="pj pj--feature" id="p-resolve" data-cat="cloud web" data-video="img/Resolve_Showcase.mp4" data-poster="img/work/resolve-showcase-poster.webp" data-reveal>
+    <article class="pj pj--feature" id="p-resolve" data-cat="cloud web" data-video="img/Resolve_Showcase.mp4" data-poster="img/work/resolve-showcase-poster.webp">
       <div class="pj-media">
-        <div class="shutter" data-shutter>
-          <video class="autoplay" muted loop playsinline preload="metadata" poster="img/work/resolve-showcase-poster.webp" width="1920" height="1080" aria-hidden="true" tabindex="-1">
-            <source src="img/Resolve_Showcase.mp4" type="video/mp4">
-          </video>
+        <div class="pj-preview">
+          <img class="pj-poster" src="img/work/resolve-showcase-poster.webp" width="1920" height="1080" alt="" loading="lazy" decoding="async"><video class="pj-preview-video" muted loop playsinline preload="none" poster="img/work/resolve-showcase-poster.webp" width="1920" height="1080" aria-hidden="true" tabindex="-1"></video>
         </div>
-        <span class="pj-badge"><span class="pj-dot" aria-hidden="true"></span>Showcase video</span>
       </div>
       <div class="pj-body">
-        <p class="pj-kicker"><span>Live project</span><span>Browser extension &middot; Web app</span></p>
-        <h3 class="pj-title"><button class="pj-open" type="button" aria-haspopup="dialog">Resolve</button></h3>
-        <p class="pj-line">A privacy-first browser protection and voluntary accountability platform for people who want healthier digital habits.</p>
+        <p class="pj-kicker"><span>Product in development</span><span>Browser extension &middot; Web app</span></p>
+        <h3 class="pj-title">Resolve</h3>
+        <p class="pj-line">I designed a browser extension and web dashboard for people who want to set browsing boundaries and invite someone they trust to support them.</p>
         <ul class="pj-tags" aria-label="Main tools"><li>TypeScript</li><li>WXT</li><li>Next.js</li><li>AWS</li><li>Terraform</li></ul>
-        <span class="pj-more" aria-hidden="true">View project <span class="arrow">&rarr;</span></span>
+        <div class="pj-actions"><a class="pj-open link" href="#p-resolve-case" aria-label="Case study for Resolve">Case study <span aria-hidden="true">&rarr;</span></a><a class="pj-watch link" href="img/Resolve_Showcase.mp4" aria-label="Watch showcase for Resolve">Watch showcase</a></div>
       </div>
-      <div class="pj-detail">
+      <div class="pj-detail" id="p-resolve-case">
+        <p class="pj-overview">Resolve is designed for people who want help sticking to browsing boundaries. I designed the WXT extension to enforce domain rules and classify images locally, and a Next.js dashboard to manage groups and consent. In the planned AWS architecture, Cognito identifies members, API Gateway and Lambda authorize and sync group rules, and DynamoDB stores memberships and policies. The notification pipeline is designed to email a generic event only when consent and policy allow it. Images, URLs, and browsing history stay out of those alerts.</p>
         <div class="strip-body">
           <div class="strip-text">
             <p>Resolve is a Christian-inspired platform for setting browsing boundaries and inviting trusted people into voluntary accountability. Its design combines customizable site restrictions with on-device content analysis and a web dashboard for managing accountability groups.</p>
@@ -121,16 +119,17 @@
         </div>
       </div>
     </article>
-    <article class="pj pj--feature" id="p-opsentra" data-cat="cloud" data-video="img/opsentra-showcase-1080p60.mp4" data-poster="img/work/ops-showcase-poster.webp" data-reveal>
-      <div class="pj-media"><div class="shutter" data-shutter><video class="autoplay" muted loop playsinline preload="metadata" poster="img/work/ops-showcase-poster.webp" width="1920" height="1080" aria-hidden="true" tabindex="-1"><source src="img/opsentra-showcase-1080p60.mp4" type="video/mp4"></video></div><span class="pj-badge"><span class="pj-dot" aria-hidden="true"></span>Showcase video</span></div>
+    <article class="pj pj--feature" id="p-opsentra" data-cat="cloud" data-video="img/opsentra-showcase-1080p60.mp4" data-poster="img/work/ops-showcase-poster.webp">
+      <div class="pj-media"><div class="pj-preview"><img class="pj-poster" src="img/work/ops-showcase-poster.webp" width="1920" height="1080" alt="" loading="lazy" decoding="async"><video class="pj-preview-video" muted loop playsinline preload="none" poster="img/work/ops-showcase-poster.webp" width="1920" height="1080" aria-hidden="true" tabindex="-1"></video></div></div>
       <div class="pj-body">
-        <p class="pj-kicker"><span>Nov 2026</span><span>Cloud · CloudOps</span></p>
-        <h3 class="pj-title"><button class="pj-open" type="button" aria-haspopup="dialog">Opsentra</button></h3>
-        <p class="pj-line">A cloud operations and incident response platform for AWS: detect an outage, investigate it, and run an approved, audited fix that only counts once health checks prove the service is back.</p>
+        <p class="pj-kicker"><span>AWS lab tested</span><span>Cloud · CloudOps</span></p>
+        <h3 class="pj-title">Opsentra</h3>
+        <p class="pj-line">I built an AWS incident console that detects an outage, routes a fix for approval, and checks that service has recovered.</p>
         <ul class="pj-tags" aria-label="Main tools"><li>Terraform</li><li>Lambda</li><li>EventBridge</li><li>Systems Manager</li><li>CloudWatch</li><li>Cognito</li><li>React</li></ul>
-        <span class="pj-more" aria-hidden="true">View project <span class="arrow">→</span></span>
+        <div class="pj-actions"><a class="pj-open link" href="#p-opsentra-case" aria-label="Case study for Opsentra">Case study <span aria-hidden="true">&rarr;</span></a><a class="pj-watch link" href="img/opsentra-showcase-1080p60.mp4" aria-label="Watch showcase for Opsentra">Watch showcase</a></div>
       </div>
-      <div class="pj-detail">
+      <div class="pj-detail" id="p-opsentra-case">
+        <p class="pj-overview">I built Opsentra for cloud operators who need one place to detect, investigate, and resolve incidents. In the AWS lab, EventBridge routes a CloudWatch alarm to Lambda, which deduplicates incidents. An approved Systems Manager runbook can restart Nginx, and the incident stays open until independent HTTP probes verify recovery. The public demo simulates this workflow.</p>
         <div class="strip-frames">
           <button class="zoom" type="button" data-full="img/work/ops-arch-l.webp" aria-label="Enlarge: Opsentra architecture on AWS" style="--r:1.78"><img src="img/work/ops-arch-s.webp" width="640" height="360" alt="Opsentra architecture: dashboard, Cognito, API Gateway, Lambda, DynamoDB, CloudWatch, EventBridge, SNS, EC2 and Systems Manager" loading="lazy"></button>
           <button class="zoom" type="button" data-full="img/work/ops-detect-l.webp" aria-label="Enlarge: Incident evidence from failed health probes" style="--r:1.78"><img src="img/work/ops-detect-s.webp" width="640" height="360" alt="Incident evidence showing three failed health probes and the CloudWatch alarm" loading="lazy"></button>
@@ -186,16 +185,17 @@
         </div>
       </div>
     </article>
-    <article class="pj pj--feature" id="p-bayanihandr" data-cat="cloud" data-video="img/bayanihan-dr-showcase.mp4" data-poster="img/work/bdr-showcase-poster.webp" data-reveal>
-      <div class="pj-media"><div class="shutter" data-shutter><video class="autoplay" muted loop playsinline preload="metadata" poster="img/work/bdr-showcase-poster.webp" width="1920" height="1080" aria-hidden="true" tabindex="-1"><source src="img/bayanihan-dr-showcase.mp4" type="video/mp4"></video></div><span class="pj-badge"><span class="pj-dot" aria-hidden="true"></span>Showcase video</span></div>
+    <article class="pj pj--feature" id="p-bayanihandr" data-cat="cloud" data-video="img/bayanihan-dr-showcase.mp4" data-poster="img/work/bdr-showcase-poster.webp">
+      <div class="pj-media"><div class="pj-preview"><img class="pj-poster" src="img/work/bdr-showcase-poster.webp" width="1920" height="1080" alt="" loading="lazy" decoding="async"><video class="pj-preview-video" muted loop playsinline preload="none" poster="img/work/bdr-showcase-poster.webp" width="1920" height="1080" aria-hidden="true" tabindex="-1"></video></div></div>
       <div class="pj-body">
-        <p class="pj-kicker"><span>Nov 2026</span><span>Cloud · Terraform</span></p>
-        <h3 class="pj-title"><button class="pj-open" type="button" aria-haspopup="dialog">BayanihanDR</button></h3>
-        <p class="pj-line">Disaster recovery through infrastructure as code: Terraform rebuilds a small business's system in AWS after a typhoon, from verified backups, in under six minutes.</p>
+        <p class="pj-kicker"><span>Disaster recovery proof of concept</span><span>Cloud · Terraform</span></p>
+        <h3 class="pj-title">BayanihanDR</h3>
+        <p class="pj-line">I tested restoring an example small business application from verified backups using Terraform and AWS.</p>
         <ul class="pj-tags" aria-label="Main tools"><li>Terraform</li><li>S3</li><li>EC2</li><li>VPC</li><li>IAM</li><li>Systems Manager</li><li>GitHub Actions</li></ul>
-        <span class="pj-more" aria-hidden="true">View project <span class="arrow">→</span></span>
+        <div class="pj-actions"><a class="pj-open link" href="#p-bayanihandr-case" aria-label="Case study for BayanihanDR">Case study <span aria-hidden="true">&rarr;</span></a><a class="pj-watch link" href="img/bayanihan-dr-showcase.mp4" aria-label="Watch showcase for BayanihanDR">Watch showcase</a></div>
       </div>
-      <div class="pj-detail">
+      <div class="pj-detail" id="p-bayanihandr-case">
+        <p class="pj-overview">I built BayanihanDR around a small office that loses its local application and database during a typhoon. Before copying backups to encrypted S3 storage, I test-restore them. Terraform provisions a temporary recovery environment in AWS Singapore, where checksum, record-count, and application health checks verify the restore. The published drill results came from AWS, and the public demo uses synthetic data.</p>
         <div class="strip-frames">
           <button class="zoom" type="button" data-full="img/work/bdr-overview-l.webp" aria-label="Enlarge: BayanihanDR overview dashboard" style="--r:1.6"><img src="img/work/bdr-overview-s.webp" width="640" height="400" alt="BayanihanDR overview dashboard with backup readiness and RTO and RPO targets" loading="lazy"></button>
           <button class="zoom" type="button" data-full="img/work/bdr-recovery-l.webp" aria-label="Enlarge: Recovery walkthrough" style="--r:1.6"><img src="img/work/bdr-recovery-s.webp" width="640" height="400" alt="Recovery walkthrough with each recovery step and its status" loading="lazy"></button>
@@ -285,16 +285,17 @@
         </div>
       </div>
     </article>
-    <article class="pj pj--feature" id="p-schedrift" data-cat="web" data-video="img/schedrift-showcase.mp4" data-poster="img/work/sd-showcase-poster.webp" data-reveal>
-      <div class="pj-media"><div class="shutter" data-shutter><video class="autoplay" muted loop playsinline preload="metadata" poster="img/work/sd-showcase-poster.webp" width="1920" height="1080" aria-hidden="true" tabindex="-1"><source src="img/schedrift-showcase.mp4" type="video/mp4"></video></div><span class="pj-badge"><span class="pj-dot" aria-hidden="true"></span>Showcase video</span></div>
+    <article class="pj pj--feature" id="p-schedrift" data-cat="web" data-video="img/schedrift-showcase.mp4" data-poster="img/work/sd-showcase-poster.webp">
+      <div class="pj-media"><div class="pj-preview"><img class="pj-poster" src="img/work/sd-showcase-poster.webp" width="1920" height="1080" alt="" loading="lazy" decoding="async"><video class="pj-preview-video" muted loop playsinline preload="none" poster="img/work/sd-showcase-poster.webp" width="1920" height="1080" aria-hidden="true" tabindex="-1"></video></div></div>
       <div class="pj-body">
-        <p class="pj-kicker"><span>Nov 2026</span><span>Web app · Open source</span></p>
-        <h3 class="pj-title"><button class="pj-open" type="button" aria-haspopup="dialog">Schedrift</button></h3>
-        <p class="pj-line">Turns Microsoft Project schedules into presentation-ready Gantt charts, with critical path analysis and delay simulation that shows what a slipped task does to Go-Live.</p>
+        <p class="pj-kicker"><span>Open-source web app</span><span>Web app · Open source</span></p>
+        <h3 class="pj-title">Schedrift</h3>
+        <p class="pj-line">I built a tool for project teams to turn Microsoft Project schedules into readable Gantt charts and see how delays affect Go-Live.</p>
         <ul class="pj-tags" aria-label="Main tools"><li>React</li><li>TypeScript</li><li>SVG Gantt</li><li>Node.js</li><li>MPXJ</li><li>Playwright</li></ul>
-        <span class="pj-more" aria-hidden="true">View project <span class="arrow">→</span></span>
+        <div class="pj-actions"><a class="pj-open link" href="#p-schedrift-case" aria-label="Case study for Schedrift">Case study <span aria-hidden="true">&rarr;</span></a><a class="pj-watch link" href="img/schedrift-showcase.mp4" aria-label="Watch showcase for Schedrift">Watch showcase</a></div>
       </div>
-      <div class="pj-detail">
+      <div class="pj-detail" id="p-schedrift-case">
+        <p class="pj-overview">I built Schedrift for project teams that need to explain a schedule in a meeting and test the effect of delays. I paired a presentation-ready Gantt view with dependency and critical path calculations so users can trace a delayed milestone back to the tasks that drive it.</p>
         <div class="strip-frames">
           <button class="zoom" type="button" data-full="img/work/sd-present-l.webp" aria-label="Enlarge: Schedrift fullscreen executive presentation" style="--r:1.76"><img src="img/work/sd-present-s.webp" width="640" height="364" alt="Fullscreen executive presentation with project phases, milestones and Go-Live" loading="lazy"></button>
           <button class="zoom" type="button" data-full="img/work/sd-executive-l.webp" aria-label="Enlarge: Executive Gantt chart" style="--r:1.76"><img src="img/work/sd-executive-s.webp" width="640" height="364" alt="Executive Gantt chart with phases and milestones" loading="lazy"></button>
@@ -322,16 +323,17 @@
         </div>
       </div>
     </article>
-    <article class="pj" id="teolohiya" data-cat="cloud web" data-video="img/teolohiya-brag.mp4" data-poster="img/work/teo-brag-poster.webp" data-reveal>
-      <div class="pj-media"><div class="shutter" data-shutter><video class="autoplay" muted loop playsinline preload="metadata" poster="img/work/teo-brag-poster.webp" width="1920" height="1080" aria-hidden="true" tabindex="-1"><source src="img/teolohiya-brag.mp4" type="video/mp4"></video></div><span class="pj-badge"><span class="pj-dot" aria-hidden="true"></span>Showcase video</span></div>
+    <article class="pj" id="teolohiya" data-cat="cloud web" data-video="img/teolohiya-brag.mp4" data-poster="img/work/teo-brag-poster.webp">
+      <div class="pj-media"><div class="pj-preview"><img class="pj-poster" src="img/work/teo-brag-poster.webp" width="1920" height="1080" alt="" loading="lazy" decoding="async"><video class="pj-preview-video" muted loop playsinline preload="none" poster="img/work/teo-brag-poster.webp" width="1920" height="1080" aria-hidden="true" tabindex="-1"></video></div></div>
       <div class="pj-body">
-        <p class="pj-kicker"><span>Live</span><span>Web app · AWS Amplify</span></p>
-        <h3 class="pj-title"><button class="pj-open" type="button" aria-haspopup="dialog">Teolohiya.site</button></h3>
-        <p class="pj-line">My flagship web app, live on AWS: a moderated listing board where readers across the Philippines find and pass on Christian theological books.</p>
+        <p class="pj-kicker"><span>Live listing platform</span><span>Web app · AWS Amplify</span></p>
+        <h3 class="pj-title">Teolohiya.site</h3>
+        <p class="pj-line">I built and deployed a searchable marketplace-style listing board for Christian theological books in the Philippines.</p>
         <ul class="pj-tags" aria-label="Main tools"><li>Next.js</li><li>Amplify Gen 2</li><li>Cognito</li><li>AppSync</li><li>DynamoDB</li></ul>
-        <span class="pj-more" aria-hidden="true">View project <span class="arrow">→</span></span>
+        <div class="pj-actions"><a class="pj-open link" href="#teolohiya-case" aria-label="Case study for Teolohiya.site">Case study <span aria-hidden="true">&rarr;</span></a><a class="pj-watch link" href="img/teolohiya-brag.mp4" aria-label="Watch showcase for Teolohiya.site">Watch showcase</a></div>
       </div>
-      <div class="pj-detail">
+      <div class="pj-detail" id="teolohiya-case">
+        <p class="pj-overview">I built Teolohiya.site so readers can find Christian books and contact booksellers directly. Sellers sign in with Cognito, upload book photos to S3, and submit listings for review. I used Lambda to publish approved listings to a guest-readable DynamoDB table, keeping drafts and moderation records private. Readers and sellers arrange the transaction directly.</p>
         <div class="strip-frames">
           <button class="zoom" type="button" data-full="img/work/teo-listings-l.webp" aria-label="Enlarge: Book categories and recently listed books" style="--r:2.13"><img src="img/work/teo-listings-s.webp" width="640" height="301" alt="Book categories and recently listed books" loading="lazy"></button>
           <button class="zoom" type="button" data-full="img/work/teo-book-l.webp" aria-label="Enlarge: Book detail page" style="--r:2.15"><img src="img/work/teo-book-s.webp" width="640" height="297" alt="Book detail page with photos, price, condition and seller contact" loading="lazy"></button>
@@ -374,16 +376,17 @@
         </div>
       </div>
     </article>
-    <article class="pj" id="p-pinansyalph" data-cat="web" data-video="img/PinansyalPH-Showcase-Under25MB.mp4" data-poster="img/work/pph-showcase-poster.webp" data-reveal>
-      <div class="pj-media"><div class="shutter" data-shutter><video class="autoplay" muted loop playsinline preload="metadata" poster="img/work/pph-showcase-poster.webp" width="1920" height="1080" aria-hidden="true" tabindex="-1"><source src="img/PinansyalPH-Showcase-Under25MB.mp4" type="video/mp4"></video></div><span class="pj-badge"><span class="pj-dot" aria-hidden="true"></span>Showcase video</span></div>
+    <article class="pj" id="p-pinansyalph" data-cat="web" data-video="img/PinansyalPH-Showcase-Under25MB.mp4" data-poster="img/work/pph-showcase-poster.webp">
+      <div class="pj-media"><div class="pj-preview"><img class="pj-poster" src="img/work/pph-showcase-poster.webp" width="1920" height="1080" alt="" loading="lazy" decoding="async"><video class="pj-preview-video" muted loop playsinline preload="none" poster="img/work/pph-showcase-poster.webp" width="1920" height="1080" aria-hidden="true" tabindex="-1"></video></div></div>
       <div class="pj-body">
-        <p class="pj-kicker"><span>Nov 2026</span><span>Web app · Open source</span></p>
-        <h3 class="pj-title"><button class="pj-open" type="button" aria-haspopup="dialog">PinansyalPH</button></h3>
-        <p class="pj-line">Free personal finance calculators built on official Philippine data: take-home pay, 13th month pay, MP2 and digital bank savings against inflation.</p>
+        <p class="pj-kicker"><span>Live open-source web app</span><span>Web app · Open source</span></p>
+        <h3 class="pj-title">PinansyalPH</h3>
+        <p class="pj-line">I built Philippine personal finance calculators for take-home pay, 13th-month pay, and savings.</p>
         <ul class="pj-tags" aria-label="Main tools"><li>React</li><li>TypeScript</li><li>GitHub Actions</li><li>Playwright</li></ul>
-        <span class="pj-more" aria-hidden="true">View project <span class="arrow">→</span></span>
+        <div class="pj-actions"><a class="pj-open link" href="#p-pinansyalph-case" aria-label="Case study for PinansyalPH">Case study <span aria-hidden="true">&rarr;</span></a><a class="pj-watch link" href="img/PinansyalPH-Showcase-Under25MB.mp4" aria-label="Watch showcase for PinansyalPH">Watch showcase</a></div>
       </div>
-      <div class="pj-detail">
+      <div class="pj-detail" id="p-pinansyalph-case">
+        <p class="pj-overview">I built PinansyalPH for people comparing everyday financial choices in the Philippines. I used published Philippine data for the calculators and visualized how savings options compare with inflation so people can see the assumptions behind a result.</p>
 
         <div class="strip-frames">
           <button class="zoom" type="button" data-full="img/work/pph-sweldo-l.webp" aria-label="Enlarge: PinansyalPH take-home pay calculator" style="--r:1.6"><img src="img/work/pph-sweldo-s.webp" width="640" height="400" alt="PinansyalPH take-home pay calculator" loading="lazy"></button>
@@ -413,16 +416,17 @@
         </div>
       </div>
     </article>
-    <article class="pj" id="p-ticketing" data-cat="cloud" data-video="img/serverless-showcase.mp4" data-poster="img/work/tk-showcase-poster.webp" data-reveal>
-      <div class="pj-media"><div class="shutter" data-shutter><video class="autoplay" muted loop playsinline preload="metadata" poster="img/work/tk-showcase-poster.webp" width="1920" height="1080" aria-hidden="true" tabindex="-1"><source src="img/serverless-showcase.mp4" type="video/mp4"></video></div><span class="pj-badge"><span class="pj-dot" aria-hidden="true"></span>Showcase video</span></div>
+    <article class="pj" id="p-ticketing" data-cat="cloud" data-video="img/serverless-showcase.mp4" data-poster="img/work/tk-showcase-poster.webp">
+      <div class="pj-media"><div class="pj-preview"><img class="pj-poster" src="img/work/tk-showcase-poster.webp" width="1920" height="1080" alt="" loading="lazy" decoding="async"><video class="pj-preview-video" muted loop playsinline preload="none" poster="img/work/tk-showcase-poster.webp" width="1920" height="1080" aria-hidden="true" tabindex="-1"></video></div></div>
       <div class="pj-body">
-        <p class="pj-kicker"><span>Oct 2026</span><span>Cloud · Serverless</span></p>
-        <h3 class="pj-title"><button class="pj-open" type="button" aria-haspopup="dialog">AWS Serverless Ticketing API</button></h3>
-        <p class="pj-line">An event-driven API for HRIS support tickets: API Gateway, Lambda and DynamoDB, with a stream that emails Critical tickets through SNS.</p>
+        <p class="pj-kicker"><span>Serverless proof of concept</span><span>Cloud · Serverless</span></p>
+        <h3 class="pj-title">AWS Serverless Ticketing API</h3>
+        <p class="pj-line">I built a support-ticket API that logs requests and sends an email when a critical ticket arrives.</p>
         <ul class="pj-tags" aria-label="Main tools"><li>API Gateway</li><li>Lambda</li><li>DynamoDB</li><li>SNS</li><li>CloudWatch</li></ul>
-        <span class="pj-more" aria-hidden="true">View project <span class="arrow">→</span></span>
+        <div class="pj-actions"><a class="pj-open link" href="#p-ticketing-case" aria-label="Case study for AWS Serverless Ticketing API">Case study <span aria-hidden="true">&rarr;</span></a><a class="pj-watch link" href="img/serverless-showcase.mp4" aria-label="Watch showcase for AWS Serverless Ticketing API">Watch showcase</a></div>
       </div>
-      <div class="pj-detail">
+      <div class="pj-detail" id="p-ticketing-case">
+        <p class="pj-overview">I modeled this API on the HRIS tickets I handle at work and used synthetic ticket data. API Gateway sends requests to a Lambda function that reads and writes DynamoDB. I put critical alerts on a separate path so the ticket request can finish independently. A DynamoDB stream triggers a second Lambda, which sends the email through SNS.</p>
         <div class="strip-frames">
           <button class="zoom" type="button" data-full="img/work/tk-table-l.webp" aria-label="Enlarge: HrisTickets items in DynamoDB" style="--r:2.09"><img src="img/work/tk-table-s.webp" width="640" height="306" alt="HrisTickets items in DynamoDB" loading="lazy"></button>
           <button class="zoom" type="button" data-full="img/work/tk-routes-l.webp" aria-label="Enlarge: HTTP API routes in API Gateway" style="--r:1.98"><img src="img/work/tk-routes-s.webp" width="640" height="324" alt="HTTP API routes in API Gateway" loading="lazy"></button>
@@ -448,7 +452,7 @@
             <button class="zoom tk-arch-zoom" type="button" data-full="img/work/tk-arch-l.webp" aria-label="Enlarge: Ticketing API architecture diagram"><img src="img/work/tk-arch-l.webp" width="1400" height="669" alt="Architecture: a client calls API Gateway, which invokes the hris-ticket-handler Lambda reading and writing the HrisTickets DynamoDB table. The table's stream triggers the hris-critical-alert Lambda, which publishes to an SNS topic that emails critical tickets. CloudWatch keeps the handler's logs and alarms on errors through a second SNS topic." loading="lazy"></button>
             <figcaption>
               <p>A request goes through API Gateway to the <b>hris-ticket-handler</b> function, which reads or writes the <b>HrisTickets</b> table. Every new or changed item also lands on the table's DynamoDB stream; <b>hris-critical-alert</b> reads it, ignores everything except new Critical tickets, and publishes those to SNS, which emails me. CloudWatch keeps the handler's logs and alarms on its errors through a second SNS topic.</p>
-              <p class="small muted">Built October 2026 in ap-southeast-1 (Singapore). All ticket data is made up.</p>
+              <p class="small muted">Deployed in ap-southeast-1 (Singapore). All ticket data is made up.</p>
             </figcaption>
           </figure>
 
@@ -554,16 +558,17 @@
         </div>
       </div>
     </article>
-    <article class="pj" id="p-ec2" data-cat="cloud" data-video="img/secure-ec2-showcase.mp4" data-poster="img/work/ec2-showcase-poster.webp" data-reveal>
-      <div class="pj-media"><div class="shutter" data-shutter><video class="autoplay" muted loop playsinline preload="metadata" poster="img/work/ec2-showcase-poster.webp" width="1920" height="1080" aria-hidden="true" tabindex="-1"><source src="img/secure-ec2-showcase.mp4" type="video/mp4"></video></div><span class="pj-badge"><span class="pj-dot" aria-hidden="true"></span>Showcase video</span></div>
+    <article class="pj" id="p-ec2" data-cat="cloud" data-video="img/secure-ec2-showcase.mp4" data-poster="img/work/ec2-showcase-poster.webp">
+      <div class="pj-media"><div class="pj-preview"><img class="pj-poster" src="img/work/ec2-showcase-poster.webp" width="1920" height="1080" alt="" loading="lazy" decoding="async"><video class="pj-preview-video" muted loop playsinline preload="none" poster="img/work/ec2-showcase-poster.webp" width="1920" height="1080" aria-hidden="true" tabindex="-1"></video></div></div>
       <div class="pj-body">
-        <p class="pj-kicker"><span>2026</span><span>Cloud · Networking</span></p>
-        <h3 class="pj-title"><button class="pj-open" type="button" aria-haspopup="dialog">Secure EC2 Web Server</button></h3>
-        <p class="pj-line">Nginx on Amazon Linux 2023 inside a custom VPC: HTTP open, SSH limited to one IP, Session Manager through an IAM role, and an EBS snapshot as backup.</p>
+        <p class="pj-kicker"><span>AWS networking lab</span><span>Cloud · Networking</span></p>
+        <h3 class="pj-title">Secure EC2 Web Server</h3>
+        <p class="pj-line">I deployed Nginx on EC2 in a custom VPC and restricted administrative access.</p>
         <ul class="pj-tags" aria-label="Main tools"><li>EC2</li><li>VPC</li><li>Security groups</li><li>IAM</li><li>EBS</li></ul>
-        <span class="pj-more" aria-hidden="true">View project <span class="arrow">→</span></span>
+        <div class="pj-actions"><a class="pj-open link" href="#p-ec2-case" aria-label="Case study for Secure EC2 Web Server">Case study <span aria-hidden="true">&rarr;</span></a><a class="pj-watch link" href="img/secure-ec2-showcase.mp4" aria-label="Watch showcase for Secure EC2 Web Server">Watch showcase</a></div>
       </div>
-      <div class="pj-detail">
+      <div class="pj-detail" id="p-ec2-case">
+        <p class="pj-overview">I built this lab to practice hosting and operating a web server on AWS. I scoped the security group to public HTTP and SSH from my own IP, and configured Systems Manager Session Manager through an IAM role. An EBS snapshot provides a recovery point for the volume.</p>
         <div class="strip-frames">
           <button class="zoom" type="button" data-full="img/work/ec2-vpc-l.webp" aria-label="Enlarge: Custom VPC resource map with a public subnet and route table" style="--r:2.29"><img src="img/work/ec2-vpc-s.webp" width="640" height="279" alt="Custom VPC resource map with a public subnet and route table" loading="lazy"></button>
           <button class="zoom" type="button" data-full="img/work/ec2-sg-l.webp" aria-label="Enlarge: Security group allowing HTTP from anywhere and SSH from one IP" style="--r:2.31"><img src="img/work/ec2-sg-s.webp" width="640" height="277" alt="Security group allowing HTTP from anywhere and SSH from one IP" loading="lazy"></button>
@@ -717,16 +722,17 @@
         </div>
       </div>
     </article>
-    <article class="pj" id="p-hris" data-cat="automation" data-video="img/template-showcase.mp4" data-poster="img/work/hris-showcase-poster.webp" data-reveal>
-      <div class="pj-media"><div class="shutter" data-shutter><video class="autoplay" muted loop playsinline preload="metadata" poster="img/work/hris-showcase-poster.webp" width="1920" height="1080" aria-hidden="true" tabindex="-1"><source src="img/template-showcase.mp4" type="video/mp4"></video></div><span class="pj-badge"><span class="pj-dot" aria-hidden="true"></span>Showcase video</span></div>
+    <article class="pj" id="p-hris" data-cat="automation" data-video="img/template-showcase.mp4" data-poster="img/work/hris-showcase-poster.webp">
+      <div class="pj-media"><div class="pj-preview"><img class="pj-poster" src="img/work/hris-showcase-poster.webp" width="1920" height="1080" alt="" loading="lazy" decoding="async"><video class="pj-preview-video" muted loop playsinline preload="none" poster="img/work/hris-showcase-poster.webp" width="1920" height="1080" aria-hidden="true" tabindex="-1"></video></div></div>
       <div class="pj-body">
-        <p class="pj-kicker"><span>2026</span><span>Automation · Work project</span></p>
-        <h3 class="pj-title"><button class="pj-open" type="button" aria-haspopup="dialog">HRIS Template Completion Tracker</button></h3>
-        <p class="pj-line">A daily Power Automate flow that replaced manual checks of about 29 HR templates across 9 business units with a Power BI completion dashboard.</p>
+        <p class="pj-kicker"><span>Internal work tool</span><span>Automation · Work project</span></p>
+        <h3 class="pj-title">HRIS Template Completion Tracker</h3>
+        <p class="pj-line">I automated daily checks for HR templates and surfaced missing submissions in Power BI.</p>
         <ul class="pj-tags" aria-label="Main tools"><li>Power Automate</li><li>SharePoint</li><li>Excel Online</li><li>Power BI</li></ul>
-        <span class="pj-more" aria-hidden="true">View project <span class="arrow">→</span></span>
+        <div class="pj-actions"><a class="pj-open link" href="#p-hris-case" aria-label="Case study for HRIS Template Completion Tracker">Case study <span aria-hidden="true">&rarr;</span></a><a class="pj-watch link" href="img/template-showcase.mp4" aria-label="Watch showcase for HRIS Template Completion Tracker">Watch showcase</a></div>
       </div>
-      <div class="pj-detail">
+      <div class="pj-detail" id="p-hris-case">
+        <p class="pj-overview">I built this for colleagues who had to check template submissions across business units. I used Power Automate to collect completion status on a schedule and Power BI to show what had arrived and which units still needed a follow-up.</p>
         <div class="strip-frames">
           <button class="zoom" type="button" data-full="img/work/hris-flow-l.webp" aria-label="Enlarge: Scheduled Power Automate flow" style="--r:2"><img src="img/work/hris-flow-s.webp" width="640" height="320" alt="Scheduled Power Automate flow" loading="lazy"></button>
           <button class="zoom" type="button" data-full="img/work/hris-tracker-l.webp" aria-label="Enlarge: Tracker table with active and stale counts per business unit" style="--r:2.14"><img src="img/work/hris-tracker-s.webp" width="640" height="299" alt="Tracker table with active and stale counts per business unit" loading="lazy"></button>
@@ -747,16 +753,17 @@
         </div>
       </div>
     </article>
-    <article class="pj" id="p-eccm" data-cat="web" data-video="img/eccm-showcase.mp4" data-poster="img/work/eccm-showcase-poster.webp" data-reveal>
-      <div class="pj-media"><div class="shutter" data-shutter><video class="autoplay" muted loop playsinline preload="metadata" poster="img/work/eccm-showcase-poster.webp" width="1920" height="1080" aria-hidden="true" tabindex="-1"><source src="img/eccm-showcase.mp4" type="video/mp4"></video></div><span class="pj-badge"><span class="pj-dot" aria-hidden="true"></span>Showcase video</span></div>
+    <article class="pj" id="p-eccm" data-cat="web" data-video="img/eccm-showcase.mp4" data-poster="img/work/eccm-showcase-poster.webp">
+      <div class="pj-media"><div class="pj-preview"><img class="pj-poster" src="img/work/eccm-showcase-poster.webp" width="1920" height="1080" alt="" loading="lazy" decoding="async"><video class="pj-preview-video" muted loop playsinline preload="none" poster="img/work/eccm-showcase-poster.webp" width="1920" height="1080" aria-hidden="true" tabindex="-1"></video></div></div>
       <div class="pj-body">
-        <p class="pj-kicker"><span>2026</span><span>Website · Custom domain</span></p>
-        <h3 class="pj-title"><button class="pj-open" type="button" aria-haspopup="dialog">ECCM Website</button></h3>
-        <p class="pj-line">A six-page website for Evangelical Covenant Church Manila with its own design system, hover and scroll motion, and the SEO essentials.</p>
+        <p class="pj-kicker"><span>Live nonprofit website</span><span>Website · Custom domain</span></p>
+        <h3 class="pj-title">ECCM Website</h3>
+        <p class="pj-line">I built a six-page website to help visitors find service details and learn about a Manila church.</p>
         <ul class="pj-tags" aria-label="Main tools"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>SEO</li></ul>
-        <span class="pj-more" aria-hidden="true">View project <span class="arrow">→</span></span>
+        <div class="pj-actions"><a class="pj-open link" href="#p-eccm-case" aria-label="Case study for ECCM Website">Case study <span aria-hidden="true">&rarr;</span></a><a class="pj-watch link" href="img/eccm-showcase.mp4" aria-label="Watch showcase for ECCM Website">Watch showcase</a></div>
       </div>
-      <div class="pj-detail">
+      <div class="pj-detail" id="p-eccm-case">
+        <p class="pj-overview">I designed and built the Evangelical Covenant Church Manila site for people looking for service details, ministries, and ways to connect. I used a shared visual system across six responsive pages and set up page metadata and a custom domain so visitors can find and share the right page.</p>
 
         <div class="strip-frames">
           <button class="zoom" type="button" data-full="img/work/eccm-ministries-l.webp" aria-label="Enlarge: ECCM ministries page" style="--r:1.95"><img src="img/work/eccm-ministries-s.webp" width="640" height="328" alt="ECCM ministries page" loading="lazy"></button>
@@ -880,6 +887,7 @@
       <h2 class="pjd-title" id="pjd-title"></h2>
       <p class="pjd-line lead" id="pjd-line"></p>
     </header>
+    <div class="pjd-hero" id="pjd-hero"></div>
     <div class="pjd-body" id="pjd-body"></div>
     <nav class="pjd-nav" aria-label="Other projects">
       <button class="pjd-step" type="button" data-step="-1"><span aria-hidden="true">←</span> <span class="pjd-step-name"></span></button>
@@ -907,7 +915,7 @@
   <span class="muted">© <span data-year>2026</span></span>
 </footer>
 
-<script src="js/main.js?v=20261105a" defer></script>
-<script src="js/projects.js?v=20261105a" defer></script>
+<script src="js/main.js?v=projects-about" defer></script>
+<script src="js/projects.js?v=projects-about" defer></script>
 </body>
 </html>

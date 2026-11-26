@@ -20,8 +20,8 @@
 <link rel="preconnect" href="https://api.fontshare.com">
 <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
 <link href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/main.css?v=20261126-theme">
-<link rel="stylesheet" href="css/pages.css?v=20261126-theme">
+<link rel="stylesheet" href="css/main.css?v=projects-about">
+<link rel="stylesheet" href="css/pages.css?v=projects-about">
 <script>document.documentElement.classList.add("js")</script>
 <script type="application/ld+json">
 {
@@ -48,7 +48,7 @@
   <div class="nav-right">
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
     <ul class="nav-links" id="nav-links">
-      <li><a href="projects">Projects</a></li>
+      <li><a data-projects-link href="projects">Projects</a></li>
       <li><a href="certifications">Certifications</a></li>
       <li><a href="journey">Journey</a></li>
       <li><a href="about" aria-current="page">About</a></li>
@@ -64,72 +64,35 @@
 </header>
 
 <main id="main">
-
-<section class="frame about page-top" aria-labelledby="page-title">
+<section class="frame page-top about-story" aria-labelledby="page-title">
   <div class="grid about-grid">
-    <figure class="about-portrait shutter-wrap">
-      <div class="shutter" data-shutter><img src="img/work/portrait-l.webp" width="720" height="720" alt="Portrait of Jervil Angelo De Leon"></div>
-      <ul class="about-highlights" aria-label="Highlights">
-        <li><span class="hl-badges" aria-hidden="true"><img src="badges/aws-ccp.png" alt="" width="40" height="40" loading="lazy"><img src="badges/aws-ai-practitioner.png" alt="" width="40" height="40" loading="lazy"></span><span><b>2× AWS Certified</b><small>Cloud Practitioner · AI Practitioner</small></span></li>
-        <li><span class="hl-badges" aria-hidden="true"><img src="badges/oci-associate.png" alt="" width="40" height="40" loading="lazy"><img src="badges/oci-ai.png" alt="" width="40" height="40" loading="lazy"></span><span><b>2× OCI Certified</b><small>Foundations Associate · AI Foundations Associate</small></span></li>
-        <li><span class="hl-num" aria-hidden="true">10</span><span><b>Projects built</b><small>6 cloud projects, including Resolve, Opsentra, BayanihanDR and Teolohiya.site</small></span></li>
-      </ul>
+    <figure class="about-portrait">
+      <img src="img/work/portrait-l.webp" width="720" height="720" alt="Portrait of Jervil Angelo De Leon">
+      <figcaption>Jervil Angelo De Leon · Makati, Philippines</figcaption>
     </figure>
-    <div class="about-text" data-reveal>
+    <div class="about-text">
       <h1 class="page-h1" id="page-title">About me</h1>
-      <p class="lead">I'm Jervil Angelo De Leon, an all-round IT professional based in Makati: programmer, game developer, video editor and helpdesk support, with a BSIT from FEU Institute of Technology.</p>
-      <p>I currently work in helpdesk support on an HRIS project, giving Level 1 support for an HR system used by seafarers and office staff. I resolve what I can, escalate what needs it, and document fixes so the same problem only gets solved once. That work is where my template tracker automation came from.</p>
-      <p>My path into IT went through animation and game development, a C# programming internship, and onsite hardware work for an HP service centre. Each stage added something I still use: programming, hands-on troubleshooting, and explaining a fix to the person who depends on it.</p>
-      <p>I'm working toward a role as a Cloud Engineer. My approach is to earn a certification, then build something real with it on AWS: a serverless ticketing API, a secured EC2 setup in a custom VPC, and Teolohiya.site, which is live today.</p>
-
-      <div class="about-extra">
-        <h2 class="about-sub">Outside work</h2>
-        <ul class="about-likes" aria-label="Interests" data-reveal>
-          <li><span>Console gaming</span></li><li><span>Dota 2</span></li><li><span>Valorant</span></li><li><span>Books</span></li><li><span>Photography</span></li><li><span>Music</span></li>
-        </ul>
-      </div>
-
-      <div class="about-extra">
-        <h2 class="about-sub">Contact</h2>
-        <ul class="about-socials" aria-label="Socials and contact" data-reveal>
-          <li><a href="https://www.facebook.com/pai.proo" target="_blank" rel="noopener"><b>Facebook</b><span>pai.proo</span><i class="arrow" aria-hidden="true">↗</i></a></li>
-          <li><a href="https://www.instagram.com/jervilangelo/" target="_blank" rel="noopener"><b>Instagram</b><span>@jervilangelo</span><i class="arrow" aria-hidden="true">↗</i></a></li>
-          <li><a href="https://www.linkedin.com/in/jervilangelo/" target="_blank" rel="noopener"><b>LinkedIn</b><span>in/jervilangelo</span><i class="arrow" aria-hidden="true">↗</i></a></li>
-          <li><a href="tel:+639625865208"><b>Phone</b><span>0962 586 5208</span><i class="arrow" aria-hidden="true">→</i></a></li>
-        </ul>
-        <p class="about-also">Also: <a class="link" href="https://www.facebook.com/thebruisedpilgrim" target="_blank" rel="noopener">The Bruised Pilgrim</a> on Facebook · <a class="link" href="https://medium.com/@deleonjervilangelo" target="_blank" rel="noopener">Writing on Medium</a></p>
-      </div>
+      <p class="lead">I’ve loved technology since I was a kid. Studying IT at FEU Institute of Technology, where I specialized in Animation and Game Development, gave me a way to bring creative work and programming together.</p>
+      <p>I went into hardware troubleshooting and then IT support. These days, I support an HR system used by seafarers and office staff. Working directly with the people who use it has taught me to ask what they’re trying to get done before I start working on a fix.</p>
+      <p>I like automating the tasks people have to repeat. At work, I built an <a class="link" href="projects#p-hris">HRIS template tracker</a> that checks submissions daily and shows the team where to follow up.</p>
+      <p>I also love books. I built <a class="link" href="projects#teolohiya">Teolohiya.site</a> to help readers in the Philippines find theological books and contact sellers. Deploying it on AWS gave me a chance to work through how sign-in, photo uploads, and moderation fit together in an app people can use.</p>
     </div>
   </div>
 </section>
-
-<section class="section frame focus" aria-labelledby="focus-title">
-  <div class="grid focus-grid" data-reveal>
-    <h2 class="h2" id="focus-title">What I'm focused on</h2>
-    <ul class="focus-list" data-reveal>
-      <li><b>Serverless architecture</b><span>Lambda, API Gateway, AppSync and DynamoDB, and keeping cost tied to usage.</span></li>
-      <li><b>Networking and security</b><span>VPCs, security groups, least-privilege IAM roles and Cognito-based access.</span></li>
-      <li><b>Operations and cost</b><span>CloudWatch logs and alarms, AWS Budgets, and avoiding always-on spend like NAT gateways.</span></li>
-      <li><b>Infrastructure as code</b><span>Amplify Gen 2 with CDK and CloudFormation; next, rebuilding the ticketing API as an AWS SAM template.</span></li>
-      <li><b>Automation</b><span>Power Automate and Power BI at work, to replace manual checks with something that runs every day.</span></li>
-    </ul>
-  </div>
-</section>
-
 <section class="section frame direction" aria-labelledby="dir-title">
-  <div class="dir-band" data-reveal>
+  <div class="dir-band">
     <div>
-      <h2 class="h2" id="dir-title">Where I'm heading</h2>
-      <p class="lead">A junior cloud, infrastructure or systems role where I can keep building, learn from experienced engineers, and look after systems people rely on.</p>
+      <h2 class="h2" id="dir-title">Where I’m heading</h2>
+      <p class="lead">I’m working toward a role in cloud infrastructure. I learn by deploying projects myself, then figuring out how to keep them running and make them easier to support.</p>
     </div>
     <div class="dir-links">
-      <a class="btn btn--dark" href="projects">See my projects <span class="arrow" aria-hidden="true">→</span></a>
-      <a class="link" href="resume">Read my resume</a>
+      <a class="btn btn--dark" href="projects">See my projects <span aria-hidden="true">&rarr;</span></a>
+      <a class="link" href="certifications">View certifications</a>
+      <a class="link" href="resume">Read my Resume/CV</a>
       <a class="link" href="contact">Get in touch</a>
     </div>
   </div>
 </section>
-
 </main>
 
 <footer class="foot">
@@ -144,6 +107,6 @@
   <span class="muted">© <span data-year>2026</span></span>
 </footer>
 
-<script src="js/main.js?v=20261105a" defer></script>
+<script src="js/main.js?v=projects-about" defer></script>
 </body>
 </html>
