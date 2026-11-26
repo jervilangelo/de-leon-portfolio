@@ -67,73 +67,66 @@
   var line = document.getElementById("pjd-line");
   var body = document.getElementById("pjd-body");
   var steps = dlg.querySelectorAll(".pjd-step");
-  var current, detail, opener, player;
+  var poster = hero.querySelector("img");
+  var play = hero.querySelector("button");
+  var fallback = hero.querySelector("[role=status]");
+  var current, detail, opener, player, pendingFrame, restoreScroll;
 
-  function clearHero() {
-    if (player) {
-      player.pause();
-      player.removeAttribute("src");
-      player.load();
-      player = null;
-    }
-    hero.replaceChildren();
+  function stopShowcase() {
+    if (!player) return;
+    var video = player;
+    player = null;
+    video.pause();
+    video.removeAttribute("src");
+    video.load();
+    video.remove();
     hero.classList.remove("is-loading");
   }
 
   function playShowcase() {
-    if (!player || player.hasAttribute("src")) return;
-    player.controls = true;
-    player.src = current.dataset.video;
-    player.play().catch(function () {});
+    if (player) return;
+    var video = document.createElement("video");
+    player = video;
+    video.playsInline = true;
+    video.controls = true;
+    video.poster = current.dataset.poster;
+    video.tabIndex = 0;
+    video.setAttribute("aria-label", "Showcase video for " + title.textContent);
+    showLoading(video, hero);
+    video.addEventListener("error", function () {
+      if (player !== video) return;
+      var restoreFocus = document.activeElement === video;
+      stopShowcase();
+      fallback.hidden = false;
+      if (restoreFocus) fallback.focus({ preventScroll: true });
+    });
+    hero.appendChild(video);
+    video.src = current.dataset.video;
+    video.play().catch(function () {});
+    video.focus({ preventScroll: true });
+    play.hidden = true;
+  }
+
+  function releaseDetail() {
+    cancelAnimationFrame(pendingFrame);
+    if (detail && detail.parentElement === body) current.appendChild(detail);
+    detail = null;
   }
 
   function fill(card) {
-    if (detail) current.appendChild(detail);
-    clearHero();
+    releaseDetail();
+    stopShowcase();
     current = card;
     detail = card.querySelector(".pj-detail");
-    kicker.textContent = card.querySelector(".pj-kicker").innerText;
+    kicker.textContent = Array.from(card.querySelector(".pj-kicker").children, function (entry) {
+      return entry.textContent;
+    }).join(" · ");
     title.textContent = card.querySelector(".pj-title").textContent;
     line.textContent = card.querySelector(".pj-line").textContent;
+    poster.src = card.dataset.poster;
+    play.hidden = false;
+    fallback.hidden = true;
 
-    if (card.dataset.video) {
-      var video = document.createElement("video");
-      var play = document.createElement("button");
-      var fallback = document.createElement("p");
-      player = video;
-      video.playsInline = true;
-      video.controls = false;
-      video.preload = "none";
-      video.poster = card.dataset.poster;
-      video.width = 1920;
-      video.height = 1080;
-      video.tabIndex = 0;
-      video.setAttribute("aria-label", "Showcase video for " + title.textContent);
-      play.className = "btn pjd-play";
-      play.type = "button";
-      play.textContent = "Play showcase";
-      play.addEventListener("click", function () { playShowcase(); video.focus(); });
-      video.addEventListener("play", function () { play.hidden = true; });
-      fallback.className = "pjd-media-error";
-      fallback.setAttribute("role", "status");
-      fallback.tabIndex = -1;
-      fallback.hidden = true;
-      fallback.textContent = "The showcase couldn’t load. The case study is available below.";
-      showLoading(video, hero);
-      video.addEventListener("error", function () {
-        if (player !== video) return;
-        var restoreFocus = document.activeElement === video || document.activeElement === play;
-        video.hidden = true;
-        play.hidden = true;
-        fallback.hidden = false;
-        if (restoreFocus) fallback.focus({ preventScroll: true });
-      });
-      hero.style.backgroundImage = 'url("' + card.dataset.poster + '")';
-      hero.append(video, play, fallback);
-    }
-
-    body.appendChild(detail);
-    panel.scrollTop = 0;
     var list = cards.filter(function (entry) { return !entry.hidden; });
     var i = list.indexOf(card);
     steps.forEach(function (step) {
@@ -143,35 +136,43 @@
       step.dataset.target = target.id;
     });
     history.replaceState(null, "", "#" + card.id);
+
+    // Paint the lightweight dialog before attaching the longer case study.
+    body.setAttribute("aria-busy", "true");
+    pendingFrame = requestAnimationFrame(function () {
+      pendingFrame = requestAnimationFrame(function () {
+        if (!dlg.open) return;
+        body.appendChild(detail);
+        body.removeAttribute("aria-busy");
+      });
+    });
   }
 
   function open(card, trigger, watch) {
     if (card.hidden) filter.querySelector('[data-cat="all"]').click();
+    restoreScroll = !trigger;
     opener = trigger || card.querySelector(".pj-open");
     fill(card);
-    if (!dlg.open) dlg.showModal();
     document.documentElement.classList.add("pjd-lock");
-    if (watch) {
-      playShowcase();
-      player.focus();
-    } else {
-      dlg.querySelector(".pjd-close").focus({ preventScroll: true });
-    }
+    if (!dlg.open) dlg.showModal();
+    panel.scrollTop = 0;
+    if (watch) playShowcase();
   }
 
   dlg.addEventListener("close", function () {
     if (dlg.open) return;
+    stopShowcase();
+    releaseDetail();
     document.documentElement.classList.remove("pjd-lock");
-    clearHero();
-    current.appendChild(detail);
-    detail = null;
     if (location.hash === "#" + current.id) history.replaceState(null, "", location.pathname + location.search);
-    opener.focus({ preventScroll: true });
+    opener.focus({ preventScroll: !restoreScroll });
   });
   dlg.querySelector(".pjd-close").addEventListener("click", function () { dlg.close(); });
+  play.addEventListener("click", playShowcase);
   steps.forEach(function (step) {
     step.addEventListener("click", function () {
       fill(document.getElementById(step.dataset.target));
+      panel.scrollTop = 0;
       dlg.querySelector(".pjd-close").focus({ preventScroll: true });
     });
   });
@@ -191,7 +192,6 @@
     var id = location.hash.slice(1);
     var card = cards.find(function (entry) { return entry.id === id || entry.id + "-case" === id; });
     if (!card || (dlg.open && card === current)) return;
-    card.scrollIntoView({ block: "center" });
     open(card);
   }
 
