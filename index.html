@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
 <link href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/main.css?v=20261105a">
-<link rel="stylesheet" href="css/cloud.css?v=20261105a">
+<link rel="stylesheet" href="css/cloud.css?v=20261126j">
 <link rel="stylesheet" href="css/pages.css?v=20261114a">
 <link rel="stylesheet" href="css/project-deck.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -68,8 +68,10 @@
 
 <section class="hero" aria-labelledby="hero-title">
   <div class="hero-copy">
-    <h1 id="hero-title">Building my way into the cloud.</h1>
-    <p class="hero-intro">I'm <b>Jervil Angelo De Leon</b>, an HRIS Technical Support professional who learns AWS by building on it: hands-on cloud and infrastructure projects, documented here with my certifications and growth.</p>
+    <p class="hero-greeting">Hello, I&rsquo;m</p>
+    <h1 id="hero-title">Jervil Angelo <span>De Leon</span></h1>
+    <p class="hero-role">IT Professional <span>| 2x AWS Certified &amp; 2x OCI Certified</span></p>
+    <p class="hero-intro">I work in IT support, helping people resolve everyday technical issues. I also build cloud projects on AWS that solve practical problems for the public.</p>
     <div class="hero-cta">
       <a class="btn" href="projects">Explore my projects <span class="arrow" aria-hidden="true">→</span></a>
       <a class="btn btn--quiet" href="certifications">View certifications</a>
@@ -81,54 +83,22 @@
     </dl>
   </div>
 
-  <div class="cloud-stage" aria-hidden="true">
+  <div class="cloud-stage">
     <div class="cloud-glow"></div>
-    <div class="cloud-shadow"></div>
-    <div class="cloud-body"><div class="cloud-float"><div class="cloud-tilt">
-      <svg class="cloud-svg" viewBox="0 0 600 380" focusable="false">
-        <defs>
-          <radialGradient id="lobe" cx="38%" cy="26%" r="82%">
-            <stop offset="0" stop-color="#fbfbf9"/>
-            <stop offset="0.5" stop-color="#eceee9"/>
-            <stop offset="0.86" stop-color="#d7dbd3"/>
-            <stop offset="1" stop-color="#c6cdc2"/>
-          </radialGradient>
-          <linearGradient id="shade" gradientUnits="userSpaceOnUse" x1="0" y1="70" x2="0" y2="340">
-            <stop offset="0" stop-color="#ffffff" stop-opacity="0.35"/>
-            <stop offset="0.42" stop-color="#ffffff" stop-opacity="0"/>
-            <stop offset="0.72" stop-color="#7f977e" stop-opacity="0.18"/>
-            <stop offset="1" stop-color="#5f765f" stop-opacity="0.62"/>
-          </linearGradient>
-          <mask id="cloudMask">
-            <g fill="#fff">
-              <circle cx="228" cy="160" r="92"/><circle cx="345" cy="122" r="118"/><circle cx="458" cy="178" r="82"/>
-              <rect x="92" y="196" width="436" height="124" rx="62"/>
-              <circle cx="138" cy="246" r="72"/><circle cx="256" cy="232" r="100"/><circle cx="388" cy="230" r="104"/><circle cx="494" cy="258" r="64"/>
-            </g>
-          </mask>
-        </defs>
-        <g fill="url(#lobe)">
-          <circle cx="228" cy="160" r="92"/>
-          <circle cx="345" cy="122" r="118"/>
-          <circle cx="458" cy="178" r="82"/>
-          <rect x="92" y="196" width="436" height="124" rx="62"/>
-          <circle cx="138" cy="246" r="72"/>
-          <circle cx="256" cy="232" r="100"/>
-          <circle cx="388" cy="230" r="104"/>
-          <circle cx="494" cy="258" r="64"/>
-        </g>
-        <rect width="600" height="380" fill="url(#shade)" mask="url(#cloudMask)"/>
-      </svg>
-    </div></div></div>
-    <div class="orbit">
-        <div class="orb" style="left:9%;top:44%"><img src="img/aws/AWSLambda.svg" data-file="AWSLambda" alt="" width="64" height="64"><span>Lambda</span></div>
-        <div class="orb" style="left:20%;top:13%"><img src="img/aws/AmazonSimpleStorageService.svg" data-file="AmazonSimpleStorageService" alt="" width="64" height="64"><span>S3</span></div>
-        <div class="orb" style="left:50%;top:4%"><img src="img/aws/AmazonDynamoDB.svg" data-file="AmazonDynamoDB" alt="" width="64" height="64"><span>DynamoDB</span></div>
-        <div class="orb" style="left:80%;top:13%"><img src="img/aws/AmazonEC2.svg" data-file="AmazonEC2" alt="" width="64" height="64"><span>EC2</span></div>
-        <div class="orb" style="left:91%;top:44%"><img src="img/aws/AmazonAPIGateway.svg" data-file="AmazonAPIGateway" alt="" width="64" height="64"><span>API Gateway</span></div>
-        <div class="orb" style="left:78%;top:76%"><img src="img/aws/AmazonCognito.svg" data-file="AmazonCognito" alt="" width="64" height="64"><span>Cognito</span></div>
-        <div class="orb" style="left:22%;top:76%"><img src="img/aws/AWSAmplify.svg" data-file="AWSAmplify" alt="" width="64" height="64"><span>Amplify</span></div>
-        <div class="orb" style="left:50%;top:88%"><img src="img/aws/AmazonCloudWatch.svg" data-file="AmazonCloudWatch" alt="" width="64" height="64"><span>CloudWatch</span></div>
+    <div class="portrait-smoke" aria-hidden="true"></div>
+    <div class="portrait-backdrop"></div>
+    <div class="hero-portrait">
+      <img src="img/work/hero-portrait.png" width="1024" height="1078" alt="Portrait of Jervil Angelo De Leon" fetchpriority="high">
+    </div>
+    <div class="orbit" aria-hidden="true">
+        <div class="orb" style="left:10%;top:48%"><img src="img/aws/AWSLambda.svg" data-file="AWSLambda" alt="" width="64" height="64"><span>Lambda</span></div>
+        <div class="orb" style="left:23%;top:23%"><img src="img/aws/AmazonSimpleStorageService.svg" data-file="AmazonSimpleStorageService" alt="" width="64" height="64"><span>S3</span></div>
+        <div class="orb" style="left:50%;top:15%"><img src="img/aws/AmazonDynamoDB.svg" data-file="AmazonDynamoDB" alt="" width="64" height="64"><span>DynamoDB</span></div>
+        <div class="orb" style="left:77%;top:23%"><img src="img/aws/AmazonEC2.svg" data-file="AmazonEC2" alt="" width="64" height="64"><span>EC2</span></div>
+        <div class="orb" style="left:90%;top:48%"><img src="img/aws/AmazonAPIGateway.svg" data-file="AmazonAPIGateway" alt="" width="64" height="64"><span>API Gateway</span></div>
+        <div class="orb" style="left:79%;top:75%"><img src="img/aws/AmazonCognito.svg" data-file="AmazonCognito" alt="" width="64" height="64"><span>Cognito</span></div>
+        <div class="orb" style="left:21%;top:75%"><img src="img/aws/AWSAmplify.svg" data-file="AWSAmplify" alt="" width="64" height="64"><span>Amplify</span></div>
+        <div class="orb" style="left:50%;top:82%"><img src="img/aws/AmazonCloudWatch.svg" data-file="AmazonCloudWatch" alt="" width="64" height="64"><span>CloudWatch</span></div>
     </div>
   </div>
   <p class="sr-only">AWS services used in my projects include Lambda, S3, DynamoDB, EC2, API Gateway, Cognito, Amplify, CloudWatch, IAM, VPC, SNS and EventBridge.</p>
@@ -258,7 +228,7 @@
 </footer>
 
 <script src="js/main.js?v=20261105a" defer></script>
-<script src="js/cloud-animation.js?v=20261105a" defer></script>
+<script src="js/cloud-animation.js?v=20261126e" defer></script>
 <script src="js/project-deck.js" defer></script>
 </body>
 </html>

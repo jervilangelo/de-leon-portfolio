@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 560">
+  <defs>
+    <linearGradient id="wisp" x1="0" y1="1" x2=".8" y2="0" gradientUnits="objectBoundingBox">
+      <stop stop-color="#8d9bad" stop-opacity="0"/>
+      <stop offset=".26" stop-color="#a5b5ca" stop-opacity=".30"/>
+      <stop offset=".55" stop-color="#d5e0ed" stop-opacity=".57"/>
+      <stop offset=".79" stop-color="#b6c6da" stop-opacity=".33"/>
+      <stop offset="1" stop-color="#98acc5" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="curl" x="0" y="0" width="640" height="560" filterUnits="userSpaceOnUse">
+      <feTurbulence baseFrequency=".013 .022" numOctaves="3" seed="7" result="eddies"/>
+      <feDisplacementMap in="SourceGraphic" in2="eddies" scale="47" xChannelSelector="R" yChannelSelector="G"/>
+      <feGaussianBlur stdDeviation="5"/>
+    </filter>
+  </defs>
+  <g fill="none" stroke="url(#wisp)" stroke-linecap="round" filter="url(#curl)">
+    <path stroke-width="39" d="M297 478C188 478 73 411 92 322S208 259 190 195 205 80 307 53"/>
+    <path stroke-width="15" d="M244 457C150 454 55 377 99 310S191 259 169 208 183 114 228 88"/>
+    <path stroke-width="30" d="M324 489C425 497 560 439 531 355S473 292 534 225 541 120 472 82"/>
+  </g>
+</svg>

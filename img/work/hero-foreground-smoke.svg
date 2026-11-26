@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 150">
+  <defs>
+    <linearGradient id="mist">
+      <stop stop-color="#b5c2d1" stop-opacity="0"/>
+      <stop offset=".19" stop-color="#b5c2d1" stop-opacity=".35"/>
+      <stop offset=".5" stop-color="#d3dce6" stop-opacity=".43"/>
+      <stop offset=".8" stop-color="#b5c2d1" stop-opacity=".32"/>
+      <stop offset="1" stop-color="#b5c2d1" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="eddies" x="0" y="0" width="600" height="150" filterUnits="userSpaceOnUse">
+      <feTurbulence baseFrequency=".017 .033" numOctaves="3" seed="4" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="34" xChannelSelector="R" yChannelSelector="G"/>
+      <feGaussianBlur stdDeviation="7"/>
+    </filter>
+  </defs>
+  <g fill="none" stroke="url(#mist)" filter="url(#eddies)">
+    <path stroke-width="32" d="M13 88C117 98 142 52 260 73S426 102 587 66"/>
+    <path stroke-width="18" opacity=".64" d="M31 102C138 121 181 90 281 96S430 115 567 83"/>
+  </g>
+</svg>
