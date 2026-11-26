@@ -5,7 +5,7 @@
   const links = cards.map(card => card.querySelector('a'));
   const tablet = matchMedia('(min-width: 600px)');
   const desktop = matchMedia('(min-width: 930px)');
-  const tilts = [-5, -4, -5, -4, -3, -2, -3, 0, 3];
+  const tilts = [-5, -4, -5, -4, -3, -2, -3, -2, 0, 3];
 
   deck.style.setProperty('--last-index', cards.length - 1);
   cards.forEach((card, index) => {

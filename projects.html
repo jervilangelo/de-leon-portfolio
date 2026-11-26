@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Projects | AWS Serverless, EC2 and Automation Builds by Jervil Angelo De Leon</title>
-<meta name="description" content="AWS projects by Jervil Angelo De Leon: Teolohiya.site on Amplify Gen 2, a serverless ticketing API with Lambda, DynamoDB and SNS, a secure EC2 web server in a custom VPC, plus Schedrift Gantt charts for Microsoft Project, PinansyalPH money calculators, HRIS automation and a church website.">
+<meta name="description" content="Projects by Jervil Angelo De Leon: Resolve for browser protection and voluntary accountability, Teolohiya.site on Amplify Gen 2, a serverless ticketing API with Lambda, DynamoDB and SNS, a secure EC2 web server in a custom VPC, plus Schedrift Gantt charts for Microsoft Project, PinansyalPH money calculators, HRIS automation and a church website.">
 <meta name="author" content="Jervil Angelo De Leon">
 <meta name="theme-color" content="#1c1c1c">
 <script src="js/theme.js?v=1"></script>
@@ -13,7 +13,7 @@
 <meta property="og:url" content="https://jervilangelo.online/projects">
 <meta property="og:site_name" content="Jervil Angelo De Leon">
 <meta property="og:title" content="Projects | AWS Serverless, EC2 and Automation Builds by Jervil Angelo De Leon">
-<meta property="og:description" content="AWS projects by Jervil Angelo De Leon: Teolohiya.site on Amplify Gen 2, a serverless ticketing API with Lambda, DynamoDB and SNS, a secure EC2 web server in a custom VPC, plus Schedrift Gantt charts for Microsoft Project, PinansyalPH money calculators, HRIS automation and a church website.">
+<meta property="og:description" content="Projects by Jervil Angelo De Leon: Resolve for browser protection and voluntary accountability, Teolohiya.site on Amplify Gen 2, a serverless ticketing API with Lambda, DynamoDB and SNS, a secure EC2 web server in a custom VPC, plus Schedrift Gantt charts for Microsoft Project, PinansyalPH money calculators, HRIS automation and a church website.">
 <meta property="og:image" content="https://jervilangelo.online/img/og-cover.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
@@ -69,17 +69,17 @@
   <div class="grid">
     <div class="page-head-text" data-reveal>
       <h1 id="page-title">Projects</h1>
-      <p class="lead">Nine things I have built and shipped: five on AWS, three web apps, an automation for my HRIS work and a church website. Open any project to see how it works.</p>
+      <p class="lead">Ten projects across cloud infrastructure, browser extensions, web apps, and HRIS automation. Open any project to see how it works.</p>
     </div>
   </div>
   <div class="pj-bar" data-reveal>
     <div class="pj-filter" role="group" aria-label="Filter projects">
-      <button type="button" aria-pressed="true" data-cat="all">All <span>9</span></button>
-      <button type="button" aria-pressed="false" data-cat="cloud">Cloud and AWS <span>5</span></button>
-      <button type="button" aria-pressed="false" data-cat="web">Websites and apps <span>4</span></button>
+      <button type="button" aria-pressed="true" data-cat="all">All <span>10</span></button>
+      <button type="button" aria-pressed="false" data-cat="cloud">Cloud and AWS <span>6</span></button>
+      <button type="button" aria-pressed="false" data-cat="web">Websites and apps <span>5</span></button>
       <button type="button" aria-pressed="false" data-cat="automation">Automation <span>1</span></button>
     </div>
-    <p class="small muted pj-status" id="pj-status" aria-live="polite">Showing all 9 projects</p>
+    <p class="small muted pj-status" id="pj-status" aria-live="polite">Showing all 10 projects</p>
   </div>
 </section>
 
@@ -89,6 +89,38 @@
      dialog hero, card media, and the full write-up inside .pj-detail. Newest goes first. -->
 <section class="frame pj-section" id="projects" aria-label="All projects">
   <div class="pj-grid" id="pj-grid">
+    <article class="pj pj--feature" id="p-resolve" data-cat="cloud web" data-video="img/Resolve_Showcase.mp4" data-poster="img/work/resolve-showcase-poster.webp" data-reveal>
+      <div class="pj-media">
+        <div class="shutter" data-shutter>
+          <video class="autoplay" muted loop playsinline preload="metadata" poster="img/work/resolve-showcase-poster.webp" width="1920" height="1080" aria-hidden="true" tabindex="-1">
+            <source src="img/Resolve_Showcase.mp4" type="video/mp4">
+          </video>
+        </div>
+        <span class="pj-badge"><span class="pj-dot" aria-hidden="true"></span>Showcase video</span>
+      </div>
+      <div class="pj-body">
+        <p class="pj-kicker"><span>Live project</span><span>Browser extension &middot; Web app</span></p>
+        <h3 class="pj-title"><button class="pj-open" type="button" aria-haspopup="dialog">Resolve</button></h3>
+        <p class="pj-line">A privacy-first browser protection and voluntary accountability platform for people who want healthier digital habits.</p>
+        <ul class="pj-tags" aria-label="Main tools"><li>TypeScript</li><li>WXT</li><li>Next.js</li><li>AWS</li><li>Terraform</li></ul>
+        <span class="pj-more" aria-hidden="true">View project <span class="arrow">&rarr;</span></span>
+      </div>
+      <div class="pj-detail">
+        <div class="strip-body">
+          <div class="strip-text">
+            <p>Resolve is a Christian-inspired platform for setting browsing boundaries and inviting trusted people into voluntary accountability. Its design combines customizable site restrictions with on-device content analysis and a web dashboard for managing accountability groups.</p>
+            <p>Privacy shapes the design. Content analysis is intended to run in the browser, and accountability is based on consent. Alerts are designed to share only a generic event, without sending browsing history, URLs, or screenshots.</p>
+          </div>
+          <div class="strip-meta">
+            <ul class="tags" aria-label="Tools"><li>WXT</li><li>React</li><li>TypeScript</li><li>Next.js</li><li>AWS</li><li>Terraform</li></ul>
+            <span class="strip-links">
+              <a class="link ext" href="https://getresolved.site/" target="_blank" rel="noopener">Visit Resolve</a>
+              <a class="link ext" href="https://github.com/jervilangelo/resolve" target="_blank" rel="noopener">GitHub</a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </article>
     <article class="pj pj--feature" id="p-opsentra" data-cat="cloud" data-video="img/opsentra-showcase-1080p60.mp4" data-poster="img/work/ops-showcase-poster.webp" data-reveal>
       <div class="pj-media"><div class="shutter" data-shutter><video class="autoplay" muted loop playsinline preload="metadata" poster="img/work/ops-showcase-poster.webp" width="1920" height="1080" aria-hidden="true" tabindex="-1"><source src="img/opsentra-showcase-1080p60.mp4" type="video/mp4"></video></div><span class="pj-badge"><span class="pj-dot" aria-hidden="true"></span>Showcase video</span></div>
       <div class="pj-body">
