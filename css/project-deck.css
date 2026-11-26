@@ -1,0 +1,195 @@
+.project-showcase {
+  --deck-ease: cubic-bezier(.2, .8, .2, 1);
+}
+
+.project-showcase-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 auto 22px;
+  max-width: 1100px;
+}
+
+.project-deck-restack[hidden] { display: none; }
+
+.project-deck {
+  --card-width: min(248px, calc(100vw - 80px));
+  --card-height: 320px;
+  --columns: 1;
+  --row-step: 354px;
+  --column-step: 270px;
+  --pile-step: 2.5px;
+  --stagger: 80ms;
+  display: grid;
+  grid-template-columns: repeat(var(--columns), var(--card-width));
+  justify-content: center;
+  gap: 24px;
+  max-width: 1100px;
+  margin-inline: auto;
+  padding-block: 24px;
+  list-style: none;
+}
+
+.project-deck[data-ready] {
+  --rows: round(up, var(--visible-count) / var(--columns), 1);
+  display: block;
+  position: relative;
+  isolation: isolate;
+  height: calc(66px + var(--card-height) + (var(--rows) - 1) * var(--row-step));
+  transition: height 900ms var(--deck-ease);
+}
+
+.project-deck[data-ready]:not([data-expanded]) {
+  --column-step: 234px;
+  transition-delay: calc(var(--last-index) * var(--stagger));
+}
+
+.project-deck[data-ready] > li {
+  --slot: max(0, var(--index) - var(--pile-count));
+  --row: round(down, var(--slot) / var(--columns), 1);
+  --column: mod(var(--slot), var(--columns));
+  --row-count: min(var(--columns), var(--visible-count) - var(--row) * var(--columns));
+  --position: calc(var(--column) - (var(--row-count) - 1) / 2);
+  --x: calc(var(--position) * var(--column-step) + var(--pile-x, 0px));
+  --y: calc(var(--row) * var(--row-step) + var(--pile-y, 0px));
+  position: absolute;
+  top: 24px;
+  left: calc(50% - var(--card-width) / 2);
+  translate: var(--x) var(--y);
+  rotate: var(--tilt);
+  transition: translate 900ms var(--deck-ease), rotate 900ms var(--deck-ease);
+  transition-delay: calc(var(--index) * var(--stagger));
+}
+
+.project-deck[data-ready] > [data-pile] {
+  --pile-x: calc((var(--index) - var(--pile-count)) * var(--pile-step));
+  --pile-y: calc((var(--index) - var(--pile-count)) * -2.5px);
+  pointer-events: none;
+}
+
+.project-deck[data-ready]:not([data-dealt]) > li {
+  translate: var(--x) calc(var(--y) + 18px);
+}
+
+.project-deck-card {
+  --card-muted: #b8b9b2;
+  --card-mark: #3d453e;
+  display: flex;
+  flex-direction: column;
+  width: var(--card-width);
+  height: var(--card-height);
+  padding: 20px;
+  border: 1px solid #444a44;
+  border-radius: 20px;
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: 0 24px 42px -23px rgb(0 0 0 / 75%);
+  text-decoration: none;
+  transition: transform 400ms var(--deck-ease), border-color 150ms ease;
+}
+
+.project-deck-light .project-deck-card {
+  --card-muted: var(--field-muted);
+  --card-mark: #c8c9be;
+  border-color: #d1d1c6;
+  background: var(--strip-4);
+  color: var(--field-ink);
+}
+
+.project-deck-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.project-deck-logo {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 50px;
+  height: 50px;
+  border: 1px solid #dadbd2;
+  border-radius: 13px;
+  background: var(--ink);
+  color: var(--field-ink);
+  font-weight: 500;
+}
+
+.project-deck-logo img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+.project-deck-category {
+  max-width: 104px;
+  color: var(--card-muted);
+  font: 11px/1.4 ui-monospace, Consolas, monospace;
+  text-align: right;
+  text-transform: uppercase;
+}
+
+.project-deck-mark {
+  margin: auto 0 16px -3px;
+  color: var(--card-mark);
+  font-size: clamp(3.5rem, 20vw, 4.6rem);
+  font-weight: 500;
+  line-height: .85;
+  letter-spacing: -.075em;
+}
+
+.project-deck-card h3 {
+  font-size: 1.4rem;
+  line-height: 1.06;
+  text-wrap: initial;
+}
+
+.project-deck-card p {
+  min-height: 2.7em;
+  margin-top: 7px;
+  color: var(--card-muted);
+  font-size: .875rem;
+  line-height: 1.35;
+}
+
+.project-deck > li:focus-within { z-index: 1; }
+.project-deck-card:focus-visible { outline-offset: 4px; }
+
+@media (min-width: 600px) {
+  .project-deck { --columns: 2; --pile-step: 4px; }
+}
+
+@media (min-width: 930px) {
+  .project-deck { --columns: 3; --pile-step: 9px; }
+
+  .project-deck[data-ready] > li {
+    --y: calc(var(--row) * var(--row-step) + var(--position) * var(--position) * 8px + var(--pile-y, 0px));
+  }
+
+  .project-deck[data-ready]:not([data-dealt]) > li {
+    translate: calc(var(--position) * 4px) calc(var(--position) * -3px);
+  }
+}
+
+@media (min-width: 1150px) {
+  .project-deck { --columns: 4; }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .project-deck[data-dealt] > li:not([data-pile]):hover { z-index: 1; }
+  .project-deck[data-dealt] > li:not([data-pile]):hover .project-deck-card {
+    transform: translateY(-18px) rotate(calc(-1 * var(--tilt)));
+    border-color: var(--accent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-deck { --stagger: 0ms; }
+  .project-deck[data-ready], .project-deck[data-ready] > li,
+  .project-deck-card { transition: none; }
+  .project-deck[data-dealt] > li:not([data-pile]):hover .project-deck-card { transform: none; }
+}
