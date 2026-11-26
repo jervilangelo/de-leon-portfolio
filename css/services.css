@@ -245,7 +245,7 @@
 .sv-scope--mid { background: var(--field); color: var(--field-ink); }
 .sv-scope--mid .points li::before { background: var(--field-ink); }
 .sv-scope--mid .btn { background: var(--bg); color: var(--ink); }
-@media (hover: hover) and (pointer: fine) { .sv-scope--mid .btn:hover { background: #333331; } }
+@media (hover: hover) and (pointer: fine) { .sv-scope--mid .btn:hover { background: var(--bg-hover); } }
 @media (max-width: 900px) {
   .sv-scopes-head h3, .sv-scopes-head p { grid-column: 1 / -1; }
   .sv-scopes-head h3 { margin-bottom: 12px; }
@@ -271,7 +271,7 @@
 .sv-filter button:active { transform: scale(0.97); }
 .sv-filter button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); font-weight: 500; }
 .sv-filter button[aria-pressed="true"] span { color: var(--accent-ink); }
-@media (hover: hover) and (pointer: fine) { .sv-filter button[aria-pressed="false"]:hover { background: #3c3c3a; } }
+@media (hover: hover) and (pointer: fine) { .sv-filter button[aria-pressed="false"]:hover { background: var(--surface-hover); } }
 
 .cw-grid { list-style: none; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 28px 8px; }
 .cw-item { grid-column: span 3; min-width: 0; }
@@ -442,7 +442,7 @@
 .sv-cta-actions { display: flex; flex-wrap: wrap; gap: 10px; }
 .btn--line { background: #b3b0a5; color: var(--field-ink); }
 @media (hover: hover) and (pointer: fine) { .btn--line:hover { background: #a6a397; } }
-.sv-cta-field ::selection { background: var(--field-ink); color: var(--field); }
+.sv-cta-field ::selection { background: var(--field-ink); color: var(--ink); }
 .sv-cta-field :focus-visible { outline-color: var(--field-ink); }
 @media (prefers-reduced-motion: no-preference) {
   .js .sv-cta-field { clip-path: inset(0 0 100% 0); transition: clip-path 1100ms var(--ease-in-out); }
@@ -475,3 +475,9 @@
   .inq.is-flash { animation: inqFlash 700ms var(--ease-out); }
 }
 @keyframes inqFlash { 0% { transform: translateY(10px); opacity: 0.4; } 100% { transform: none; opacity: 1; } }
+
+[data-theme="light"] .inq :is(input, select, textarea) { background: var(--surface); }
+[data-theme="light"] .inq :is(input, select, textarea):focus { background: #f8faf5; }
+[data-theme="light"] .btn--line { background: #d6dece; }
+[data-theme="light"] .btn--line:hover { background: #c9d4c1; }
+[data-theme="light"] .proposal-price { color: var(--field); }

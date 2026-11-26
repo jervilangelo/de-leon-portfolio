@@ -96,7 +96,7 @@
 }
 .svc-filter button:active { transform: scale(0.97); }
 .svc-filter button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); font-weight: 500; }
-@media (hover: hover) and (pointer: fine) { .svc-filter button[aria-pressed="false"]:hover { background: #3c3c3a; } }
+@media (hover: hover) and (pointer: fine) { .svc-filter button[aria-pressed="false"]:hover { background: var(--surface-hover); } }
 .svc-count { font-variant-numeric: tabular-nums; }
 .svc-count span { font-weight: 500; }
 .svc-note { max-width: 44ch; }
@@ -696,7 +696,7 @@
 .pj-filter button:active { transform: scale(0.97); }
 .pj-filter button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); font-weight: 500; }
 .pj-filter button[aria-pressed="true"] span { color: var(--accent-ink); }
-@media (hover: hover) and (pointer: fine) { .pj-filter button[aria-pressed="false"]:hover { background: #3c3c3a; } }
+@media (hover: hover) and (pointer: fine) { .pj-filter button[aria-pressed="false"]:hover { background: var(--surface-hover); } }
 
 .pj-section { padding-top: 40px; }
 .pj-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 64px var(--gap); }
@@ -782,7 +782,7 @@
 }
 .pjd-top {
   position: sticky; top: 0; z-index: 5; display: flex; justify-content: space-between; align-items: center; gap: 16px;
-  padding: 14px 0; background: linear-gradient(var(--bg) 72%, rgba(28, 28, 28, 0));
+  padding: 14px 0; background: linear-gradient(var(--bg) 72%, transparent);
 }
 .pjd-kicker { font-size: var(--step-small); color: var(--muted); }
 .pjd-close { min-height: 44px; }
@@ -849,3 +849,10 @@
   .bdr-aws { grid-template-columns: 1fr; }
   .bdr-modules li { grid-template-columns: 1fr; }
 }
+
+/* Keep text readable over dark media and architecture diagrams. */
+[data-theme="light"] .pj-badge { color: #f1f1ef; }
+[data-theme="light"] .pj-dot { background: #a9bfa8; }
+[data-theme="light"] .cs-diagram figcaption { color: #bfc1b9; }
+[data-theme="light"] :is(.bdr-kicker, .bdr-flow span, .bdr-modules b) { color: #65369a; }
+[data-theme="light"] .lightbox { color: #f1f1ef; }

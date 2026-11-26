@@ -1,6 +1,7 @@
 /* Jervil Angelo De Leon, portfolio. Shared by index.html and the case study pages. */
 
 :root {
+  color-scheme: dark;
   --bg: #1c1c1c;
   --surface: #262626;
   --surface-2: #303030;
@@ -9,6 +10,9 @@
   --accent: #8fa68e;
   --accent-strong: #a9bfa8;
   --accent-ink: #1c1c1c;
+  --surface-hover: #3c3c3a;
+  --bg-hover: #333331;
+  --ink-hover: #ffffff;
   --field: #c8c5ba;
   --field-ink: #1c1c1c;
   --field-muted: #4a4943;
@@ -38,6 +42,28 @@
   --t-hover: 180ms;
   --t-ui: 240ms;
   --t-reveal: 800ms;
+}
+
+html[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f7f7f3;
+  --surface: #ffffff;
+  --surface-2: #edeee9;
+  --ink: #252822;
+  --muted: #555b52;
+  --accent: #496b50;
+  --accent-strong: #34533b;
+  --accent-ink: #ffffff;
+  --surface-hover: #e0e4db;
+  --bg-hover: #e8eae3;
+  --ink-hover: #3c4339;
+  --field: #e8ebe2;
+  --field-ink: #252822;
+  --field-muted: #53594f;
+  --strip-1: #e8ebe2;
+  --strip-2: #ccdcca;
+  --strip-3: #e6e9e1;
+  --strip-4: #eeeee6;
 }
 
 @media (max-width: 640px) {
@@ -101,11 +127,11 @@ a { color: inherit; }
 .btn--dark { background: var(--bg); color: var(--ink); }
 @media (hover: hover) and (pointer: fine) {
   .btn:hover { background: var(--accent-strong); }
-  .btn--ink:hover { background: #ffffff; }
-  .btn--dark:hover { background: #333331; }
+  .btn--ink:hover { background: var(--ink-hover); }
+  .btn--dark:hover { background: var(--bg-hover); }
 }
 .btn--quiet { background: var(--surface-2); color: var(--ink); }
-@media (hover: hover) and (pointer: fine) { .btn--quiet:hover { background: #3c3c3a; } }
+@media (hover: hover) and (pointer: fine) { .btn--quiet:hover { background: var(--surface-hover); } }
 .btn .arrow { transition: transform var(--t-ui) var(--ease-out); }
 @media (hover: hover) and (pointer: fine) { .btn:hover .arrow { transform: translateX(3px); } }
 
@@ -140,10 +166,11 @@ code { font-family: inherit; font-size: inherit; font-weight: 500; background: v
   display: flex; align-items: center; justify-content: space-between; gap: 24px;
   padding-inline: var(--margin);
 }
-.wordmark {
-  font-size: var(--step-body); font-weight: 500; letter-spacing: -0.01em;
-  text-decoration: none; white-space: nowrap;
+.nav-home {
+  display: grid; place-items: center; flex: 0 0 44px; height: 44px;
+  border-radius: 8px; color: var(--ink);
 }
+.nav-home:hover, .nav-home[aria-current="page"] { color: var(--accent-strong); }
 .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
 .nav-links a {
   font-size: var(--step-small); text-decoration: none; color: var(--ink);
@@ -159,6 +186,21 @@ code { font-family: inherit; font-size: inherit; font-weight: 500; background: v
 @media (hover: hover) and (pointer: fine) { .nav-links a:hover::after { transform: scaleX(1); } }
 .nav .btn { min-height: 40px; padding: 0 16px; font-size: var(--step-small); }
 .nav-right { display: flex; align-items: center; gap: 28px; }
+.theme-toggle {
+  display: grid; place-items: center; flex: 0 0 44px; width: 44px; height: 44px;
+  border: 1px solid var(--surface-hover); border-radius: 50%; background: var(--surface);
+  color: var(--ink); cursor: pointer;
+  transition: background-color var(--t-hover) ease, color var(--t-hover) ease, transform var(--t-press) ease;
+}
+.theme-toggle[hidden], .theme-moon, [data-theme="light"] .theme-sun { display: none; }
+[data-theme="light"] .theme-moon { display: block; }
+.theme-toggle:hover { background: var(--surface-hover); color: var(--accent-strong); }
+.theme-toggle:active { transform: scale(0.94); }
+
+@media (prefers-reduced-motion: no-preference) {
+  body, .nav { transition: background-color var(--t-hover) ease, color var(--t-hover) ease; }
+}
+
 .menu-toggle {
   display: none; min-height: 44px; padding: 0 14px; border: 0; cursor: pointer;
   background: var(--surface-2); color: var(--ink); font: 500 var(--step-small)/1 var(--font);
@@ -166,6 +208,7 @@ code { font-family: inherit; font-size: inherit; font-weight: 500; background: v
 
 @media (max-width: 900px) {
   .nav { gap: 12px; }
+  .nav-right { gap: 12px; }
   .js .menu-toggle { display: inline-flex; align-items: center; }
   .js .nav-links {
     position: fixed; inset: var(--nav-h) 0 auto 0; z-index: 49;
@@ -186,6 +229,7 @@ code { font-family: inherit; font-size: inherit; font-weight: 500; background: v
 }
 @media (max-width: 420px) {
   .nav .btn { padding: 0 12px; }
+  .nav-right { gap: 8px; }
 }
 
 /* ---------- reveal motion (content stays visible without script) ---------- */

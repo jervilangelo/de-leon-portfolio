@@ -193,3 +193,11 @@
   .project-deck-card { transition: none; }
   .project-deck[data-dealt] > li:not([data-pile]):hover .project-deck-card { transform: none; }
 }
+
+[data-theme="light"] .project-deck-card {
+  --card-muted: var(--muted);
+  --card-mark: #d9e1d5;
+  border-color: #c9d2c5;
+  box-shadow: 0 24px 42px -23px rgb(35 50 38 / 44%);
+}
+[data-theme="light"] .project-deck-logo { background: #f1f1ef; }
