@@ -21,34 +21,13 @@
       var open = btn.getAttribute("aria-expanded") !== "true";
       btn.setAttribute("aria-expanded", String(open));
       if (!hasGsap || reduce) { panel.hidden = !open; if (hasGsap) refresh(); return; }
+      gsap.killTweensOf(panel);
       if (open) {
         panel.hidden = false;
-        gsap.fromTo(panel, { height: 0 }, { height: "auto", duration: 0.55, ease: "power2.out", onComplete: refresh });
+        gsap.fromTo(panel, { height: 0 }, { height: "auto", duration: 0.55, ease: "power2.out", onComplete: function () { panel.style.height = ""; refresh(); } });
       } else {
         gsap.to(panel, { height: 0, duration: 0.4, ease: "power2.inOut", onComplete: function () { panel.hidden = true; panel.style.height = ""; refresh(); } });
       }
-    });
-  });
-
-  var tabs = Array.prototype.slice.call(story.querySelectorAll('.cp-tabs [role="tab"]'));
-  function select(tab, focus) {
-    tabs.forEach(function (t) {
-      var on = t === tab;
-      t.setAttribute("aria-selected", String(on));
-      t.tabIndex = on ? 0 : -1;
-      document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
-    });
-    if (focus) tab.focus();
-  }
-  tabs.forEach(function (tab, i) {
-    tab.addEventListener("click", function () { select(tab, false); });
-    tab.addEventListener("keydown", function (e) {
-      var k = e.key, n = tabs.length, to = null;
-      if (k === "ArrowRight") to = tabs[(i + 1) % n];
-      else if (k === "ArrowLeft") to = tabs[(i - 1 + n) % n];
-      else if (k === "Home") to = tabs[0];
-      else if (k === "End") to = tabs[n - 1];
-      if (to) { e.preventDefault(); select(to, true); }
     });
   });
 
@@ -81,7 +60,7 @@
     return nodes.map(function (n, i) {
       // the last chapter's line ends on the top of its cloud rather than on a node
       var cloud = chapters[i].querySelector(".end-cloud");
-      if (cloud) {
+      if (cloud && i === chapters.length - 1) {
         // land on the highest point of the cloud's outline
         var c = cloud.getBoundingClientRect(), top = cloudTop(cloud);
         return { x: c.left + top.x * c.width / 64 - sb.left, y: c.top + top.y * c.height / 40 - sb.top };
@@ -181,53 +160,25 @@
       ch.classList.toggle("is-lit", lit);
       if (lit) { ch.classList.add("is-seen"); current = i; }
     });
-    if (endCh) setOrbit(endCh.classList.contains("is-lit"));
     if (rail) {
       rail.style.setProperty("--p", Math.max(0, Math.min(1, p)).toFixed(3));
-      railLinks.forEach(function (a, i) { a.classList.toggle("is-current", i === current); });
+      railLinks.forEach(function (a, i) {
+        if (i === current) a.setAttribute("aria-current", "location");
+        else a.removeAttribute("aria-current");
+      });
     }
   }
 
-  /* ---------- services orbiting the final cloud once it is lit ---------- */
-  var endCh = story.querySelector(".ch--end"), endStage = story.querySelector(".end-stage");
-  var orbitIcons = endStage ? Array.prototype.slice.call(endStage.querySelectorAll(".end-orbit img")) : [];
-  var orbitOn = false, orbitStart = 0, orbitRaf = 0, orbitRot = 0.6, orbitLast = 0, orbitInView = true;
-  function placeOrbit(t, e) {
-    var W = endStage.clientWidth, H = endStage.clientHeight, n = orbitIcons.length;
-    var rx = W * 0.5 - 22, ry = H * 0.2;
-    orbitIcons.forEach(function (img, i) {
-      var a = orbitRot + (i / n) * Math.PI * 2, z = Math.sin(a), depth = (z + 1) / 2;
-      var spread = 0.2 + 0.8 * e;
-      var x = Math.cos(a) * rx * spread, y = z * ry * spread + Math.sin(t / 900 + i) * 3;
-      img.style.transform = "translate3d(" + x.toFixed(1) + "px," + y.toFixed(1) + "px,0) scale(" + ((0.68 + 0.36 * depth) * (0.5 + 0.5 * e)).toFixed(3) + ")";
-      img.style.opacity = (e * (0.4 + 0.6 * depth)).toFixed(3);
-      img.style.zIndex = z > 0 ? 3 : 1;
-    });
-  }
-  function orbitFrame(t) {
-    if (!orbitStart) { orbitStart = t; orbitLast = t; }
-    orbitRot += Math.min(0.05, (t - orbitLast) / 1000) * (Math.PI * 2 / 40);
-    orbitLast = t;
-    var x = Math.max(0, Math.min(1, (t - orbitStart) / 1200)), e = 1 - Math.pow(1 - x, 3);
-    placeOrbit(t, e);
-    orbitRaf = requestAnimationFrame(orbitFrame);
-  }
-  function setOrbit(on) {
-    if (!endStage || on === orbitOn) return;
-    orbitOn = on;
-    cancelAnimationFrame(orbitRaf);
-    if (!on) { orbitIcons.forEach(function (img) { img.style.opacity = 0; }); orbitStart = 0; return; }
-    if (reduce) { placeOrbit(0, 1); return; }
-    orbitStart = 0;
-    if (orbitInView) orbitRaf = requestAnimationFrame(orbitFrame);
-  }
-  if (endStage && "IntersectionObserver" in window) {
-    new IntersectionObserver(function (es) {
-      orbitInView = es[0].isIntersecting;
-      cancelAnimationFrame(orbitRaf);
-      if (orbitOn && orbitInView && !reduce) { orbitLast = performance.now(); orbitRaf = requestAnimationFrame(orbitFrame); }
+  var endStage = story.querySelector(".end-stage");
+  if (!reduce && endStage && "IntersectionObserver" in window) {
+    new IntersectionObserver(function (entries) {
+      endStage.classList.toggle("is-visible", entries[0].isIntersecting);
     }).observe(endStage);
   }
+  story.addEventListener("focusin", function (event) {
+    var chapter = event.target.closest(".ch");
+    if (chapter) chapter.classList.add("is-seen");
+  });
 
   var state = { p: 0 };
   var timer;
@@ -252,13 +203,17 @@
   });
   render(0);
 
-  if (reduce) {
+  if (reduce || !("IntersectionObserver" in window)) {
     chapters.forEach(function (c) { c.classList.add("is-seen"); });
   } else {
-    // text reveals as soon as a chapter scrolls into view; only the node waits for the line
-    chapters.forEach(function (ch) {
-      ScrollTrigger.create({ trigger: ch.querySelector(".ch-body"), start: "top 88%", once: true, onEnter: function () { ch.classList.add("is-seen"); } });
+    var reveals = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.closest(".ch").classList.add("is-seen");
+        reveals.unobserve(entry.target);
+      });
     });
+    chapters.forEach(function (ch) { reveals.observe(ch.querySelector(".ch-title")); });
 
     // a little depth on the line drawings
     story.querySelectorAll(".ch-art").forEach(function (art) {

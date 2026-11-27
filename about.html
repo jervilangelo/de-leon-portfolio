@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
 <link href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/main.css?v=projects-about">
-<link rel="stylesheet" href="css/pages.css?v=portfolio-follow-up">
+<link rel="stylesheet" href="css/pages.css?v=about-motion">
 <script>document.documentElement.classList.add("js")</script>
 <script type="application/ld+json">
 {
@@ -63,29 +63,35 @@
   </div>
 </header>
 
-<main id="main">
+<main id="main" class="about-page">
 <section class="frame page-top about-story" aria-labelledby="page-title">
   <div class="grid about-grid">
-    <figure class="about-portrait">
+    <div class="about-intro" data-reveal>
+      <h1 class="page-h1" id="page-title">About me</h1>
+      <p class="lead">I’ve been curious about computers since I first explored Windows XP as a kid. At FEU Institute of Technology, I studied IT with a specialization in Animation and Game Development, where I got to design interactive experiences and write the code behind them.</p>
+    </div>
+    <figure class="about-portrait" data-reveal>
       <img src="img/work/portrait-l.webp" width="720" height="720" alt="Portrait of Jervil Angelo De Leon">
       <figcaption>Jervil Angelo De Leon · Makati, Philippines</figcaption>
     </figure>
-    <div class="about-text">
-      <h1 class="page-h1" id="page-title">About me</h1>
-      <p class="lead">I’ve loved technology since I was a kid. Studying IT at FEU Institute of Technology, where I specialized in Animation and Game Development, gave me a way to bring creative work and programming together.</p>
-      <p>I went into hardware troubleshooting and then IT support. These days, I support an HR system used by seafarers and office staff. Working directly with the people who use it has taught me to ask what they’re trying to get done before I start working on a fix.</p>
-      <p>I like automating the tasks people have to repeat. At work, I built an <a class="link" href="projects#p-hris">HRIS template tracker</a> that checks submissions daily and shows the team where to follow up.</p>
-      <p>I also love books. I built <a class="link" href="projects#teolohiya">Teolohiya.site</a> to help readers in the Philippines find theological books and contact sellers. Deploying it on AWS gave me a chance to work through how sign-in, photo uploads, and moderation fit together in an app people can use.</p>
+    <div class="about-text" data-reveal>
+      <p>I started my career troubleshooting hardware on site. Today, I help seafarers and office staff use their HR system. When someone reports an issue, I start by asking what they were trying to do. That often tells me where to look and whether there’s a recurring problem worth solving.</p>
+      <p>One example is the <a class="link" href="projects#p-hris">HRIS template tracker</a> I built at work. It checks submissions each day and shows the team which ones still need a follow-up.</p>
+      <p>Outside work, my love of books led me to build <a class="link" href="projects#teolohiya">Teolohiya.site</a>, where readers in the Philippines can find theological books and contact sellers directly. Deploying it on AWS taught me how to make sign-in, photo uploads, and listing moderation work together.</p>
+      <nav class="about-jump" aria-label="On this page">
+        <a class="link" href="#experience-title">Work experience <span aria-hidden="true">↓</span></a>
+        <a class="link" href="#about-aws-title">AWS services <span aria-hidden="true">↓</span></a>
+      </nav>
     </div>
   </div>
 </section>
 <section class="section frame about-index" aria-labelledby="experience-title">
-  <div class="about-index-heading">
+  <div class="about-index-heading" data-reveal>
     <h2 class="h2" id="experience-title">Work experience</h2>
     <a class="link" href="resume">Read my full Resume/CV <span aria-hidden="true">&rarr;</span></a>
   </div>
   <ol class="about-experience">
-    <li>
+    <li data-reveal>
       <p class="about-role-date"><time datetime="2026-07">July 2026</time> to present</p>
       <div>
         <h3>HRIS Technical Support</h3>
@@ -97,7 +103,7 @@
         </ul>
       </div>
     </li>
-    <li>
+    <li data-reveal>
       <p class="about-role-date"><time datetime="2025-05">May</time> to <time datetime="2025-11">November 2025</time></p>
       <div>
         <h3>Field / Onsite Engineer</h3>
@@ -105,7 +111,7 @@
         <p>Installed operating systems and diagnosed and repaired printers, POS systems, laptops, and workstations at client sites.</p>
       </div>
     </li>
-    <li>
+    <li data-reveal>
       <p class="about-role-date"><time datetime="2024-01">January</time> to <time datetime="2024-07">July 2024</time></p>
       <div>
         <h3>IT Intern / C# Programmer</h3>
@@ -117,19 +123,19 @@
 </section>
 
 <section class="section frame about-index" aria-labelledby="about-aws-title">
-  <div class="about-index-heading">
+  <div class="about-index-heading" data-reveal>
     <h2 class="h2" id="about-aws-title">AWS services I’ve used</h2>
     <a class="link" href="projects#services">Browse the project stacks <span aria-hidden="true">&rarr;</span></a>
   </div>
   <div class="about-aws-grid">
-    <section>
+    <section data-reveal>
       <h3>Compute</h3>
       <dl>
         <div><dt>Amazon EC2</dt><dd>Runs Nginx in Secure EC2 and the temporary BayanihanDR recovery host.</dd></div>
         <div><dt>AWS Lambda</dt><dd>Handles ticket requests, listing moderation, and incident events.</dd></div>
       </dl>
     </section>
-    <section>
+    <section data-reveal>
       <h3>Networking and delivery</h3>
       <dl>
         <div><dt>Amazon VPC</dt><dd>Defines subnets and routing for Secure EC2 and BayanihanDR.</dd></div>
@@ -137,7 +143,7 @@
         <div><dt>Amazon CloudFront</dt><dd>Delivers Teolohiya.site through Amplify Hosting.</dd></div>
       </dl>
     </section>
-    <section>
+    <section data-reveal>
       <h3>Storage and databases</h3>
       <dl>
         <div><dt>Amazon DynamoDB</dt><dd>Stores tickets, listings, and Opsentra incident history.</dd></div>
@@ -145,7 +151,7 @@
         <div><dt>Amazon EBS</dt><dd>Provides the Secure EC2 volume and its backup snapshot.</dd></div>
       </dl>
     </section>
-    <section>
+    <section data-reveal>
       <h3>Security and identity</h3>
       <dl>
         <div><dt>AWS Identity and Access Management (IAM)</dt><dd>Scopes permissions for functions, instances, and backup uploads.</dd></div>
@@ -154,7 +160,7 @@
         <div><dt>AWS IAM Identity Center</dt><dd>Provides sign-on with temporary credentials for BayanihanDR operations.</dd></div>
       </dl>
     </section>
-    <section>
+    <section data-reveal>
       <h3>Application integration</h3>
       <dl>
         <div><dt>AWS AppSync</dt><dd>Serves the GraphQL listings API for Teolohiya.site.</dd></div>
@@ -162,7 +168,7 @@
         <div><dt>Amazon EventBridge</dt><dd>Routes alarms and runbook status events in Opsentra.</dd></div>
       </dl>
     </section>
-    <section>
+    <section data-reveal>
       <h3>Operations, monitoring, and cost</h3>
       <dl>
         <div><dt>AWS Systems Manager</dt><dd>Provides Session Manager access and runs approved Opsentra fixes.</dd></div>
@@ -170,14 +176,14 @@
         <div><dt>AWS Budgets</dt><dd>Tracks spending and sends alerts for builds such as BayanihanDR.</dd></div>
       </dl>
     </section>
-    <section>
+    <section data-reveal>
       <h3>Deployment</h3>
       <dl>
         <div><dt>AWS Amplify Gen 2</dt><dd>Hosts Teolohiya.site and manages its backend deployments.</dd></div>
         <div><dt>AWS CloudFormation</dt><dd>Provisions the resources defined by the Amplify backend.</dd></div>
       </dl>
     </section>
-    <section>
+    <section data-reveal>
       <h3>Infrastructure tools</h3>
       <dl>
         <div><dt>Terraform</dt><dd>Provisions Opsentra’s control plane and the BayanihanDR recovery site.</dd></div>
@@ -187,7 +193,7 @@
   </div>
 </section>
 <section class="section frame direction" aria-labelledby="dir-title">
-  <div class="dir-band">
+  <div class="dir-band" data-reveal>
     <div>
       <h2 class="h2" id="dir-title">Where I’m heading</h2>
       <p class="lead">I’m working toward a role in cloud infrastructure. I learn by deploying projects myself, then figuring out how to keep them running and make them easier to support.</p>
